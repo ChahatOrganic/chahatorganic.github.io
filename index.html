@@ -4,31 +4,41 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Chahat Organic | Farm Fresh Organic Products</title>
+<title>Chahat Organic | Pure Organic Essentials</title>
 
-<meta name="description" content="Chahat Organic offers premium organic tea, haldi and spices sourced directly from Indian farmers. Pure, chemical-free and naturally grown.">
+<meta name="description" content="Chahat Organic offers premium organic haldi, tea, shahad and daily-use spices sourced directly from Indian farmers. Pure, natural and chemical-free.">
 
 <style>
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#f7f7f7;
+  background:#f6f6f6;
   color:#333;
 }
 header{
-  background:#2e7d32;
+  background:#1b5e20;
   color:#fff;
-  padding:18px;
+  padding:22px;
   text-align:center;
 }
+header h1{
+  margin:0;
+  font-size:36px;
+  letter-spacing:1px;
+}
+header p{
+  margin-top:6px;
+  font-size:15px;
+  opacity:0.9;
+}
 nav{
-  background:#1b5e20;
+  background:#2e7d32;
   text-align:center;
-  padding:10px;
+  padding:12px;
 }
 nav a{
   color:#fff;
-  margin:0 14px;
+  margin:0 16px;
   text-decoration:none;
   font-weight:bold;
 }
@@ -36,8 +46,8 @@ nav a{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:60px 8%;
-  background:#fff8e1;
+  padding:70px 8%;
+  background:#fffbe9;
   flex-wrap:wrap;
 }
 .hero-text{
@@ -45,21 +55,26 @@ nav a{
   min-width:280px;
 }
 .hero-text h1{
-  font-size:42px;
-  color:#2e7d32;
+  font-size:44px;
+  color:#1b5e20;
+  line-height:1.2;
+}
+.hero-text h1 span{
+  color:#d4a017;
 }
 .hero-text p{
   font-size:18px;
-  line-height:1.6;
+  line-height:1.7;
+  margin-top:16px;
 }
 .hero-text button{
-  margin-top:20px;
-  padding:14px 26px;
+  margin-top:26px;
+  padding:14px 30px;
   font-size:16px;
-  background:#2e7d32;
+  background:#1b5e20;
   color:white;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
 }
 .hero-images{
@@ -70,31 +85,53 @@ nav a{
 }
 .hero-images img{
   width:100%;
-  border-radius:18px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+  border-radius:20px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.18);
 }
 section{
-  padding:40px 8%;
+  padding:50px 8%;
   background:#fff;
-  margin-top:10px;
+  margin-top:12px;
+}
+section h2{
+  font-size:30px;
+  color:#1b5e20;
+  margin-bottom:25px;
 }
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+  gap:22px;
 }
 .product{
-  background:#fff;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  background:#ffffff;
+  padding:22px;
+  border-radius:14px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.12);
   text-align:center;
 }
+.product h3{
+  margin-bottom:8px;
+  color:#2e7d32;
+}
+.product p{
+  font-size:15px;
+}
+.badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:6px 12px;
+  background:#e8f5e9;
+  color:#1b5e20;
+  border-radius:20px;
+  font-size:13px;
+}
 footer{
-  background:#333;
+  background:#1b1b1b;
   color:#fff;
   text-align:center;
-  padding:14px;
+  padding:16px;
+  margin-top:20px;
 }
 @media(max-width:768px){
   .hero{
@@ -112,7 +149,7 @@ footer{
 
 <header>
   <h1>Chahat Organic</h1>
-  <p>Direct From Farmers • Pure • Trusted • Organic</p>
+  <p>From Farmers • Pure • Natural • Trusted</p>
 </header>
 
 <nav>
@@ -122,14 +159,19 @@ footer{
   <a href="#contact">Contact</a>
 </nav>
 
-<!-- COPPERSMITH STYLE HERO -->
+<!-- HERO SECTION -->
 <section class="hero">
 
   <div class="hero-text">
-    <h1>Pure Organic Goodness</h1>
+    <h1>
+      Everyday <span>Organic Essentials</span><br>
+      For Healthy Living
+    </h1>
+
     <p>
-      Experience premium organic products like <b>Haldi</b> & <b>Chaipatti</b><br>
-      Directly sourced from Indian farmers — fresh, chemical-free & natural.
+      Discover premium quality <b>Haldi, Chaipatti, Shahad</b> and<br>
+      daily-use organic spices — sourced directly from Indian farmers,
+      naturally grown and chemical-free.
     </p>
 
     <a href="https://wa.me/917053053863">
@@ -138,46 +180,80 @@ footer{
   </div>
 
   <div class="hero-images">
-    <img src="images/haldi.jpg" alt="Organic Turmeric Powder">
-    <img src="images/tea.jpg" alt="Organic Tea Leaves">
+    <img src="images/haldi.jpg" alt="Chahat Organic Turmeric">
+    <img src="images/tea.jpg" alt="Chahat Organic Tea">
   </div>
 
 </section>
 
+<!-- PRODUCTS -->
 <section id="products">
 <h2>Our Organic Products</h2>
+
 <div class="products">
+
+  <div class="product">
+    <h3>Organic Haldi Powder</h3>
+    <p>Rich in curcumin • Daily wellness</p>
+    <span class="badge">Kitchen Essential</span>
+  </div>
+
   <div class="product">
     <h3>Organic Tea Leaves</h3>
-    <p>₹220 / kg</p>
+    <p>Strong aroma • Fresh taste</p>
+    <span class="badge">Daily Beverage</span>
   </div>
+
   <div class="product">
-    <h3>Organic Turmeric Powder</h3>
-    <p>₹275 / kg</p>
+    <h3>Organic Shahad (Honey)</h3>
+    <p>Raw • Unprocessed • Natural</p>
+    <span class="badge">Immunity Booster</span>
   </div>
+
   <div class="product">
-    <h3>Organic Coriander Seeds</h3>
-    <p>₹220 / kg</p>
+    <h3>Organic Elaichi</h3>
+    <p>Premium pods • Natural fragrance</p>
+    <span class="badge">Spice</span>
   </div>
+
   <div class="product">
-    <h3>Organic Mustard Seeds</h3>
-    <p>₹198 / kg</p>
+    <h3>Organic Dhaniya</h3>
+    <p>Fresh seeds • Pure flavor</p>
+    <span class="badge">Daily Cooking</span>
   </div>
+
   <div class="product">
-    <h3>Organic Fenugreek Seeds</h3>
-    <p>₹330 / kg</p>
+    <h3>Organic Jeera</h3>
+    <p>Traditionally sourced</p>
+    <span class="badge">Ayurvedic</span>
   </div>
+
+  <div class="product">
+    <h3>Organic Sarson</h3>
+    <p>Pure mustard seeds</p>
+    <span class="badge">Indian Kitchen</span>
+  </div>
+
+  <div class="product">
+    <h3>Organic Methi</h3>
+    <p>Health-friendly seeds</p>
+    <span class="badge">Daily Use</span>
+  </div>
+
 </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
 <h2>About Chahat Organic</h2>
 <p>
-Chahat Organic connects consumers directly with trusted farmers,
-providing naturally grown, chemical-free organic food products.
+Chahat Organic is committed to bringing pure, authentic and naturally grown
+food products from trusted farmers directly to your home.
+No chemicals. No shortcuts. Only honest organic living.
 </p>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
 <h2>Contact Us</h2>
 <p>📞 7053053863</p>
