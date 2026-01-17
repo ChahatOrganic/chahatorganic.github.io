@@ -1,272 +1,62 @@
-body{
-  margin:0;
-  font-family:"Segoe UI",Arial,sans-serif;
-  background:#f3f6f3;
-  color:#333;
-}
-
-.notice{
-  background:#e6b800;
-  color:#1b1b1b;
-  text-align:center;
-  padding:10px;
-  font-weight:600;
-}
-
-header{
-  background:#0f3d2e;
-  color:#fff;
-  padding:22px;
-  text-align:center;
-}
-header h1{margin:0;font-size:40px}
-header p{margin-top:6px;opacity:.9}
-
-.hero{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
-  align-items:center;
-  padding:60px 8%;
-  background:linear-gradient(135deg,#0f3d2e,#1b5e20);
-  color:#fff;
-}
-.hero-text{width:45%;min-width:280px}
-.hero-text h2{font-size:46px;line-height:1.2}
-.hero-text span{color:#f4d03f}
-.hero-text p{font-size:18px;line-height:1.7}
-
-.hero-img{width:45%;min-width:280px}
-.hero-img img{
-  width:100%;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.4);
-}
-
-section{
-  background:#fff;
-  padding:60px 8%;
-  margin-top:10px;
-}
-section h2{
-  text-align:center;
-  font-size:34px;
-  color:#0f3d2e;
-}
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:24px;
-  margin-top:40px;
-}
-.product{
-  background:#fff;
-  padding:22px;
-  border-radius:18px;
-  box-shadow:0 6px 18px rgba(0,0,0,.12);
-  cursor:pointer;
-  transition:.3s;
-}
-.product:hover{transform:translateY(-6px)}
-.product h3{margin-bottom:6px;color:#1b5e20}
-.product p{font-size:14px;color:#666}
-
-.badge{
-  display:inline-block;
-  margin-top:10px;
-  padding:6px 14px;
-  background:#fdecea;
-  color:#c0392b;
-  border-radius:20px;
-  font-size:13px;
-  font-weight:600;
-}
-
-.about{
-  background:#f8fbf8;
-  text-align:center;
-}
-.about p{
-  max-width:950px;
-  margin:auto;
-  font-size:18px;
-  line-height:1.9;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  justify-content:center;
-  align-items:center;
-  z-index:999;
-}
-.modal-box{
-  background:#fff;
-  width:92%;
-  max-width:900px;
-  padding:32px;
-  border-radius:20px;
-  max-height:90vh;
-  overflow:auto;
-}
-.modal-box img{
-  width:100%;
-  max-width:420px;
-  border-radius:16px;
-}
-.close{float:right;font-size:22px;cursor:pointer}
-
-.price{font-size:18px;margin-top:10px}
-.stock{color:#c0392b;font-weight:bold;margin-top:12px}
-
-.buy{
-  margin-top:18px;
-  padding:14px 28px;
-  background:#1b5e20;
-  color:#fff;
-  border:none;
-  border-radius:10px;
-  font-size:16px;
-  cursor:pointer;
-}
-
-footer{
-  background:#111;
-  color:#fff;
-  text-align:center;
-  padding:22px;
-}
-footer span{
-  display:block;
-  margin-top:6px;
-  font-size:14px;
-  opacity:.8;
-}
-
-@media(max-width:768px){
-  .hero{flex-direction:column;text-align:center}
-  .hero-text,.hero-img{width:100%}
-}const products = [
-{
-  name:"Organic Turmeric (Haldi)",
-  img:"haldi.jpg",
-  p250:320,
-  p500:580,
-  ben:[
-    "Powerful natural anti-inflammatory",
-    "Strengthens immunity for daily protection",
-    "Improves digestion and gut health",
-    "Supports joint, liver and skin wellness",
-    "Chemical-free alternative to adulterated spices"
-  ]
-},
-{
-  name:"Organic Black Tea",
-  img:"tea.jpg",
-  p250:350,
-  p500:620,
-  ben:[
-    "Rich in antioxidants for heart health",
-    "Improves mental alertness naturally",
-    "No artificial color or flavor",
-    "Safer than chemically processed teas"
-  ]
-},
-{
-  name:"Organic Green Tea",
-  img:"tea.jpg",
-  p250:360,
-  p500:640,
-  ben:[
-    "Supports weight management",
-    "Helps detox the body",
-    "Boosts metabolism naturally",
-    "Free from chemical residues"
-  ]
-},
-{
-  name:"Organic Honey",
-  img:"CH02.png",
-  p250:420,
-  p500:760,
-  ben:[
-    "Natural immunity booster",
-    "Healthy alternative to refined sugar",
-    "Supports digestion and throat health",
-    "No sugar syrup or additives"
-  ]
-},
-{
-  name:"Organic Amla Powder",
-  img:"CH03.png",
-  p250:300,
-  p500:540,
-  ben:[
-    "High Vitamin C content",
-    "Improves skin and hair health",
-    "Boosts immunity long-term",
-    "Better than chemically preserved supplements"
-  ]
-},
-{
-  name:"Organic Ashwagandha Powder",
-  img:"CH03.png",
-  p250:390,
-  p500:720,
-  ben:[
-    "Reduces stress and fatigue",
-    "Improves strength and stamina",
-    "Supports better sleep cycle",
-    "Natural alternative to chemical tonics"
-  ]
-}
-];
-
-// RENDER GRID
-const grid = document.getElementById("productGrid");
-products.forEach((p,i)=>{
-  grid.innerHTML += `
-  <div class="product" onclick="openProduct(${i})">
-    <h3>${p.name}</h3>
-    <p>100% Organic & Natural</p>
-    <span class="badge">OUT OF STOCK</span>
-  </div>`;
-});
-
-function openProduct(i){
-  const p = products[i];
-  document.getElementById("mName").innerText = p.name;
-  document.getElementById("mImg").src = p.img;
-  document.getElementById("p250").innerText = p.p250;
-  document.getElementById("p500").innerText = p.p500;
-
-  document.getElementById("mBenefits").innerHTML =
-    "<h3>Product Benefits</h3><ul>" +
-    p.ben.map(b=>"<li>"+b+"</li>").join("") +
-    "</ul><p><b>Why Organic?</b><br>Chemical-based products can weaken immunity, harm digestion and cause long-term health issues. Organic products are safer, cleaner and support sustainable farming.</p>";
-
-  document.getElementById("modal").style.display="flex";
-}
-
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
-
-function buyAlert(){
-  alert(
-    "This product is currently OUT OF STOCK.\n\nFor more information, email us at:\nshubhammishraa052@gmail.com\n\nOr WhatsApp: 7053053863"
-  );
-}<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Chahat Organic | Premium Organic Essentials</title>
-<meta name="description" content="Chahat Organic offers premium organic food, spices, tea, honey and wellness products sourced directly from Indian farmers.">
-<link rel="stylesheet" href="styles.css">
+<meta name="description" content="Chahat Organic offers premium organic food, spices, tea, honey, grains and wellness products sourced directly from Indian farmers.">
+
+<style>
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f3f6f3;color:#333}
+.notice{background:#e6b800;color:#000;text-align:center;padding:10px;font-weight:600}
+header{background:#0f3d2e;color:#fff;padding:22px;text-align:center}
+header h1{margin:0;font-size:40px}
+header p{margin-top:6px;opacity:.9}
+
+.hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+padding:60px 8%;background:linear-gradient(135deg,#0f3d2e,#1b5e20);color:#fff}
+.hero-text{width:45%;min-width:280px}
+.hero-text h2{font-size:46px;line-height:1.2}
+.hero-text span{color:#f4d03f}
+.hero-text p{font-size:18px;line-height:1.7}
+.hero-img{width:45%;min-width:280px}
+.hero-img img{width:100%;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+
+section{background:#fff;padding:60px 8%;margin-top:10px}
+section h2{text-align:center;font-size:34px;color:#0f3d2e}
+
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:40px}
+.product{background:#fff;padding:22px;border-radius:18px;box-shadow:0 6px 18px rgba(0,0,0,.12);
+cursor:pointer;transition:.3s}
+.product:hover{transform:translateY(-6px)}
+.product h3{margin-bottom:6px;color:#1b5e20}
+.product p{font-size:14px;color:#666}
+.badge{display:inline-block;margin-top:10px;padding:6px 14px;background:#fdecea;color:#c0392b;
+border-radius:20px;font-size:13px;font-weight:600}
+
+.about{background:#f8fbf8;text-align:center}
+.about p{max-width:950px;margin:auto;font-size:18px;line-height:1.9}
+
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);
+justify-content:center;align-items:center;z-index:999}
+.modal-box{background:#fff;width:92%;max-width:900px;padding:32px;border-radius:20px;
+max-height:90vh;overflow:auto}
+.modal-box img{width:100%;max-width:420px;border-radius:16px}
+.close{float:right;font-size:22px;cursor:pointer}
+.price{font-size:18px;margin-top:10px}
+.stock{color:#c0392b;font-weight:bold;margin-top:12px}
+.buy{margin-top:18px;padding:14px 28px;background:#1b5e20;color:#fff;border:none;
+border-radius:10px;font-size:16px;cursor:pointer}
+
+footer{background:#111;color:#fff;text-align:center;padding:22px}
+footer span{display:block;margin-top:6px;font-size:14px;opacity:.8}
+
+@media(max-width:768px){
+.hero{flex-direction:column;text-align:center}
+.hero-text,.hero-img{width:100%}
+}
+</style>
 </head>
 
 <body>
@@ -276,16 +66,16 @@ function buyAlert(){
 </div>
 
 <header>
-  <h1>Chahat Organic</h1>
-  <p>Pure • Natural • Farmer Sourced</p>
+<h1>Chahat Organic</h1>
+<p>Pure • Natural • Farmer Sourced</p>
 </header>
 
 <div class="hero">
   <div class="hero-text">
     <h2>Everyday <span>Organic Essentials</span><br>for Healthy Living</h2>
     <p>
-      Premium organic groceries and wellness products sourced directly from
-      Indian farmers. Chemical-free, naturally grown and safe for daily use.
+      Premium organic food, spices and wellness products sourced directly from trusted Indian farmers.
+      Organic products support immunity and digestion, while chemical-based foods may cause long-term health damage.
     </p>
   </div>
   <div class="hero-img">
@@ -301,13 +91,14 @@ function buyAlert(){
 <section class="about">
 <h2>About Chahat Organic</h2>
 <p>
-Chahat Organic is an initiative by <b>Shubham Mishra</b>, created to deliver
-pure and trustworthy organic products directly from farmers to families.
-We strongly believe chemical-based food products can harm long-term health,
-while organic living supports immunity, digestion and overall wellness.
+Chahat Organic is an initiative by <b>Shubham Mishra</b>, dedicated to providing pure, chemical-free
+organic products directly from farmers. Unlike chemically processed foods that may weaken immunity,
+harm digestion and cause lifestyle diseases, organic products support long-term health, safety
+and sustainable living.
 </p>
 </section>
 
+<!-- MODAL -->
 <div class="modal" id="modal">
   <div class="modal-box">
     <span class="close" onclick="closeModal()">✖</span>
@@ -327,15 +118,73 @@ while organic living supports immunity, digestion and overall wellness.
 </footer>
 
 <script>
+// BRAND SLIDER
 const brandImgs=["CH01.png","CH02.png","CH03.png"];
 let bi=0;
 setInterval(()=>{
   bi=(bi+1)%brandImgs.length;
   document.getElementById("brandSlider").src=brandImgs[bi];
 },10000);
-</script>
 
-<script src="products.js"></script>
+// 30 PRODUCTS DATA
+const products=[
+["Organic Turmeric (Haldi)","haldi.jpg",320,580,["Natural anti-inflammatory","Boosts immunity","Improves digestion","Safer than chemical spices"]],
+["Organic Black Tea","tea.jpg",350,620,["Rich antioxidants","Improves alertness","Heart friendly","No artificial color"]],
+["Organic Green Tea","tea.jpg",360,640,["Weight management","Body detox","Boosts metabolism"]],
+["Organic Tulsi Tea","tea.jpg",340,600,["Strengthens immunity","Reduces stress","Respiratory support"]],
+["Organic Lemongrass Tea","tea.jpg",340,600,["Aids digestion","Calming effect","Natural detox"]],
+["Organic Honey","CH02.png",420,760,["Natural immunity booster","Healthy sugar alternative","Aids digestion"]],
+["Organic Amla Powder","CH03.png",300,540,["Vitamin C rich","Skin & hair health","Boosts immunity"]],
+["Organic Ashwagandha Powder","CH03.png",390,720,["Stress relief","Better sleep","Improves stamina"]],
+["Organic Triphala Powder","CH03.png",280,510,["Digestive health","Natural detox","Gut balance"]],
+["Organic Tulsi Powder","CH03.png",260,480,["Immunity support","Respiratory wellness","Infection resistance"]],
+["Organic Giloy Powder","CH03.png",300,560,["Fever recovery","Immunity boost","Detox support"]],
+["Organic Moringa Powder","CH03.png",320,590,["Energy boost","Nutrient rich","Reduces weakness"]],
+["Organic Chia Seeds","haldi.jpg",280,520,["High fiber","Heart health","Weight control"]],
+["Organic Flax Seeds","haldi.jpg",240,440,["Omega-3 rich","Improves digestion","Skin & hair support"]],
+["Organic Wheat Atta","haldi.jpg",180,320,["Daily staple","High fiber","Better digestion"]],
+["Organic Basmati Rice","haldi.jpg",260,480,["Light & aromatic","Healthy carbohydrate","Easy digestion"]],
+["Organic Brown Rice","haldi.jpg",240,450,["High fiber","Blood sugar control","Heart health"]],
+["Organic Bajra","haldi.jpg",220,400,["Keeps body warm","Digestive support","High fiber"]],
+["Organic Jowar","haldi.jpg",210,390,["Gluten free","Weight friendly","Sustained energy"]],
+["Organic Chana Dal","haldi.jpg",250,460,["High protein","Energy support","Digestive health"]],
+["Organic Moong Dal","haldi.jpg",260,480,["Easy digestion","Protein rich","Weight control"]],
+["Organic Arhar Dal","haldi.jpg",280,520,["Muscle support","Daily protein","Energy boost"]],
+["Organic Mustard Oil","haldi.jpg",360,660,["Heart health","Joint support","Traditional cooking"]],
+["Organic Groundnut Oil","haldi.jpg",340,620,["Healthy fats","Heart friendly","Daily cooking"]],
+["Organic Jaggery","haldi.jpg",220,400,["Iron rich","Improves digestion","Natural energy"]],
+["Organic Jaggery Powder","haldi.jpg",230,420,["Easy sweetener","Energy boost","Healthier than sugar"]],
+["Organic Herbal Soap","haldi.jpg",150,280,["Chemical free","Skin friendly","Daily care"]],
+["Organic Hair Oil","haldi.jpg",260,480,["Reduces hair fall","Nourishes scalp","Promotes growth"]],
+["Organic Neem Powder","haldi.jpg",240,440,["Skin purification","Acne control","Natural detox"]],
+["Organic Aloe Vera Powder","haldi.jpg",260,480,["Skin hydration","Digestive support","Wellness boost"]]
+];
+
+// RENDER PRODUCTS
+const grid=document.getElementById("productGrid");
+products.forEach((p,i)=>{
+grid.innerHTML+=`
+<div class="product" onclick="openProduct(${i})">
+<h3>${p[0]}</h3>
+<p>100% Organic & Natural</p>
+<span class="badge">OUT OF STOCK</span>
+</div>`;
+});
+
+function openProduct(i){
+const p=products[i];
+mName.innerText=p[0];
+mImg.src=p[1];
+p250.innerText=p[2];
+p500.innerText=p[3];
+mBenefits.innerHTML="<h3>Benefits</h3><ul>"+p[4].map(b=>"<li>"+b+"</li>").join("")+"</ul><p><b>Why Organic?</b><br>Chemical-based products may harm immunity, digestion and long-term health. Organic products are safer, cleaner and support sustainable living.</p>";
+modal.style.display="flex";
+}
+function closeModal(){modal.style.display="none";}
+function buyAlert(){
+alert("This product is currently OUT OF STOCK.\n\nFor more information:\nEmail: shubhammishraa052@gmail.com\nWhatsApp: 7053053863");
+}
+</script>
 
 </body>
 </html>
