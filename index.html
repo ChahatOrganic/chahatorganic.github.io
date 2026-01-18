@@ -4,53 +4,202 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Chahat Organic | Premium Organic Essentials</title>
-<meta name="description" content="Chahat Organic offers premium organic food, spices, tea, honey, grains and wellness products sourced directly from Indian farmers.">
+<title>Chahat Organic | Premium Organic Products</title>
+
+<meta name="description" content="Chahat Organic offers premium, chemical-free organic tea, spices, honey and wellness products sourced directly from trusted Indian farmers.">
+<meta name="keywords" content="organic products India, organic tea, organic haldi, chemical free spices, farmer sourced organic food, Chahat Organic">
+<meta name="author" content="Shubham Mishra">
 
 <style>
-body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f3f6f3;color:#333}
-.notice{background:#e6b800;color:#000;text-align:center;padding:10px;font-weight:600}
-header{background:#0f3d2e;color:#fff;padding:22px;text-align:center}
-header h1{margin:0;font-size:40px}
-header p{margin-top:6px;opacity:.9}
+body{
+  margin:0;
+  font-family:Segoe UI,Arial,sans-serif;
+  background:#f3f6f3;
+  color:#333;
+}
 
-.hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
-padding:60px 8%;background:linear-gradient(135deg,#0f3d2e,#1b5e20);color:#fff}
+/* NOTICE */
+.notice{
+  background:#e6b800;
+  color:#000;
+  text-align:center;
+  padding:10px;
+  font-weight:600;
+}
+
+/* HEADER */
+header{
+  background:#0f3d2e;
+  color:#fff;
+  padding:26px;
+  text-align:center;
+}
+header h1{
+  margin:0;
+  font-size:42px;
+  letter-spacing:1px;
+}
+.tagline{
+  font-size:20px;
+  color:#f4d03f;
+  margin-top:6px;
+}
+.hindi{
+  margin-top:8px;
+  font-size:18px;
+  opacity:.95;
+}
+
+/* HERO */
+.hero{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  padding:70px 8%;
+  background:linear-gradient(135deg,#0f3d2e,#1b5e20);
+  color:#fff;
+}
 .hero-text{width:45%;min-width:280px}
-.hero-text h2{font-size:46px;line-height:1.2}
+.hero-text h2{
+  font-size:48px;
+  line-height:1.25;
+}
 .hero-text span{color:#f4d03f}
-.hero-text p{font-size:18px;line-height:1.7}
+.hero-text p{
+  font-size:18px;
+  line-height:1.8;
+  max-width:520px;
+}
 .hero-img{width:45%;min-width:280px}
-.hero-img img{width:100%;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.hero-img img{
+  width:100%;
+  border-radius:22px;
+  box-shadow:0 12px 35px rgba(0,0,0,.45);
+}
 
-section{background:#fff;padding:60px 8%;margin-top:10px}
-section h2{text-align:center;font-size:34px;color:#0f3d2e}
+/* SECTIONS */
+section{
+  background:#fff;
+  padding:60px 8%;
+  margin-top:10px;
+}
+section h2{
+  text-align:center;
+  font-size:36px;
+  color:#0f3d2e;
+}
 
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:40px}
-.product{background:#fff;padding:22px;border-radius:18px;box-shadow:0 6px 18px rgba(0,0,0,.12);
-cursor:pointer;transition:.3s}
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:26px;
+  margin-top:45px;
+}
+.product{
+  background:#fff;
+  padding:24px;
+  border-radius:18px;
+  box-shadow:0 6px 20px rgba(0,0,0,.12);
+  cursor:pointer;
+  transition:.3s;
+}
 .product:hover{transform:translateY(-6px)}
-.product h3{margin-bottom:6px;color:#1b5e20}
+.product h3{color:#1b5e20;margin-bottom:6px}
 .product p{font-size:14px;color:#666}
-.badge{display:inline-block;margin-top:10px;padding:6px 14px;background:#fdecea;color:#c0392b;
-border-radius:20px;font-size:13px;font-weight:600}
+.badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:6px 14px;
+  background:#fdecea;
+  color:#c0392b;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:600;
+}
 
-.about{background:#f8fbf8;text-align:center}
-.about p{max-width:950px;margin:auto;font-size:18px;line-height:1.9}
+/* TRUST */
+.trust{
+  background:#f8fbf8;
+  text-align:center;
+}
+.trust ul{
+  max-width:900px;
+  margin:30px auto 0;
+  text-align:left;
+  font-size:17px;
+  line-height:1.8;
+}
 
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);
-justify-content:center;align-items:center;z-index:999}
-.modal-box{background:#fff;width:92%;max-width:900px;padding:32px;border-radius:20px;
-max-height:90vh;overflow:auto}
-.modal-box img{width:100%;max-width:420px;border-radius:16px}
-.close{float:right;font-size:22px;cursor:pointer}
+/* ABOUT */
+.about{
+  background:#ffffff;
+  text-align:center;
+}
+.about p{
+  max-width:950px;
+  margin:auto;
+  font-size:18px;
+  line-height:1.9;
+}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+.modal-box{
+  background:#fff;
+  width:92%;
+  max-width:900px;
+  padding:34px;
+  border-radius:22px;
+  max-height:90vh;
+  overflow:auto;
+}
+.modal-box img{
+  width:100%;
+  max-width:420px;
+  border-radius:18px;
+  margin:20px 0;
+}
+.close{
+  float:right;
+  font-size:22px;
+  cursor:pointer;
+}
 .price{font-size:18px;margin-top:10px}
 .stock{color:#c0392b;font-weight:bold;margin-top:12px}
-.buy{margin-top:18px;padding:14px 28px;background:#1b5e20;color:#fff;border:none;
-border-radius:10px;font-size:16px;cursor:pointer}
+.buy{
+  margin-top:18px;
+  padding:14px 30px;
+  background:#1b5e20;
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  cursor:pointer;
+}
 
-footer{background:#111;color:#fff;text-align:center;padding:22px}
-footer span{display:block;margin-top:6px;font-size:14px;opacity:.8}
+/* FOOTER */
+footer{
+  background:#111;
+  color:#fff;
+  text-align:center;
+  padding:26px;
+}
+footer span{
+  display:block;
+  margin-top:6px;
+  font-size:14px;
+  opacity:.85;
+}
 
 @media(max-width:768px){
 .hero{flex-direction:column;text-align:center}
@@ -66,39 +215,58 @@ footer span{display:block;margin-top:6px;font-size:14px;opacity:.8}
 </div>
 
 <header>
-<h1>Chahat Organic</h1>
-<p>Pure • Natural • Farmer Sourced</p>
+  <h1>Chahat Organic</h1>
+  <div class="tagline">Premium • Pure • Farmer Sourced</div>
+  <div class="hindi">अपनों के लिए चाह</div>
 </header>
 
 <div class="hero">
   <div class="hero-text">
     <h2>Everyday <span>Organic Essentials</span><br>for Healthy Living</h2>
     <p>
-      Premium organic food, spices and wellness products sourced directly from trusted Indian farmers.
-      Organic products support immunity and digestion, while chemical-based foods may cause long-term health damage.
+      Premium organic tea, spices, honey and wellness products sourced directly
+      from trusted Indian farmers. What we give our own family, we deliver to yours.
     </p>
+    <p><b>Follow us on Instagram:</b> @chahatorganic</p>
   </div>
   <div class="hero-img">
-    <img id="brandSlider" src="CH01.png">
+    <img id="brandSlider" src="CH01.png" alt="Chahat Organic">
   </div>
 </div>
 
 <section>
-<h2>Our Organic Product Range</h2>
+<h2>Our Organic Products</h2>
 <div class="products" id="productGrid"></div>
+</section>
+
+<section class="trust">
+<h2>Our Quality Promise</h2>
+<ul>
+<li>100% chemical-free ingredients</li>
+<li>No artificial colors, flavors or preservatives</li>
+<li>Direct sourcing from trusted farmers</li>
+<li>Small-batch processing for freshness</li>
+<li>Safe for everyday family consumption</li>
+<li>No adulteration or shortcuts</li>
+<li>Traditional & responsible practices</li>
+<li>Hygienic handling & packaging</li>
+<li>Honest labeling & transparency</li>
+<li>What we sell, we personally trust</li>
+</ul>
 </section>
 
 <section class="about">
 <h2>About Chahat Organic</h2>
 <p>
-Chahat Organic is an initiative by <b>Shubham Mishra</b>, dedicated to providing pure, chemical-free
-organic products directly from farmers. Unlike chemically processed foods that may weaken immunity,
-harm digestion and cause lifestyle diseases, organic products support long-term health, safety
+Chahat Organic is a farmer-connected organic brand founded by <b>Shubham Mishra</b>,
+with a simple mission: to deliver safe, honest and chemical-free food products
+that support long-term health. In a market filled with chemically processed items
+that may harm immunity and digestion, Chahat Organic focuses on purity, transparency
+and family-first nutrition. Our products are thoughtfully selected for daily use
 and sustainable living.
 </p>
 </section>
 
-<!-- MODAL -->
 <div class="modal" id="modal">
   <div class="modal-box">
     <span class="close" onclick="closeModal()">✖</span>
@@ -118,52 +286,31 @@ and sustainable living.
 </footer>
 
 <script>
-// BRAND SLIDER
-const brandImgs=["CH01.png","CH02.png","CH03.png"];
+/* BRAND SLIDER */
+const brandImgs=["CH01.png","CH02.png","CH03.png","Chahat.png"];
 let bi=0;
 setInterval(()=>{
   bi=(bi+1)%brandImgs.length;
-  document.getElementById("brandSlider").src=brandImgs[bi];
+  brandSlider.src=brandImgs[bi];
 },10000);
 
-// 30 PRODUCTS DATA
+/* PRODUCTS (ONLY SELECTED CATEGORY) */
 const products=[
-["Organic Turmeric (Haldi)","haldi.jpg",320,580,["Natural anti-inflammatory","Boosts immunity","Improves digestion","Safer than chemical spices"]],
-["Organic Black Tea","tea.jpg",350,620,["Rich antioxidants","Improves alertness","Heart friendly","No artificial color"]],
-["Organic Green Tea","tea.jpg",360,640,["Weight management","Body detox","Boosts metabolism"]],
-["Organic Tulsi Tea","tea.jpg",340,600,["Strengthens immunity","Reduces stress","Respiratory support"]],
-["Organic Lemongrass Tea","tea.jpg",340,600,["Aids digestion","Calming effect","Natural detox"]],
-["Organic Honey","CH02.png",420,760,["Natural immunity booster","Healthy sugar alternative","Aids digestion"]],
-["Organic Amla Powder","CH03.png",300,540,["Vitamin C rich","Skin & hair health","Boosts immunity"]],
-["Organic Ashwagandha Powder","CH03.png",390,720,["Stress relief","Better sleep","Improves stamina"]],
-["Organic Triphala Powder","CH03.png",280,510,["Digestive health","Natural detox","Gut balance"]],
-["Organic Tulsi Powder","CH03.png",260,480,["Immunity support","Respiratory wellness","Infection resistance"]],
-["Organic Giloy Powder","CH03.png",300,560,["Fever recovery","Immunity boost","Detox support"]],
-["Organic Moringa Powder","CH03.png",320,590,["Energy boost","Nutrient rich","Reduces weakness"]],
-["Organic Chia Seeds","haldi.jpg",280,520,["High fiber","Heart health","Weight control"]],
-["Organic Flax Seeds","haldi.jpg",240,440,["Omega-3 rich","Improves digestion","Skin & hair support"]],
-["Organic Wheat Atta","haldi.jpg",180,320,["Daily staple","High fiber","Better digestion"]],
-["Organic Basmati Rice","haldi.jpg",260,480,["Light & aromatic","Healthy carbohydrate","Easy digestion"]],
-["Organic Brown Rice","haldi.jpg",240,450,["High fiber","Blood sugar control","Heart health"]],
-["Organic Bajra","haldi.jpg",220,400,["Keeps body warm","Digestive support","High fiber"]],
-["Organic Jowar","haldi.jpg",210,390,["Gluten free","Weight friendly","Sustained energy"]],
-["Organic Chana Dal","haldi.jpg",250,460,["High protein","Energy support","Digestive health"]],
-["Organic Moong Dal","haldi.jpg",260,480,["Easy digestion","Protein rich","Weight control"]],
-["Organic Arhar Dal","haldi.jpg",280,520,["Muscle support","Daily protein","Energy boost"]],
-["Organic Mustard Oil","haldi.jpg",360,660,["Heart health","Joint support","Traditional cooking"]],
-["Organic Groundnut Oil","haldi.jpg",340,620,["Healthy fats","Heart friendly","Daily cooking"]],
-["Organic Jaggery","haldi.jpg",220,400,["Iron rich","Improves digestion","Natural energy"]],
-["Organic Jaggery Powder","haldi.jpg",230,420,["Easy sweetener","Energy boost","Healthier than sugar"]],
-["Organic Herbal Soap","haldi.jpg",150,280,["Chemical free","Skin friendly","Daily care"]],
-["Organic Hair Oil","haldi.jpg",260,480,["Reduces hair fall","Nourishes scalp","Promotes growth"]],
-["Organic Neem Powder","haldi.jpg",240,440,["Skin purification","Acne control","Natural detox"]],
-["Organic Aloe Vera Powder","haldi.jpg",260,480,["Skin hydration","Digestive support","Wellness boost"]]
+["Organic Turmeric (Haldi)","haldi.jpg",320,580,["Natural anti-inflammatory","Boosts immunity","Improves digestion","Joint & liver support"]],
+["Organic Black Tea","tea.jpg",350,620,["Rich antioxidants","Improves focus","Heart-friendly","Daily refreshment"]],
+["Organic Green Tea","tea.jpg",360,640,["Weight balance","Detox support","Metabolism boost"]],
+["Organic Tulsi Tea","tea.jpg",340,600,["Immunity support","Stress relief","Respiratory wellness"]],
+["Organic Lemongrass Tea","tea.jpg",340,600,["Digestive aid","Calming effect","Natural detox"]],
+["Organic Honey","CH02.png",420,760,["Natural immunity","Healthy sugar alternative","Digestive support"]],
+["Organic Amla Powder","CH03.png",300,540,["Vitamin C rich","Hair & skin support","Immunity boost"]],
+["Organic Ashwagandha Powder","CH03.png",390,720,["Stress reduction","Energy & stamina","Better sleep"]],
+["Organic Triphala Powder","CH03.png",280,510,["Digestive balance","Gut health","Natural detox"]],
+["Organic Tulsi Powder","CH03.png",260,480,["Respiratory health","Immunity strength","Infection resistance"]]
 ];
 
-// RENDER PRODUCTS
-const grid=document.getElementById("productGrid");
+productGrid.innerHTML="";
 products.forEach((p,i)=>{
-grid.innerHTML+=`
+productGrid.innerHTML+=`
 <div class="product" onclick="openProduct(${i})">
 <h3>${p[0]}</h3>
 <p>100% Organic & Natural</p>
@@ -174,15 +321,15 @@ grid.innerHTML+=`
 function openProduct(i){
 const p=products[i];
 mName.innerText=p[0];
-mImg.src=p[1];
+mImg.src=p[1]||"Chahat.png";
 p250.innerText=p[2];
 p500.innerText=p[3];
-mBenefits.innerHTML="<h3>Benefits</h3><ul>"+p[4].map(b=>"<li>"+b+"</li>").join("")+"</ul><p><b>Why Organic?</b><br>Chemical-based products may harm immunity, digestion and long-term health. Organic products are safer, cleaner and support sustainable living.</p>";
+mBenefits.innerHTML="<h3>Benefits</h3><ul>"+p[4].map(b=>"<li>"+b+"</li>").join("")+"</ul><p><b>Why Organic?</b> Chemical products may harm immunity and digestion, while organic products support long-term wellness.</p>";
 modal.style.display="flex";
 }
 function closeModal(){modal.style.display="none";}
 function buyAlert(){
-alert("This product is currently OUT OF STOCK.\n\nFor more information:\nEmail: shubhammishraa052@gmail.com\nWhatsApp: 7053053863");
+alert("This product is currently OUT OF STOCK.\n\nFor more details:\nEmail: shubhammishraa052@gmail.com\nWhatsApp: 7053053863");
 }
 </script>
 
