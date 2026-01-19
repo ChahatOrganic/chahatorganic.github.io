@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chahat Organic | Article Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial,sans-serif;background:#0f3d2e;margin:0;color:#fff}
+.container{max-width:900px;margin:auto;padding:20px}
+.card{background:#fff;color:#333;border-radius:10px;padding:20px;margin-top:30px}
+h1,h2{text-align:center;color:#0f3d2e}
+input,textarea,button{width:100%;padding:12px;margin-top:10px;font-size:16px}
+button{background:#0f3d2e;color:#fff;border:none;cursor:pointer}
+button:hover{opacity:.9}
+.article{border-bottom:1px solid #ddd;padding:10px 0}
+.logout{background:#c0392b;margin-top:10px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="container">
+<div id="loginBox" class="card">
+<h2>Admin Login</h2>
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+<button onclick="login()">Login</button>
+</div>
+
+<div id="adminPanel" class="card hidden">
+<h2>Post New Article</h2>
+<input type="text" id="title" placeholder="Article Title">
+<textarea id="content" rows="8" placeholder="Write your article here..."></textarea>
+<button onclick="addArticle()">Publish Article</button>
+<button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<div class="card">
+<h2>Published Articles</h2>
+<div id="articles"></div>
+</div>
+</div>
+
+<script>
+const ADMIN_USER="admin";
+const ADMIN_PASS="chahat@123";
+
+function login(){
+ const u=document.getElementById("username").value;
+ const p=document.getElementById("password").value;
+ if(u===ADMIN_USER && p===ADMIN_PASS){
+  localStorage.setItem("adminLogged","yes");
+  showAdmin();
+ }else{alert("Wrong ID or Password");}
+}
+function showAdmin(){
+ if(localStorage.getItem("adminLogged")==="yes"){
+  document.getElementById("loginBox").classList.add("hidden");
+  document.getElementById("adminPanel").classList.remove("hidden");
+ }
+}
+function logout(){localStorage.removeItem("adminLogged");location.reload();}
+function addArticle(){
+ const t=document.getElementById("title").value;
+ const c=document.getElementById("content").value;
+ if(!t||!c){alert("Fill all fields");return;}
+ const d=JSON.parse(localStorage.getItem("articles")||"[]");
+ d.unshift({title:t,content:c,date:new Date().toLocaleDateString()});
+ localStorage.setItem("articles",JSON.stringify(d));
+ document.getElementById("title").value="";
+ document.getElementById("content").value="";
+ loadArticles();
+}
+function loadArticles(){
+ const box=document.getElementById("articles");
+ const d=JSON.parse(localStorage.getItem("articles")||"[]");
+ box.innerHTML="";
+ if(!d.length){box.innerHTML="<p>No articles yet.</p>";}
+ d.forEach(a=>{
+  box.innerHTML+=`<div class="article"><h3>${a.title}</h3><small>${a.date}</small><p>${a.content}</p></div>`;
+ });
+}
+showAdmin();loadArticles();
+</script>
+</body>
+</html>
