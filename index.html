@@ -4,256 +4,268 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Organic Articles & Health Insights | Chahat Organic</title>
+<title>Chahat Organic | Premium Pure & Natural Products</title>
 
-<meta name="description" content="Read expert articles on organic food, healthy living and chemical-free nutrition by Chahat Organic. Learn why organic lifestyle matters.">
+<meta name="description" content="Chahat Organic – premium organic spices, tea, honey and wellness products. 100% pure, natural and farmer sourced. Chemical-free food for healthy living.">
+<meta name="keywords" content="Chahat Organic, organic spices, organic tea, organic honey, chemical free food, natural products India">
 
-<meta name="keywords" content="organic food articles, organic lifestyle, chemical free food, healthy living, chahat organic">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --green:#0f3d2e;
+  --green2:#1b5e20;
+  --gold:#f4d03f;
+  --light:#f3f6f3;
+}
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background:#f3f6f3;
+  font-family:Poppins, Arial, sans-serif;
+  background:var(--light);
   color:#333;
+}
+
+/* NOTICE */
+.notice{
+  background:#f1c40f;
+  color:#000;
+  text-align:center;
+  padding:10px;
+  font-weight:600;
 }
 
 /* HEADER */
 header{
-  background:#0f3d2e;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:linear-gradient(135deg,var(--green),var(--green2));
   color:#fff;
-  padding:22px;
+  padding:28px 16px;
   text-align:center;
+  transition:all .3s ease;
+}
+header.shrink{
+  padding:10px 16px;
 }
 header h1{
   margin:0;
-  font-size:38px;
-}
-header p{
-  margin-top:6px;
-  opacity:.9;
-}
-
-/* PAGE CONTENT */
-.container{
-  padding:60px 8%;
-}
-.page-title{
-  text-align:center;
-  font-size:34px;
-  color:#0f3d2e;
-  margin-bottom:8px;
-}
-.subtitle{
-  text-align:center;
-  font-size:17px;
-  color:#555;
-  margin-bottom:40px;
-}
-
-/* ARTICLES GRID */
-.articles{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:26px;
-}
-.article-card{
-  background:#fff;
-  border-radius:18px;
-  box-shadow:0 6px 18px rgba(0,0,0,.12);
-  overflow:hidden;
-  cursor:pointer;
+  font-family:"Playfair Display", serif;
+  font-size:46px;
   transition:.3s;
 }
-.article-card:hover{
-  transform:translateY(-6px);
+header.shrink h1{font-size:28px}
+header .hindi{
+  margin-top:6px;
+  font-size:22px;
+  color:var(--gold);
 }
-.article-card img{
-  width:100%;
-  height:190px;
-  object-fit:cover;
-}
-.article-content{
-  padding:18px;
-}
-.article-content h3{
-  margin:8px 0;
-  color:#1b5e20;
-}
-.article-content p{
-  font-size:14px;
-  color:#666;
-}
-.date{
-  font-size:13px;
-  color:#888;
+header.shrink .hindi{display:none}
+header .tagline{
+  margin-top:6px;
+  font-size:15px;
 }
 
-/* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.75);
-  justify-content:center;
+/* HERO */
+.hero{
+  display:flex;
+  flex-wrap:wrap;
   align-items:center;
-  z-index:999;
+  justify-content:space-between;
+  padding:70px 8%;
+  background:linear-gradient(180deg,#0f3d2e,#134e3a);
+  color:#fff;
 }
-.modal-box{
-  background:#fff;
-  width:92%;
-  max-width:900px;
-  padding:32px;
-  border-radius:20px;
-  max-height:90vh;
-  overflow:auto;
-}
-.close{
-  float:right;
-  font-size:22px;
-  cursor:pointer;
-}
-.modal-box img{
+.hero-text{width:45%;min-width:280px}
+.hero-text h2{font-size:48px}
+.hero-text h2 span{color:var(--gold)}
+.hero-text p{font-size:18px;line-height:1.8}
+.hero-img{width:45%;min-width:280px}
+.hero-img img{
   width:100%;
-  border-radius:14px;
-  margin:15px 0;
+  border-radius:24px;
+  box-shadow:0 14px 36px rgba(0,0,0,.45);
 }
-.modal-box p{
-  line-height:1.8;
-  font-size:16px;
+
+/* SECTIONS */
+section{
+  background:#fff;
+  padding:70px 8%;
+}
+section h2{
+  text-align:center;
+  font-size:38px;
+  color:var(--green);
+}
+
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:28px;
+  margin-top:40px;
+}
+.product{
+  background:#fff;
+  padding:18px;
+  border-radius:22px;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+  text-align:center;
+}
+.product img{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  border-radius:16px;
+}
+.product h3{margin:14px 0 8px;color:var(--green2)}
+.badge{
+  padding:6px 16px;
+  background:#fdecea;
+  color:#c0392b;
+  border-radius:20px;
+  font-size:13px;
+}
+.price{font-weight:600;margin-top:6px}
+.buy{
+  margin-top:12px;
+  padding:10px;
+  background:#ccc;
+  border-radius:8px;
+  font-size:14px;
+}
+
+/* BLOG */
+.blog{
+  background:#f8fbf8;
+}
+.blog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:28px;
+  margin-top:40px;
+}
+.blog-card{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 8px 22px rgba(0,0,0,.1);
+  overflow:hidden;
+}
+.blog-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+.blog-card div{padding:16px}
+.blog-card h4{margin:0;color:var(--green)}
+.blog-card a{
+  display:inline-block;
+  margin-top:10px;
+  color:var(--green2);
+  font-weight:600;
+  text-decoration:none;
+}
+
+/* ABOUT */
+.about{
+  background:#f8fbf8;
+  text-align:center;
+}
+.about p{
+  max-width:1000px;
+  margin:auto;
+  font-size:18px;
+  line-height:1.9;
 }
 
 /* FOOTER */
 footer{
-  background:#111;
+  background:#0c0c0c;
   color:#fff;
+  padding:40px 16px;
   text-align:center;
-  padding:24px;
-  margin-top:40px;
 }
-footer span{
-  display:block;
-  margin-top:6px;
-  font-size:14px;
-  opacity:.8;
-}
+footer b{color:var(--gold)}
 
 @media(max-width:768px){
-  header h1{font-size:30px}
+  .hero{flex-direction:column;text-align:center}
+  .hero-text,.hero-img{width:100%}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Chahat Organic</h1>
-  <p>Pure • Natural • Farmer Sourced</p>
-</header>
-
-<div class="container">
-  <h2 class="page-title">Organic Knowledge & Health Articles</h2>
-  <p class="subtitle">
-    Expert insights on organic food, healthy living and the impact of chemical-free nutrition.
-  </p>
-
-  <div class="articles" id="articleGrid"></div>
+<div class="notice">
+🚧 All products are currently OUT OF STOCK. Availability will be updated soon.
 </div>
 
-<!-- ARTICLE MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <span class="close" onclick="closeArticle()">✖</span>
-    <h2 id="aTitle"></h2>
-    <p class="date" id="aDate"></p>
-    <img id="aImg">
-    <div id="aContent"></div>
+<header id="siteHeader">
+  <h1>Chahat Organic</h1>
+  <div class="hindi">🌿 अपनों के लिए चाह</div>
+  <div class="tagline">Pure • Natural • Farmer Sourced</div>
+</header>
+
+<div class="hero">
+  <div class="hero-text">
+    <h2>Everyday <span>Organic Essentials</span><br>for Healthy Living</h2>
+    <p>
+      Premium organic spices, tea, honey and wellness products sourced directly
+      from trusted Indian farmers across India.
+    </p>
+  </div>
+  <div class="hero-img">
+    <img src="CH01.png" alt="Chahat Organic">
   </div>
 </div>
 
+<section>
+<h2>Our Organic Products</h2>
+<div class="products">
+  <div class="product">
+    <img src="Chahat.png">
+    <h3>More Products Coming Soon</h3>
+    <span class="badge">COMING SOON</span>
+    <div class="buy">Out of Stock</div>
+  </div>
+</div>
+</section>
+
+<section class="blog">
+<h2>Organic Knowledge & Articles</h2>
+<div class="blog-grid">
+  <div class="blog-card">
+    <img src="haldi.jpg">
+    <div>
+      <h4>Why Organic Turmeric Is Essential</h4>
+      <a href="articles.html">Read full article →</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="about">
+<h2>About Chahat Organic</h2>
+<p>
+Chahat Organic is a farmer-first initiative delivering authentic,
+chemical-free food products. Our mission is honest food for healthy living.
+</p>
+<p><b>Manager & Founder: Shubham Mishra</b></p>
+</section>
+
 <footer>
-© 2026 Chahat Organic • Honest Food • Honest Living
-<span>Managed & Founded by <b>Shubham Mishra</b></span>
+© 2026 <b>Chahat Organic</b> • Honest Food • Honest Living<br><br>
+📷 Instagram: <b>@chahatorganic</b><br>
+📱 WhatsApp: <b>7053053863</b><br>
+✉️ Email: <b>shubhammishraa052@gmail.com</b>
 </footer>
 
 <script>
-/* ARTICLE DATA – Add new articles here */
-const articles=[
-{
-  title:"Why Organic Turmeric Is Essential for Daily Health",
-  date:"19 September 2026",
-  img:"haldi.jpg",
-  content:`
-  <p>
-  Organic turmeric is rich in natural curcumin and free from artificial color
-  and chemical polishing agents. Regular consumption supports immunity,
-  digestion and joint health.
-  </p>
-  <p>
-  In contrast, chemically processed turmeric may contain harmful residues
-  that can negatively impact liver function and weaken long-term immunity.
-  </p>
-  `
-},
-{
-  title:"Organic Tea vs Regular Tea – A Health Comparison",
-  date:"18 September 2026",
-  img:"tea.jpg",
-  content:`
-  <p>
-  Organic tea is grown without synthetic pesticides and chemical fertilizers,
-  making it safer for daily consumption. It supports heart health,
-  mental alertness and digestion.
-  </p>
-  <p>
-  Regular tea often contains chemical residues that may cause acidity,
-  stomach discomfort and long-term health issues.
-  </p>
-  `
-},
-{
-  title:"Why Choosing Organic Food Protects Your Family",
-  date:"17 September 2026",
-  img:"CH01.png",
-  content:`
-  <p>
-  Organic food reduces exposure to toxic chemicals, making it safer
-  for children, adults and elderly family members.
-  </p>
-  <p>
-  Long-term consumption of chemical-based food is associated with
-  lifestyle diseases, whereas organic nutrition promotes immunity,
-  energy and overall well-being.
-  </p>
-  `
-}
-];
-
-/* RENDER ARTICLES */
-const grid=document.getElementById("articleGrid");
-articles.forEach((a,i)=>{
-  grid.innerHTML+=`
-  <div class="article-card" onclick="openArticle(${i})">
-    <img src="${a.img}">
-    <div class="article-content">
-      <div class="date">${a.date}</div>
-      <h3>${a.title}</h3>
-      <p>Click to read full article →</p>
-    </div>
-  </div>`;
+window.addEventListener("scroll",()=>{
+  document.getElementById("siteHeader")
+    .classList.toggle("shrink",window.scrollY>80);
 });
-
-function openArticle(i){
-  const a=articles[i];
-  aTitle.innerText=a.title;
-  aDate.innerText=a.date;
-  aImg.src=a.img;
-  aContent.innerHTML=a.content;
-  modal.style.display="flex";
-}
-function closeArticle(){
-  modal.style.display="none";
-}
 </script>
 
 </body>
