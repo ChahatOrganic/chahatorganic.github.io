@@ -284,7 +284,36 @@ long-term health, organic products support immunity, digestion and sustainable l
   <button type="submit">Send Message</button>
 </form>
 </section>
+  
+products.forEach((p,i)=>{
+  const card=document.createElement("div");
+  card.className="product";
 
+  if(p.coming){
+    card.innerHTML=`
+      <img src="${p.img}">
+      <h3>${p.name}</h3>
+      <ul>
+        ${p.ben.map(b=>`<li>${b}</li>`).join("")}
+      </ul>
+      <div class="badge">COMING SOON</div>
+      <button disabled>OUT OF STOCK</button>
+    `;
+  } else {
+    card.innerHTML=`
+      <img src="${p.img}">
+      <h3>${p.name}</h3>
+      <ul>
+        ${p.ben.map(b=>`<li>${b}</li>`).join("")}
+      </ul>
+      <div class="price">Starting ₹${Math.round(p.base*1.1)}</div>
+      <button onclick="openModal(${i})">VIEW</button>
+    `;
+  }
+
+  document.getElementById("productGrid").appendChild(card);
+});
+  
 <footer>
 © 2026 Chahat Organic • Honest Food • Honest Living<br><br>
 <b>Founder & Manager: Shubham Mishra</b><br>
