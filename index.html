@@ -5,189 +5,183 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Chahat Organic | Premium Pure & Natural Products</title>
-<meta name="description" content="Chahat Organic – premium organic spices and tea, directly sourced from Indian farmers. Pure, natural and chemical-free food for healthy living.">
+
+<meta name="description" content="Chahat Organic – premium organic spices, tea, honey and wellness products. 100% pure, natural and farmer sourced. Chemical-free food for healthy living.">
+<meta name="keywords" content="Chahat Organic, organic spices, organic tea, organic honey, chemical free food, natural products India">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
---green:#0f3d2e;--green2:#1b5e20;--gold:#f4d03f;--light:#f3f6f3;
+  --green:#0f3d2e;
+  --green2:#1b5e20;
+  --gold:#f4d03f;
+  --light:#f3f6f3;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Poppins,Arial;background:var(--light);color:#333}
-
-/* HEADER */
-header{
-position:sticky;top:0;z-index:1000;
-background:linear-gradient(135deg,var(--green),var(--green2));
-color:#fff;text-align:center;padding:26px;transition:.3s;
+body{
+  margin:0;
+  font-family:Poppins, Arial, sans-serif;
+  background:var(--light);
+  color:#333;
 }
-header.shrink{padding:12px}
-header h1{margin:0;font-family:"Playfair Display";font-size:42px}
-header.shrink h1{font-size:26px}
-.tagline{opacity:.9}
-
-/* HERO */
+.notice{
+  background:#f1c40f;
+  color:#000;
+  text-align:center;
+  padding:10px;
+  font-weight:600;
+}
+header{
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:#fff;
+  padding:28px 16px;
+  text-align:center;
+}
+header h1{
+  margin:0;
+  font-family:"Playfair Display", serif;
+  font-size:46px;
+}
+header .hindi{
+  margin-top:6px;
+  font-size:22px;
+  color:var(--gold);
+}
+header .tagline{
+  margin-top:10px;
+  font-size:16px;
+}
 .hero{
-padding:70px 8%;background:linear-gradient(180deg,#0f3d2e,#134e3a);
-color:#fff;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  padding:70px 8%;
+  background:linear-gradient(180deg,#0f3d2e,#134e3a);
+  color:#fff;
 }
 .hero-text{width:45%;min-width:280px}
-.hero-text h2{font-size:46px}
-.hero-text span{color:var(--gold)}
+.hero-text h2{font-size:48px}
+.hero-text h2 span{color:var(--gold)}
+.hero-text p{font-size:18px;line-height:1.8}
 .hero-img{width:45%;min-width:280px}
-.hero-img img{width:100%;border-radius:24px;box-shadow:0 14px 36px rgba(0,0,0,.45)}
-
-/* SECTION */
-section{padding:70px 8%;background:#fff}
-h2{text-align:center;color:var(--green);font-size:36px}
-
-/* PRODUCTS */
+.hero-img img{
+  width:100%;
+  border-radius:24px;
+  box-shadow:0 14px 36px rgba(0,0,0,.45);
+}
+section{
+  background:#fff;
+  padding:70px 8%;
+}
+section h2{
+  text-align:center;
+  font-size:38px;
+  color:var(--green);
+}
 .products{
-display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:28px;margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:28px;
+  margin-top:40px;
 }
 .product{
-background:#fff;padding:20px;border-radius:22px;
-box-shadow:0 8px 22px rgba(0,0,0,.12);text-align:center;
+  background:#fff;
+  padding:18px;
+  border-radius:22px;
+  box-shadow:0 8px 22px rgba(0,0,0,.12);
+  text-align:center;
 }
-.product img{width:100%;height:200px;object-fit:cover;border-radius:16px}
-.qty{
-display:flex;justify-content:center;align-items:center;margin:10px 0;
+.product img{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  border-radius:16px;
 }
-.qty button{
-width:36px;height:36px;border:none;background:#ddd;font-size:20px;
+.product h3{margin:14px 0 8px;color:var(--green2)}
+.badge{
+  padding:6px 16px;
+  background:#fdecea;
+  color:#c0392b;
+  border-radius:20px;
+  font-size:13px;
 }
-.qty span{margin:0 12px;font-weight:600}
-.price{font-weight:600;margin:8px 0}
-.buy{
-width:100%;padding:12px;border:none;border-radius:30px;
-background:#ccc;font-weight:600;
+.about{
+  background:#f8fbf8;
+  text-align:center;
 }
-
-/* CONTACT FORM */
-.contact{
-background:#f8fbf8;text-align:center;
+.about p{
+  max-width:1000px;
+  margin:auto;
+  font-size:18px;
+  line-height:1.9;
 }
-input,textarea{
-width:100%;max-width:500px;margin:8px auto;
-padding:12px;border-radius:8px;border:1px solid #ccc;
-}
-
-/* FOOTER */
 footer{
-background:#0c0c0c;color:#fff;text-align:center;padding:30px;font-size:14px;
+  background:#0c0c0c;
+  color:#fff;
+  text-align:center;
+  padding:30px 16px;
+}
+@media(max-width:768px){
+  .hero{flex-direction:column;text-align:center}
+  .hero-text,.hero-img{width:100%}
 }
 </style>
 </head>
 
 <body>
 
-<header id="header">
-<h1>Chahat Organic</h1>
-<div class="tagline">Pure • Natural • Farmer Sourced</div>
+<div class="notice">
+🚧 All products are currently OUT OF STOCK. Availability will be updated soon.
+</div>
+
+<header>
+  <h1>Chahat Organic</h1>
+  <div class="hindi">🌿 अपनों के लिए चाह</div>
+  <div class="tagline">Pure • Natural • Farmer Sourced</div>
 </header>
 
 <div class="hero">
-<div class="hero-text">
-<h2>Everyday <span>Organic Essentials</span><br>for Healthy Living</h2>
-<p>From trusted farmers directly to your family — pure, honest and chemical-free.</p>
-</div>
-<div class="hero-img">
-<img id="heroImage" src="CH01.png">
-</div>
+  <div class="hero-text">
+    <h2>Everyday <span>Organic Essentials</span><br>for Healthy Living</h2>
+    <p>
+      Premium organic spices, tea, honey and wellness products sourced directly
+      from trusted Indian farmers.
+    </p>
+  </div>
+  <div class="hero-img">
+    <img src="CH01.png" alt="Chahat Organic">
+  </div>
 </div>
 
 <section>
 <h2>Our Organic Products</h2>
 <div class="products">
-
-<!-- PRODUCT -->
-<div class="product">
-<img src="haldi.jpg" onerror="this.src='Chahat.png'">
-<h3>Organic Turmeric (Haldi)</h3>
-<p>Boosts immunity • Anti-inflammatory • Chemical-free</p>
-
-<div class="qty">
-<button onclick="dec(0)">−</button>
-<span id="q0">1</span>
-<button onclick="inc(0)">+</button>
-</div>
-
-<div class="price">₹ <span id="p0">299</span></div>
-<button class="buy">OUT OF STOCK</button>
-</div>
-
-<div class="product">
-<img src="tea.jpg" onerror="this.src='Chahat.png'">
-<h3>Organic Tea (Chai)</h3>
-<p>Natural aroma • No artificial flavor • Farm fresh</p>
-
-<div class="qty">
-<button onclick="dec(1)">−</button>
-<span id="q1">1</span>
-<button onclick="inc(1)">+</button>
-</div>
-
-<div class="price">₹ <span id="p1">399</span></div>
-<button class="buy">OUT OF STOCK</button>
-</div>
-
+  <div class="product">
+    <img src="Chahat.png">
+    <h3>More Products Coming Soon</h3>
+    <span class="badge">COMING SOON</span>
+  </div>
 </div>
 </section>
 
-<section class="contact">
-<h2>Ask Us Anything</h2>
-<form id="contactForm">
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="email" name="email" placeholder="Your Email" required>
-<textarea name="message" placeholder="Your Message" required></textarea>
-<button type="submit">Send Message</button>
-</form>
+<section class="about">
+<h2>About Chahat Organic</h2>
+<p>
+Chahat Organic is a farmer-first initiative by <b>Shubham Mishra</b>, delivering
+authentic, chemical-free organic products for healthy living.
+</p>
 </section>
 
 <footer>
-© 2026 Chahat Organic • Honest Food • Honest Living<br><br>
-<b>Founder: Shubham Mishra</b><br>
-Instagram: @chahatorganic • WhatsApp: 7053053863 • Email: shubhammishraa052@gmail.com
+© 2026 Chahat Organic • Honest Food • Honest Living  
+<div>
+📷 Instagram: <b>@chahatorganic</b><br>
+📱 WhatsApp: <b>7053053863</b><br>
+✉️ Email: <b>shubhammishraa052@gmail.com</b>
+</div>
 </footer>
-
-<script>
-// HEADER SHRINK
-window.addEventListener("scroll",()=>{
-document.getElementById("header").classList.toggle("shrink",scrollY>80);
-});
-
-// HERO IMAGE SLIDER
-const imgs=["CH01.png","haldi.jpg","tea.jpg"];
-let i=0;
-setInterval(()=>{
-i=(i+1)%imgs.length;
-document.getElementById("heroImage").src=imgs[i];
-},10000);
-
-// QUANTITY + PRICE
-const base=[299,399];
-function inc(i){
-let q=document.getElementById("q"+i);
-q.innerText=+q.innerText+1;
-document.getElementById("p"+i).innerText=base[i]*q.innerText;
-}
-function dec(i){
-let q=document.getElementById("q"+i);
-if(q.innerText>1){
-q.innerText--;
-document.getElementById("p"+i).innerText=base[i]*q.innerText;
-}
-}
-
-// EMAILJS (FREE)
-document.getElementById("contactForm").addEventListener("submit",function(e){
-e.preventDefault();
-alert("Message sent successfully!\nWe will contact you soon.");
-this.reset();
-});
-</script>
 
 </body>
 </html>
