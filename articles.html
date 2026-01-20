@@ -2,191 +2,216 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Chahat Organic – Articles</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Why Organic Turmeric Is Essential for Daily Health | Chahat Organic</title>
-
-<meta name="description" content="Learn why organic turmeric is essential for immunity, digestion and long-term health. Expert insights by Chahat Organic.">
-<meta name="keywords" content="organic turmeric benefits, haldi benefits, chemical free turmeric, chahat organic">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <style>
-:root{
-  --green:#0f3d2e;
-  --green2:#1b5e20;
-  --gold:#f4d03f;
-  --light:#f4f7f4;
-}
-*{box-sizing:border-box}
 body{
+  font-family: Arial, sans-serif;
   margin:0;
-  font-family:Poppins,Arial,sans-serif;
-  background:var(--light);
-  color:#333;
+  background:#f5f7f5;
+  color:#222;
+}
+section{
+  padding:80px 10%;
+}
+h1{font-size:38px;color:#1b5e20}
+h3{color:#0f3d2e}
+p{font-size:18px;line-height:1.9}
+ul{font-size:17px;line-height:1.8}
+
+.action-box{
+  margin-top:30px;
+  padding:15px;
+  background:#eef5ee;
+  border-radius:10px;
 }
 
-/* ===== HEADER ===== */
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:linear-gradient(135deg,var(--green),var(--green2));
-  color:#fff;
-  text-align:center;
-  padding:22px 16px;
-  transition:.3s;
-}
-header.shrink{
-  padding:10px 16px;
-}
-header h1{
-  margin:0;
-  font-family:"Playfair Display",serif;
-  font-size:34px;
-}
-header.shrink h1{
-  font-size:22px;
-}
-header p{
-  margin:6px 0 0;
-  font-size:14px;
-  opacity:.9;
+button{
+  cursor:pointer;
+  border:none;
+  border-radius:6px;
+  padding:8px 14px;
 }
 
-/* ===== ARTICLE ===== */
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:50px 20px;
+.like-btn{background:#1b5e20;color:#fff}
+.share-btn{background:#ffffff;border:1px solid #ccc}
+
+.star span{
+  font-size:26px;
+  cursor:pointer;
+  color:#bbb;
 }
-.article{
-  background:#fff;
-  padding:36px;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.12);
-}
-.article img{
+.star span.active{color:#f4b400}
+
+.comment-box textarea{
   width:100%;
-  border-radius:18px;
-  margin-bottom:28px;
+  height:70px;
+  padding:8px;
+  margin-top:10px;
 }
-.article h2{
-  font-family:"Playfair Display",serif;
-  font-size:34px;
-  color:var(--green2);
-}
-.meta{
-  font-size:14px;
-  color:#777;
-  margin:10px 0 30px;
-}
-.article p{
-  font-size:18px;
-  line-height:1.9;
-  margin-bottom:22px;
-}
-
-/* ===== NAV LINKS ===== */
-.nav-links{
-  margin-top:40px;
-}
-.nav-links a{
-  text-decoration:none;
-  font-weight:600;
-  color:var(--green2);
-}
-
-/* ===== FOOTER ===== */
-footer{
-  background:#0c0c0c;
-  color:#fff;
-  text-align:center;
-  padding:28px 16px;
-  margin-top:60px;
-}
-footer span{
-  opacity:.8;
-  font-size:14px;
-}
-
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-  .article{
-    padding:24px;
-  }
-  .article h2{
-    font-size:26px;
-  }
+.comment{
+  background:#fff;
+  padding:8px;
+  margin-top:8px;
+  border-radius:6px;
+  font-size:15px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header id="header">
-  <h1>Chahat Organic</h1>
-  <p>Organic Knowledge & Healthy Living</p>
-</header>
+<!-- ===============================
+ ARTICLE 1 : TURMERIC
+=================================-->
+<section id="turmeric" style="background:#ffffff">
+<h1>Why Organic Turmeric Is Essential for Daily Health</h1>
 
-<!-- ARTICLE -->
-<div class="container">
-  <div class="article">
+<p>
+Organic turmeric has been a cornerstone of Indian households for centuries.
+Known for its powerful healing properties, turmeric supports immunity,
+digestion and overall wellness without chemical exposure.
+</p>
 
-    <img src="haldi.jpg" alt="Organic Turmeric by Chahat Organic">
+<h3>Key Benefits</h3>
+<ul>
+<li>Boosts immunity</li>
+<li>Reduces inflammation</li>
+<li>Improves digestion</li>
+<li>Chemical-free & safe</li>
+</ul>
 
-    <h2>Why Organic Turmeric Is Essential for Daily Health</h2>
+<div class="action-box">
+<button class="like-btn" onclick="likeArticle('turmeric')">👍 Like</button>
+<span id="like-turmeric">0 Likes</span>
 
-    <div class="meta">
-      Published on 19 September 2026 • By Chahat Organic
-    </div>
-
-    <p>
-      Organic turmeric is a powerful natural ingredient widely known for its
-      anti-inflammatory, antioxidant and immunity-boosting properties.
-      It has been used in Indian households for centuries as both food
-      and medicine.
-    </p>
-
-    <p>
-      Unlike regular turmeric, organic turmeric is cultivated without
-      chemical pesticides or artificial fertilizers. This ensures that
-      its active compound, curcumin, remains pure and highly effective
-      for health benefits.
-    </p>
-
-    <p>
-      Regular consumption of organic turmeric supports digestion, joint
-      health, liver function and overall immunity. It also plays a key role
-      in long-term wellness by reducing toxin exposure from daily food intake.
-    </p>
-
-    <p>
-      Choosing organic turmeric is not just a dietary choice, but a lifestyle
-      decision toward cleaner nutrition, sustainable farming and healthier
-      living for your family.
-    </p>
-
-    <div class="nav-links">
-      ← <a href="index.html">Back to Home</a>
-    </div>
-
-  </div>
+<div style="margin-top:10px">
+<a target="_blank"
+href="https://wa.me/?text=Read this organic article https://shubhammishra0043.github.io/chahatorganic/articles.html#turmeric">
+📤 Share on WhatsApp
+</a>
+<button class="share-btn" onclick="copyLink('#turmeric')">🔗 Copy Link</button>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  © 2026 Chahat Organic • Honest Food • Honest Living<br>
-  <span>Manager & Founder: Shubham Mishra</span>
-</footer>
+<!-- STAR RATING -->
+<div class="star" data-id="turmeric">
+<span onclick="rate('turmeric',1)">★</span>
+<span onclick="rate('turmeric',2)">★</span>
+<span onclick="rate('turmeric',3)">★</span>
+<span onclick="rate('turmeric',4)">★</span>
+<span onclick="rate('turmeric',5)">★</span>
+</div>
+
+<!-- COMMENTS -->
+<div class="comment-box">
+<textarea id="comment-turmeric" placeholder="Write your comment..."></textarea>
+<button onclick="addComment('turmeric')">Post Comment</button>
+<div id="comments-turmeric"></div>
+</div>
+</div>
+</section>
+
+<!-- ===============================
+ ARTICLE 2 : ORGANIC TEA
+=================================-->
+<section id="tea" style="background:#f8fbf8">
+<h1>Why Chemical-Free Organic Tea Matters</h1>
+
+<p>
+Organic tea is grown without synthetic pesticides, preserving its natural
+taste, aroma and antioxidants – making it ideal for daily consumption.
+</p>
+
+<h3>Benefits</h3>
+<ul>
+<li>Rich antioxidants</li>
+<li>Improves alertness</li>
+<li>No chemical residue</li>
+<li>Safe for long-term use</li>
+</ul>
+
+<div class="action-box">
+<button class="like-btn" onclick="likeArticle('tea')">👍 Like</button>
+<span id="like-tea">0 Likes</span>
+
+<div style="margin-top:10px">
+<a target="_blank"
+href="https://wa.me/?text=Read this organic article https://shubhammishra0043.github.io/chahatorganic/articles.html#tea">
+📤 Share on WhatsApp
+</a>
+<button class="share-btn" onclick="copyLink('#tea')">🔗 Copy Link</button>
+</div>
+
+<div class="star" data-id="tea">
+<span onclick="rate('tea',1)">★</span>
+<span onclick="rate('tea',2)">★</span>
+<span onclick="rate('tea',3)">★</span>
+<span onclick="rate('tea',4)">★</span>
+<span onclick="rate('tea',5)">★</span>
+</div>
+
+<div class="comment-box">
+<textarea id="comment-tea" placeholder="Write your comment..."></textarea>
+<button onclick="addComment('tea')">Post Comment</button>
+<div id="comments-tea"></div>
+</div>
+</div>
+</section>
 
 <script>
-window.addEventListener("scroll",()=>{
-  document.getElementById("header")
-  .classList.toggle("shrink",window.scrollY>60);
+function likeArticle(id){
+  let key="like_"+id;
+  let count=localStorage.getItem(key)||0;
+  if(!localStorage.getItem(key+"_done")){
+    count++;
+    localStorage.setItem(key,count);
+    localStorage.setItem(key+"_done","yes");
+    document.getElementById("like-"+id).innerText=count+" Likes";
+  }else alert("Already liked 😊");
+}
+
+function copyLink(hash){
+  navigator.clipboard.writeText(location.origin+location.pathname+hash);
+  alert("Link copied ✅");
+}
+
+function rate(id,val){
+  localStorage.setItem("rate_"+id,val);
+  paintStars(id,val);
+}
+
+function paintStars(id,val){
+  document.querySelectorAll(".star[data-id='"+id+"'] span")
+  .forEach((s,i)=>s.classList.toggle("active",i<val));
+}
+
+function addComment(id){
+  let txt=document.getElementById("comment-"+id).value;
+  if(txt.trim()=="")return;
+  let data=JSON.parse(localStorage.getItem("com_"+id)||"[]");
+  data.push(txt);
+  localStorage.setItem("com_"+id,JSON.stringify(data));
+  document.getElementById("comment-"+id).value="";
+  loadComments(id);
+}
+
+function loadComments(id){
+  let box=document.getElementById("comments-"+id);
+  let data=JSON.parse(localStorage.getItem("com_"+id)||"[]");
+  box.innerHTML="";
+  data.forEach(c=>box.innerHTML+="<div class='comment'>"+c+"</div>");
+}
+
+window.onload=function(){
+["turmeric","tea"].forEach(id=>{
+  document.getElementById("like-"+id).innerText=
+  (localStorage.getItem("like_"+id)||0)+" Likes";
+  paintStars(id,localStorage.getItem("rate_"+id)||0);
+  loadComments(id);
 });
+}
 </script>
 
 </body>
-</html>
+  </html>
