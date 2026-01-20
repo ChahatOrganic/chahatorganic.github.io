@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Chahat Organic – Admin Panel</title>
+<title>Chahat Organic – Admin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Firebase -->
@@ -10,214 +10,113 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
 <style>
-body{margin:0;font-family:Segoe UI,Arial;background:#f4f7f4}
-header{background:#1b5e20;color:#fff;padding:20px;text-align:center}
-input,textarea{width:100%;padding:12px;margin-top:10px;border-radius:10px;border:1px solid #ccc}
-button{margin-top:12px;padding:10px 20px;border:none;border-radius:999px;background:#1b5e20;color:#fff;cursor:pointer}
-.editor{min-height:250px;border:1px solid #ccc;padding:12px;border-radius:12px}
-.panel{max-width:1100px;margin:20px auto;background:#fff;padding:20px;border-radius:16px}
-.section{margin-top:25px}
-label{font-weight:600}
-.report-item{
-  background:#f7f7f7;
-  padding:12px;
-  margin-top:8px;
-  border-radius:10px;
+body{margin:0;font-family:Arial;background:#f4f7f4}
+header{background:#1b5e20;color:#fff;padding:15px;text-align:center}
+.box{max-width:900px;margin:20px auto;background:#fff;padding:20px;border-radius:12px}
+input{width:100%;padding:12px;margin-bottom:10px;font-size:16px}
+.toolbar button{margin-right:6px;padding:6px 10px}
+.editor{border:1px solid #ccc;min-height:220px;padding:12px;font-size:16px}
+.actions{margin-top:12px}
+.actions button{
+  padding:8px 18px;background:#1b5e20;color:#fff;
+  border:none;border-radius:20px;margin-right:8px;cursor:pointer
 }
-.report-item b{color:#1b5e20}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Chahat Organic – Admin Panel</h1>
-  <p>Draft • Schedule • Auto Publish • SEO • Email • WhatsApp • Analytics</p>
+  <h2>Chahat Organic – Admin Panel</h2>
+  <p>Simple • Email-like Editor</p>
 </header>
 
-<div class="panel">
+<div class="box">
 
-<h3>Article Content</h3>
-<input id="title" placeholder="Article Title">
+<input id="title" placeholder="Subject / Title">
 
-<div id="editor" class="editor" contenteditable placeholder="Write article here..."></div>
-
-<label>🕒 Schedule Publish (optional)</label>
-<input type="datetime-local" id="schedule">
-
-<!-- SEO -->
-<div class="section">
-  <h3>🧾 SEO Meta</h3>
-  <input id="seoTitle" placeholder="Meta Title (60 chars)">
-  <textarea id="seoDesc" placeholder="Meta Description (160 chars)"></textarea>
-  <input id="seoKeys" placeholder="Keywords (comma separated)">
+<div class="toolbar">
+  <button onclick="cmd('bold')"><b>B</b></button>
+  <button onclick="cmd('italic')"><i>I</i></button>
+  <button onclick="cmd('insertUnorderedList')">• List</button>
+  <button onclick="addImage()">Image</button>
 </div>
 
-<button onclick="saveDraft()">💾 Save Draft</button>
-<button onclick="publish()">🚀 Publish</button>
+<div id="editor" class="editor" contenteditable>
+Write your message here (email jaisa)...
+</div>
 
-<hr>
+<input type="datetime-local" id="schedule">
 
-<h3>📄 Drafts (Auto-publish enabled)</h3>
-<div id="drafts"></div>
-
-<hr>
-
-<h3>📊 Article Performance Report</h3>
-<div id="report"></div>
+<div class="actions">
+  <button onclick="publishNow()">Publish</button>
+  <button onclick="schedulePost()">Schedule</button>
+</div>
 
 </div>
 
 <script>
-/* =========================
-   CONFIG SECTION
-========================= */
-
-// 🔥 FIREBASE CONFIG (same as articles.html)
+/* ===== FIREBASE CONFIG (APNA REAL DATA DALO) ===== */
 firebase.initializeApp({
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT"
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com"
 });
 const db = firebase.firestore();
+const storage = firebase.storage();
 
-// 📩 EMAILJS CONFIG
-emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
-const EMAIL_SERVICE = "YOUR_SERVICE_ID";
-const EMAIL_TEMPLATE = "YOUR_TEMPLATE_ID";
-const NOTIFY_EMAIL = "youremail@gmail.com";
+/* ===== EDITOR ===== */
+function cmd(c){ document.execCommand(c,false,null); }
 
-// 📲 WHATSAPP ADMIN NUMBER
-const ADMIN_WHATSAPP = "91XXXXXXXXXX"; // country code ke sath
-
-/* =========================
-   SAVE DRAFT
-========================= */
-async function saveDraft(){
-  await db.collection("drafts").add({
-    title: title.value,
-    content: editor.innerHTML,
-    seo:{
-      title: seoTitle.value,
-      desc: seoDesc.value,
-      keys: seoKeys.value
-    },
-    schedule: schedule.value || null,
-    created: new Date().toISOString()
-  });
-  alert("Draft saved");
+/* ===== IMAGE ADD ===== */
+function addImage(){
+  let i=document.createElement("input");
+  i.type="file"; i.accept="image/*";
+  i.onchange=async()=>{
+    let f=i.files[0];
+    let r=storage.ref("posts/"+Date.now()+"_"+f.name);
+    await r.put(f);
+    let url=await r.getDownloadURL();
+    document.execCommand(
+      "insertHTML",
+      false,
+      `<img src="${url}" style="max-width:100%;margin:10px 0;border-radius:10px">`
+    );
+  };
+  i.click();
 }
 
-/* =========================
-   PUBLISH NOW
-========================= */
-async function publish(){
-  await db.collection("articles").add({
-    title: title.value,
-    content: editor.innerHTML,
-    seo:{
-      title: seoTitle.value,
-      desc: seoDesc.value,
-      keys: seoKeys.value
-    },
-    published: new Date().toISOString(),
-    likes: 0
+/* ===== PUBLISH NOW ===== */
+async function publishNow(){
+  if(!title.value || !editor.innerHTML.trim()){
+    alert("Title aur content zaroori hai");
+    return;
+  }
+  await db.collection("posts").add({
+    title:title.value,
+    content:editor.innerHTML,
+    publishTime:new Date()
   });
-
-  sendEmail(title.value);
-  openWhatsAppAlert(title.value);
-  alert("Published successfully");
+  alert("Publish ho gaya ✅");
+  title.value=""; editor.innerHTML=""; schedule.value="";
 }
 
-/* =========================
-   AUTO-PUBLISH CHECK
-========================= */
-setInterval(async ()=>{
-  let now = new Date();
-  let snap = await db.collection("drafts").get();
-  snap.forEach(async d=>{
-    let data = d.data();
-    if(data.schedule && new Date(data.schedule) <= now){
-      await db.collection("articles").add({
-        title:data.title,
-        content:data.content,
-        seo:data.seo,
-        published:new Date().toISOString(),
-        likes:0
-      });
-      await db.collection("drafts").doc(d.id).delete();
-      sendEmail(data.title);
-      openWhatsAppAlert(data.title);
-    }
+/* ===== SCHEDULE ===== */
+async function schedulePost(){
+  if(!schedule.value){
+    alert("Date & time select karo");
+    return;
+  }
+  await db.collection("posts").add({
+    title:title.value,
+    content:editor.innerHTML,
+    publishTime:new Date(schedule.value)
   });
-},30000);
-
-/* =========================
-   LOAD DRAFTS
-========================= */
-db.collection("drafts").onSnapshot(snap=>{
-  drafts.innerHTML="";
-  snap.forEach(d=>{
-    let v=d.data();
-    drafts.innerHTML+=`
-      <div style="background:#f7f7f7;padding:10px;margin-top:8px;border-radius:10px">
-        <b>${v.title}</b><br>
-        Scheduled: ${v.schedule || "Not set"}
-      </div>`;
-  });
-});
-
-/* =========================
-   EMAIL NOTIFICATION
-========================= */
-function sendEmail(title){
-  emailjs.send(EMAIL_SERVICE, EMAIL_TEMPLATE, {
-    article_title: title,
-    to_email: NOTIFY_EMAIL
-  });
+  alert("Schedule ho gaya ✅");
+  title.value=""; editor.innerHTML=""; schedule.value="";
 }
-
-/* =========================
-   WHATSAPP ALERT (1-CLICK)
-========================= */
-function openWhatsAppAlert(title){
-  const msg =
-`🟢 New Article Published – Chahat Organic
-
-📌 ${title}
-
-👉 Please check & share`;
-  const url = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(msg)}`;
-  window.open(url, "_blank");
-}
-
-/* =========================
-   ARTICLE PERFORMANCE REPORT
-========================= */
-function loadPerformanceReport(){
-  db.collection("articles").onSnapshot(snap=>{
-    report.innerHTML="";
-    snap.forEach(doc=>{
-      const a = doc.data();
-      db.collection("articles").doc(doc.id)
-      .collection("comments").get()
-      .then(c=>{
-        report.innerHTML += `
-          <div class="report-item">
-            <b>${a.title}</b><br>
-            👍 Likes: ${a.likes || 0} |
-            💬 Comments: ${c.size}
-          </div>`;
-      });
-    });
-  });
-}
-
-loadPerformanceReport();
 </script>
 
 </body>
