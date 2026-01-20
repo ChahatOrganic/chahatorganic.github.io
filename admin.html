@@ -5,145 +5,219 @@
 <title>Chahat Organic – Admin Panel</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Firebase CDN -->
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 <style>
 body{margin:0;font-family:Segoe UI,Arial;background:#f4f7f4}
-.login,.panel{max-width:900px;margin:40px auto;background:#fff;padding:25px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.1)}
-h1,h2{color:#1b5e20}
-input,textarea{width:100%;padding:10px;margin-top:10px;border-radius:10px;border:1px solid #ccc}
+header{background:#1b5e20;color:#fff;padding:20px;text-align:center}
+input,textarea{width:100%;padding:12px;margin-top:10px;border-radius:10px;border:1px solid #ccc}
 button{margin-top:12px;padding:10px 20px;border:none;border-radius:999px;background:#1b5e20;color:#fff;cursor:pointer}
-.logout{background:#eee;color:#000}
-.article{background:#f7f7f7;padding:15px;border-radius:12px;margin-top:10px}
-.meta{font-size:13px;color:#777}
-.stats{display:flex;gap:20px;margin-top:20px}
-.stat{background:#e8f5e9;padding:15px;border-radius:12px;flex:1;text-align:center}
-.stat b{font-size:22px}
+.editor{min-height:250px;border:1px solid #ccc;padding:12px;border-radius:12px}
+.panel{max-width:1100px;margin:20px auto;background:#fff;padding:20px;border-radius:16px}
+.section{margin-top:25px}
+label{font-weight:600}
+.report-item{
+  background:#f7f7f7;
+  padding:12px;
+  margin-top:8px;
+  border-radius:10px;
+}
+.report-item b{color:#1b5e20}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div class="login" id="loginBox">
-  <h2>Admin Login</h2>
-  <input id="user" placeholder="Username">
-  <input id="pass" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
+<header>
+  <h1>Chahat Organic – Admin Panel</h1>
+  <p>Draft • Schedule • Auto Publish • SEO • Email • WhatsApp • Analytics</p>
+</header>
+
+<div class="panel">
+
+<h3>Article Content</h3>
+<input id="title" placeholder="Article Title">
+
+<div id="editor" class="editor" contenteditable placeholder="Write article here..."></div>
+
+<label>🕒 Schedule Publish (optional)</label>
+<input type="datetime-local" id="schedule">
+
+<!-- SEO -->
+<div class="section">
+  <h3>🧾 SEO Meta</h3>
+  <input id="seoTitle" placeholder="Meta Title (60 chars)">
+  <textarea id="seoDesc" placeholder="Meta Description (160 chars)"></textarea>
+  <input id="seoKeys" placeholder="Keywords (comma separated)">
 </div>
 
-<!-- PANEL -->
-<div class="panel" id="panel" style="display:none">
-  <button class="logout" onclick="logout()">Logout</button>
-  <h1>Admin Panel – Chahat Organic</h1>
+<button onclick="saveDraft()">💾 Save Draft</button>
+<button onclick="publish()">🚀 Publish</button>
 
-  <!-- ANALYTICS -->
-  <div class="stats">
-    <div class="stat">Articles<br><b id="aCount">0</b></div>
-    <div class="stat">Likes<br><b id="lCount">0</b></div>
-    <div class="stat">Comments<br><b id="cCount">0</b></div>
-  </div>
+<hr>
 
-  <!-- POST -->
-  <h2>Create New Article</h2>
-  <input id="title" placeholder="Article Title">
-  <textarea id="content" placeholder="Article Content"></textarea>
-  <input type="file" id="imageFile" accept="image/*">
-  <button onclick="publish()">Publish</button>
+<h3>📄 Drafts (Auto-publish enabled)</h3>
+<div id="drafts"></div>
 
-  <!-- LIST -->
-  <h2>Your Articles</h2>
-  <div id="list"></div>
+<hr>
+
+<h3>📊 Article Performance Report</h3>
+<div id="report"></div>
+
 </div>
 
 <script>
-/* 🔐 ADMIN LOGIN */
-const ADMIN_USER="admin";
-const ADMIN_PASS="chahat@13";
+/* =========================
+   CONFIG SECTION
+========================= */
 
-/* 🔥 FIREBASE CONFIG (REPLACE THIS) */
-const firebaseConfig = {
+// 🔥 FIREBASE CONFIG (same as articles.html)
+firebase.initializeApp({
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "XXXX",
-  appId: "XXXX"
-};
-
-firebase.initializeApp(firebaseConfig);
+  projectId: "YOUR_PROJECT"
+});
 const db = firebase.firestore();
-const storage = firebase.storage();
 
-/* LOGIN */
-function login(){
-  if(user.value===ADMIN_USER && pass.value===ADMIN_PASS){
-    loginBox.style.display="none";
-    panel.style.display="block";
-    loadArticles();
-    loadAnalytics();
-  } else alert("Wrong login");
+// 📩 EMAILJS CONFIG
+emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+const EMAIL_SERVICE = "YOUR_SERVICE_ID";
+const EMAIL_TEMPLATE = "YOUR_TEMPLATE_ID";
+const NOTIFY_EMAIL = "youremail@gmail.com";
+
+// 📲 WHATSAPP ADMIN NUMBER
+const ADMIN_WHATSAPP = "91XXXXXXXXXX"; // country code ke sath
+
+/* =========================
+   SAVE DRAFT
+========================= */
+async function saveDraft(){
+  await db.collection("drafts").add({
+    title: title.value,
+    content: editor.innerHTML,
+    seo:{
+      title: seoTitle.value,
+      desc: seoDesc.value,
+      keys: seoKeys.value
+    },
+    schedule: schedule.value || null,
+    created: new Date().toISOString()
+  });
+  alert("Draft saved");
 }
-function logout(){location.reload();}
 
-/* PUBLISH */
+/* =========================
+   PUBLISH NOW
+========================= */
 async function publish(){
-  if(!title.value||!content.value){alert("Fill all fields");return;}
-  let imgURL="";
-  if(imageFile.files[0]){
-    let ref=storage.ref("articles/"+Date.now()+"_"+imageFile.files[0].name);
-    await ref.put(imageFile.files[0]);
-    imgURL=await ref.getDownloadURL();
-  }
   await db.collection("articles").add({
-    title:title.value,
-    content:content.value,
-    image:imgURL,
-    date:new Date().toLocaleString(),
-    likes:0
+    title: title.value,
+    content: editor.innerHTML,
+    seo:{
+      title: seoTitle.value,
+      desc: seoDesc.value,
+      keys: seoKeys.value
+    },
+    published: new Date().toISOString(),
+    likes: 0
   });
-  title.value="";content.value="";imageFile.value="";
-  loadArticles();
+
+  sendEmail(title.value);
+  openWhatsAppAlert(title.value);
+  alert("Published successfully");
 }
 
-/* LOAD ARTICLES */
-function loadArticles(){
-  db.collection("articles").orderBy("date","desc").onSnapshot(snap=>{
-    list.innerHTML="";
-    snap.forEach(doc=>{
-      let d=doc.data();
-      list.innerHTML+=`
-      <div class="article">
-        <b>${d.title}</b>
-        <div class="meta">${d.date}</div>
-        <button onclick="del('${doc.id}')">Delete</button>
+/* =========================
+   AUTO-PUBLISH CHECK
+========================= */
+setInterval(async ()=>{
+  let now = new Date();
+  let snap = await db.collection("drafts").get();
+  snap.forEach(async d=>{
+    let data = d.data();
+    if(data.schedule && new Date(data.schedule) <= now){
+      await db.collection("articles").add({
+        title:data.title,
+        content:data.content,
+        seo:data.seo,
+        published:new Date().toISOString(),
+        likes:0
+      });
+      await db.collection("drafts").doc(d.id).delete();
+      sendEmail(data.title);
+      openWhatsAppAlert(data.title);
+    }
+  });
+},30000);
+
+/* =========================
+   LOAD DRAFTS
+========================= */
+db.collection("drafts").onSnapshot(snap=>{
+  drafts.innerHTML="";
+  snap.forEach(d=>{
+    let v=d.data();
+    drafts.innerHTML+=`
+      <div style="background:#f7f7f7;padding:10px;margin-top:8px;border-radius:10px">
+        <b>${v.title}</b><br>
+        Scheduled: ${v.schedule || "Not set"}
       </div>`;
-    });
   });
-}
-function del(id){
-  if(confirm("Delete article?")){
-    db.collection("articles").doc(id).delete();
-  }
+});
+
+/* =========================
+   EMAIL NOTIFICATION
+========================= */
+function sendEmail(title){
+  emailjs.send(EMAIL_SERVICE, EMAIL_TEMPLATE, {
+    article_title: title,
+    to_email: NOTIFY_EMAIL
+  });
 }
 
-/* ANALYTICS */
-function loadAnalytics(){
+/* =========================
+   WHATSAPP ALERT (1-CLICK)
+========================= */
+function openWhatsAppAlert(title){
+  const msg =
+`🟢 New Article Published – Chahat Organic
+
+📌 ${title}
+
+👉 Please check & share`;
+  const url = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  window.open(url, "_blank");
+}
+
+/* =========================
+   ARTICLE PERFORMANCE REPORT
+========================= */
+function loadPerformanceReport(){
   db.collection("articles").onSnapshot(snap=>{
-    let likes=0,comments=0;
-    aCount.innerText=snap.size;
-    snap.forEach(d=>{
-      likes+=d.data().likes||0;
-      db.collection("articles").doc(d.id)
-        .collection("comments")
-        .get().then(c=>cCount.innerText=parseInt(cCount.innerText)+c.size);
+    report.innerHTML="";
+    snap.forEach(doc=>{
+      const a = doc.data();
+      db.collection("articles").doc(doc.id)
+      .collection("comments").get()
+      .then(c=>{
+        report.innerHTML += `
+          <div class="report-item">
+            <b>${a.title}</b><br>
+            👍 Likes: ${a.likes || 0} |
+            💬 Comments: ${c.size}
+          </div>`;
+      });
     });
-    lCount.innerText=likes;
   });
 }
+
+loadPerformanceReport();
 </script>
 
 </body>
