@@ -3,215 +3,244 @@
 <head>
 <meta charset="UTF-8">
 <title>Chahat Organic – Articles</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+:root{
+  --green:#1b5e20;
+  --light:#f4f7f4;
+  --dark:#1c1c1c;
+  --grey:#777;
+}
+
 body{
-  font-family: Arial, sans-serif;
   margin:0;
-  background:#f5f7f5;
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:var(--light);
   color:#222;
 }
-section{
-  padding:80px 10%;
-}
-h1{font-size:38px;color:#1b5e20}
-h3{color:#0f3d2e}
-p{font-size:18px;line-height:1.9}
-ul{font-size:17px;line-height:1.8}
 
-.action-box{
-  margin-top:30px;
-  padding:15px;
-  background:#eef5ee;
-  border-radius:10px;
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#1b5e20,#2e7d32);
+  color:#fff;
+  padding:28px 20px;
+  text-align:center;
 }
+header h1{margin:0;font-size:32px}
+header p{margin-top:6px;opacity:.9}
 
-button{
-  cursor:pointer;
-  border:none;
-  border-radius:6px;
+/* ARTICLE CARD (FEED STYLE) */
+.article{
+  background:#fff;
+  margin:25px auto;
+  max-width:900px;
+  border-radius:16px;
+  padding:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+.article h2{color:var(--green);margin-top:0}
+.meta{font-size:14px;color:var(--grey);margin-bottom:12px}
+.article p{font-size:17px;line-height:1.8}
+
+/* SOCIAL BAR (FB / INSTA STYLE) */
+.social-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+.social-btn{
+  display:flex;
+  align-items:center;
+  gap:6px;
   padding:8px 14px;
-}
-
-.like-btn{background:#1b5e20;color:#fff}
-.share-btn{background:#ffffff;border:1px solid #ccc}
-
-.star span{
-  font-size:26px;
+  border-radius:999px;
+  border:none;
   cursor:pointer;
-  color:#bbb;
+  font-size:14px;
+  background:#f1f1f1;
 }
-.star span.active{color:#f4b400}
 
+.like-btn{
+  background:#e8f5e9;
+  color:var(--green);
+  font-weight:600;
+}
+
+.fb{background:#e7f0ff;color:#1877f2}
+.x{background:#ededed;color:#000}
+.wa{background:#e8fff0;color:#25D366}
+.li{background:#eef3ff;color:#0a66c2}
+.share{background:#fff3e0;color:#ef6c00}
+.copy{background:#f5f5f5}
+
+/* COMMENTS */
+.comment-box{margin-top:22px}
 .comment-box textarea{
   width:100%;
-  height:70px;
-  padding:8px;
-  margin-top:10px;
+  padding:10px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  resize:none;
+}
+.comment-box button{
+  margin-top:8px;
+  background:var(--green);
+  color:#fff;
+  border:none;
+  padding:8px 18px;
+  border-radius:999px;
+  cursor:pointer;
 }
 .comment{
-  background:#fff;
-  padding:8px;
-  margin-top:8px;
-  border-radius:6px;
+  margin-top:10px;
+  padding:10px;
+  background:#f7f7f7;
+  border-radius:10px;
   font-size:15px;
+}
+
+/* FOOTER */
+footer{
+  margin-top:70px;
+  background:#0f2f17;
+  color:#e0e0e0;
+  padding:45px 20px;
+}
+.footer-inner{max-width:1000px;margin:auto}
+footer h3{color:#fff;margin-top:0}
+footer p{line-height:1.9;color:#cfd8cf}
+.footer-bottom{
+  margin-top:22px;
+  border-top:1px solid rgba(255,255,255,.2);
+  padding-top:15px;
+  font-size:14px;
+  text-align:center;
+  color:#bcd0bc;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===============================
- ARTICLE 1 : TURMERIC
-=================================-->
-<section id="turmeric" style="background:#ffffff">
-<h1>Why Organic Turmeric Is Essential for Daily Health</h1>
+<header>
+  <h1>Chahat Organic – Daily Articles</h1>
+  <p>Pure • Natural • Direct From Farmers</p>
+</header>
 
-<p>
-Organic turmeric has been a cornerstone of Indian households for centuries.
-Known for its powerful healing properties, turmeric supports immunity,
-digestion and overall wellness without chemical exposure.
-</p>
+<div id="articles"></div>
 
-<h3>Key Benefits</h3>
-<ul>
-<li>Boosts immunity</li>
-<li>Reduces inflammation</li>
-<li>Improves digestion</li>
-<li>Chemical-free & safe</li>
-</ul>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <h3>Our Vision</h3>
+    <p>
+      At <b>Chahat Organic</b>, our vision is to encourage a healthier and more
+      conscious lifestyle by delivering pure, chemical-free organic products
+      directly from trusted Indian farmers. We are committed to transparency,
+      sustainability, and long-term wellness for families and the environment.
+    </p>
 
-<div class="action-box">
-<button class="like-btn" onclick="likeArticle('turmeric')">👍 Like</button>
-<span id="like-turmeric">0 Likes</span>
-
-<div style="margin-top:10px">
-<a target="_blank"
-href="https://wa.me/?text=Read this organic article https://shubhammishra0043.github.io/chahatorganic/articles.html#turmeric">
-📤 Share on WhatsApp
-</a>
-<button class="share-btn" onclick="copyLink('#turmeric')">🔗 Copy Link</button>
-</div>
-
-<!-- STAR RATING -->
-<div class="star" data-id="turmeric">
-<span onclick="rate('turmeric',1)">★</span>
-<span onclick="rate('turmeric',2)">★</span>
-<span onclick="rate('turmeric',3)">★</span>
-<span onclick="rate('turmeric',4)">★</span>
-<span onclick="rate('turmeric',5)">★</span>
-</div>
-
-<!-- COMMENTS -->
-<div class="comment-box">
-<textarea id="comment-turmeric" placeholder="Write your comment..."></textarea>
-<button onclick="addComment('turmeric')">Post Comment</button>
-<div id="comments-turmeric"></div>
-</div>
-</div>
-</section>
-
-<!-- ===============================
- ARTICLE 2 : ORGANIC TEA
-=================================-->
-<section id="tea" style="background:#f8fbf8">
-<h1>Why Chemical-Free Organic Tea Matters</h1>
-
-<p>
-Organic tea is grown without synthetic pesticides, preserving its natural
-taste, aroma and antioxidants – making it ideal for daily consumption.
-</p>
-
-<h3>Benefits</h3>
-<ul>
-<li>Rich antioxidants</li>
-<li>Improves alertness</li>
-<li>No chemical residue</li>
-<li>Safe for long-term use</li>
-</ul>
-
-<div class="action-box">
-<button class="like-btn" onclick="likeArticle('tea')">👍 Like</button>
-<span id="like-tea">0 Likes</span>
-
-<div style="margin-top:10px">
-<a target="_blank"
-href="https://wa.me/?text=Read this organic article https://shubhammishra0043.github.io/chahatorganic/articles.html#tea">
-📤 Share on WhatsApp
-</a>
-<button class="share-btn" onclick="copyLink('#tea')">🔗 Copy Link</button>
-</div>
-
-<div class="star" data-id="tea">
-<span onclick="rate('tea',1)">★</span>
-<span onclick="rate('tea',2)">★</span>
-<span onclick="rate('tea',3)">★</span>
-<span onclick="rate('tea',4)">★</span>
-<span onclick="rate('tea',5)">★</span>
-</div>
-
-<div class="comment-box">
-<textarea id="comment-tea" placeholder="Write your comment..."></textarea>
-<button onclick="addComment('tea')">Post Comment</button>
-<div id="comments-tea"></div>
-</div>
-</div>
-</section>
+    <div class="footer-bottom">
+      © 2026 Chahat Organic • Founded & Managed by <b>Shubham Mishra</b>
+    </div>
+  </div>
+</footer>
 
 <script>
-function likeArticle(id){
-  let key="like_"+id;
-  let count=localStorage.getItem(key)||0;
-  if(!localStorage.getItem(key+"_done")){
-    count++;
-    localStorage.setItem(key,count);
-    localStorage.setItem(key+"_done","yes");
-    document.getElementById("like-"+id).innerText=count+" Likes";
-  }else alert("Already liked 😊");
+function render(){
+  let data = JSON.parse(localStorage.getItem("ARTICLES") || "[]");
+  let box = document.getElementById("articles");
+  box.innerHTML="";
+
+  data.slice().reverse().forEach((a,revIndex)=>{
+    let i = data.length - 1 - revIndex;
+    let id = "a"+i;
+
+    box.innerHTML += `
+    <div class="article">
+      <h2>${a.title}</h2>
+      <div class="meta">${a.date}</div>
+      <p>${a.content}</p>
+
+      <div class="social-bar">
+        <button class="social-btn like-btn" onclick="like(${i})">
+          ❤️ ${a.likes || 0}
+        </button>
+
+        <button class="social-btn fb" onclick="shareFB()">Facebook</button>
+        <button class="social-btn x" onclick="shareX('${a.title}')">X</button>
+        <button class="social-btn wa" onclick="shareWA('${a.title}')">WhatsApp</button>
+        <button class="social-btn li" onclick="shareLI()">LinkedIn</button>
+        <button class="social-btn share" onclick="nativeShare('${a.title}')">Share</button>
+        <button class="social-btn copy" onclick="copyLink()">Copy</button>
+      </div>
+
+      <div class="comment-box">
+        <textarea id="c-${id}" placeholder="Write a comment..."></textarea>
+        <button onclick="comment('${id}')">Post</button>
+        <div id="cl-${id}"></div>
+      </div>
+    </div>`;
+
+    loadComments(id);
+  });
 }
 
-function copyLink(hash){
-  navigator.clipboard.writeText(location.origin+location.pathname+hash);
-  alert("Link copied ✅");
+function like(i){
+  let d = JSON.parse(localStorage.getItem("ARTICLES"));
+  d[i].likes = (d[i].likes || 0) + 1;
+  localStorage.setItem("ARTICLES", JSON.stringify(d));
+  render();
 }
 
-function rate(id,val){
-  localStorage.setItem("rate_"+id,val);
-  paintStars(id,val);
-}
-
-function paintStars(id,val){
-  document.querySelectorAll(".star[data-id='"+id+"'] span")
-  .forEach((s,i)=>s.classList.toggle("active",i<val));
-}
-
-function addComment(id){
-  let txt=document.getElementById("comment-"+id).value;
-  if(txt.trim()=="")return;
-  let data=JSON.parse(localStorage.getItem("com_"+id)||"[]");
-  data.push(txt);
-  localStorage.setItem("com_"+id,JSON.stringify(data));
-  document.getElementById("comment-"+id).value="";
+function comment(id){
+  let txt = document.getElementById("c-"+id).value;
+  if(!txt.trim()) return;
+  let key = "com_"+id;
+  let arr = JSON.parse(localStorage.getItem(key) || "[]");
+  arr.push(txt);
+  localStorage.setItem(key, JSON.stringify(arr));
+  document.getElementById("c-"+id).value="";
   loadComments(id);
 }
 
 function loadComments(id){
-  let box=document.getElementById("comments-"+id);
-  let data=JSON.parse(localStorage.getItem("com_"+id)||"[]");
+  let box = document.getElementById("cl-"+id);
+  let arr = JSON.parse(localStorage.getItem("com_"+id) || "[]");
+  if(!box) return;
   box.innerHTML="";
-  data.forEach(c=>box.innerHTML+="<div class='comment'>"+c+"</div>");
+  arr.forEach(c => box.innerHTML += `<div class="comment">${c}</div>`);
 }
 
-window.onload=function(){
-["turmeric","tea"].forEach(id=>{
-  document.getElementById("like-"+id).innerText=
-  (localStorage.getItem("like_"+id)||0)+" Likes";
-  paintStars(id,localStorage.getItem("rate_"+id)||0);
-  loadComments(id);
-});
+/* SHARE FUNCTIONS */
+function shareWA(t){
+  window.open(`https://wa.me/?text=${encodeURIComponent(t + " " + location.href)}`);
 }
+function shareFB(){
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${location.href}`);
+}
+function shareX(t){
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(t)}&url=${location.href}`);
+}
+function shareLI(){
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${location.href}`);
+}
+function copyLink(){
+  navigator.clipboard.writeText(location.href);
+  alert("Link copied ✅");
+}
+function nativeShare(t){
+  if(navigator.share){
+    navigator.share({title:t,url:location.href});
+  }else{
+    copyLink();
+  }
+}
+
+render();
 </script>
 
 </body>
-  </html>
+</html>
