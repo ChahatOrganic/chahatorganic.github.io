@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Chahat Organic – Admin</title>
+<title>Chahat Organic – Admin Panel</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Firebase -->
@@ -11,16 +11,46 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 
 <style>
+:root{--green:#1b5e20}
 body{margin:0;font-family:Arial;background:#f4f7f4}
-header{background:#1b5e20;color:#fff;padding:15px;text-align:center}
-.box{max-width:900px;margin:20px auto;background:#fff;padding:20px;border-radius:12px}
+
+/* Header */
+header{background:var(--green);color:#fff;padding:16px;text-align:center}
+
+/* Login */
+.login{
+  max-width:380px;margin:80px auto;background:#fff;
+  padding:25px;border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.1)
+}
+.login h2{text-align:center;color:var(--green)}
+.login input{width:100%;padding:12px;margin-top:10px}
+.login button{
+  width:100%;margin-top:15px;padding:12px;
+  background:var(--green);color:#fff;border:none;border-radius:20px
+}
+
+/* Admin box */
+.box{
+  display:none;
+  max-width:900px;margin:20px auto;background:#fff;
+  padding:20px;border-radius:12px
+}
 input{width:100%;padding:12px;margin-bottom:10px;font-size:16px}
 .toolbar button{margin-right:6px;padding:6px 10px}
-.editor{border:1px solid #ccc;min-height:220px;padding:12px;font-size:16px}
+.editor{
+  border:1px solid #ccc;min-height:220px;
+  padding:12px;font-size:16px
+}
 .actions{margin-top:12px}
 .actions button{
-  padding:8px 18px;background:#1b5e20;color:#fff;
+  padding:8px 18px;background:var(--green);color:#fff;
   border:none;border-radius:20px;margin-right:8px;cursor:pointer
+}
+.msg{
+  margin-top:10px;
+  color:var(--green);
+  font-weight:600;
 }
 </style>
 </head>
@@ -29,12 +59,21 @@ input{width:100%;padding:12px;margin-bottom:10px;font-size:16px}
 
 <header>
   <h2>Chahat Organic – Admin Panel</h2>
-  <p>Simple • Email-like Editor</p>
+  <p>Secure • Simple • Professional</p>
 </header>
 
-<div class="box">
+<!-- LOGIN -->
+<div class="login" id="loginBox">
+  <h2>Admin Login</h2>
+  <input id="username" placeholder="Username">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
 
-<input id="title" placeholder="Subject / Title">
+<!-- ADMIN PANEL -->
+<div class="box" id="adminBox">
+
+<input id="title" placeholder="Post Title / Subject">
 
 <div class="toolbar">
   <button onclick="cmd('bold')"><b>B</b></button>
@@ -44,7 +83,7 @@ input{width:100%;padding:12px;margin-bottom:10px;font-size:16px}
 </div>
 
 <div id="editor" class="editor" contenteditable>
-Write your message here (email jaisa)...
+Write your content here (email-style editor)...
 </div>
 
 <input type="datetime-local" id="schedule">
@@ -54,23 +93,43 @@ Write your message here (email jaisa)...
   <button onclick="schedulePost()">Schedule</button>
 </div>
 
+<div class="msg" id="statusMsg"></div>
+
 </div>
 
 <script>
-/* ===== FIREBASE CONFIG (APNA REAL DATA DALO) ===== */
+/* ================= LOGIN ================= */
+const ADMIN_USER="admin";
+const ADMIN_PASS="chahat@13";
+
+function login(){
+  if(username.value===ADMIN_USER && password.value===ADMIN_PASS){
+    loginBox.style.display="none";
+    adminBox.style.display="block";
+    sessionStorage.setItem("admin","1");
+  }else{
+    alert("Invalid username or password");
+  }
+}
+if(sessionStorage.getItem("admin")==="1"){
+  loginBox.style.display="none";
+  adminBox.style.display="block";
+}
+
+/* ================= FIREBASE ================= */
 firebase.initializeApp({
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT.firebaseapp.com",
   projectId: "YOUR_PROJECT",
   storageBucket: "YOUR_PROJECT.appspot.com"
 });
-const db = firebase.firestore();
-const storage = firebase.storage();
+const db=firebase.firestore();
+const storage=firebase.storage();
 
-/* ===== EDITOR ===== */
-function cmd(c){ document.execCommand(c,false,null); }
+/* ================= EDITOR ================= */
+function cmd(c){document.execCommand(c,false,null);}
 
-/* ===== IMAGE ADD ===== */
+/* ================= IMAGE ================= */
 function addImage(){
   let i=document.createElement("input");
   i.type="file"; i.accept="image/*";
@@ -88,10 +147,10 @@ function addImage(){
   i.click();
 }
 
-/* ===== PUBLISH NOW ===== */
+/* ================= PUBLISH ================= */
 async function publishNow(){
   if(!title.value || !editor.innerHTML.trim()){
-    alert("Title aur content zaroori hai");
+    alert("Title and content are required.");
     return;
   }
   await db.collection("posts").add({
@@ -99,14 +158,14 @@ async function publishNow(){
     content:editor.innerHTML,
     publishTime:new Date()
   });
-  alert("Publish ho gaya ✅");
-  title.value=""; editor.innerHTML=""; schedule.value="";
+  statusMsg.innerText="✅ Post published successfully and is now live.";
+  clearForm();
 }
 
-/* ===== SCHEDULE ===== */
+/* ================= SCHEDULE ================= */
 async function schedulePost(){
   if(!schedule.value){
-    alert("Date & time select karo");
+    alert("Please select a date and time for scheduling.");
     return;
   }
   await db.collection("posts").add({
@@ -114,8 +173,14 @@ async function schedulePost(){
     content:editor.innerHTML,
     publishTime:new Date(schedule.value)
   });
-  alert("Schedule ho gaya ✅");
-  title.value=""; editor.innerHTML=""; schedule.value="";
+  statusMsg.innerText="⏰ Post scheduled successfully. It will go live automatically.";
+  clearForm();
+}
+
+function clearForm(){
+  title.value="";
+  editor.innerHTML="";
+  schedule.value="";
 }
 </script>
 
