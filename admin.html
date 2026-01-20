@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chahat Organic – Admin Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+
+<style>
+body{margin:0;font-family:Segoe UI,Arial;background:#f4f7f4}
+.login,.panel{max-width:900px;margin:40px auto;background:#fff;padding:25px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.1)}
+h1,h2{color:#1b5e20}
+input,textarea{width:100%;padding:10px;margin-top:10px;border-radius:10px;border:1px solid #ccc}
+button{margin-top:12px;padding:10px 20px;border:none;border-radius:999px;background:#1b5e20;color:#fff;cursor:pointer}
+.logout{background:#eee;color:#000}
+.article{background:#f7f7f7;padding:15px;border-radius:12px;margin-top:10px}
+.meta{font-size:13px;color:#777}
+.stats{display:flex;gap:20px;margin-top:20px}
+.stat{background:#e8f5e9;padding:15px;border-radius:12px;flex:1;text-align:center}
+.stat b{font-size:22px}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="login" id="loginBox">
+  <h2>Admin Login</h2>
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<!-- PANEL -->
+<div class="panel" id="panel" style="display:none">
+  <button class="logout" onclick="logout()">Logout</button>
+  <h1>Admin Panel – Chahat Organic</h1>
+
+  <!-- ANALYTICS -->
+  <div class="stats">
+    <div class="stat">Articles<br><b id="aCount">0</b></div>
+    <div class="stat">Likes<br><b id="lCount">0</b></div>
+    <div class="stat">Comments<br><b id="cCount">0</b></div>
+  </div>
+
+  <!-- POST -->
+  <h2>Create New Article</h2>
+  <input id="title" placeholder="Article Title">
+  <textarea id="content" placeholder="Article Content"></textarea>
+  <input type="file" id="imageFile" accept="image/*">
+  <button onclick="publish()">Publish</button>
+
+  <!-- LIST -->
+  <h2>Your Articles</h2>
+  <div id="list"></div>
+</div>
+
+<script>
+/* 🔐 ADMIN LOGIN */
+const ADMIN_USER="admin";
+const ADMIN_PASS="chahat@13";
+
+/* 🔥 FIREBASE CONFIG (REPLACE THIS) */
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "XXXX",
+  appId: "XXXX"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const storage = firebase.storage();
+
+/* LOGIN */
+function login(){
+  if(user.value===ADMIN_USER && pass.value===ADMIN_PASS){
+    loginBox.style.display="none";
+    panel.style.display="block";
+    loadArticles();
+    loadAnalytics();
+  } else alert("Wrong login");
+}
+function logout(){location.reload();}
+
+/* PUBLISH */
+async function publish(){
+  if(!title.value||!content.value){alert("Fill all fields");return;}
+  let imgURL="";
+  if(imageFile.files[0]){
+    let ref=storage.ref("articles/"+Date.now()+"_"+imageFile.files[0].name);
+    await ref.put(imageFile.files[0]);
+    imgURL=await ref.getDownloadURL();
+  }
+  await db.collection("articles").add({
+    title:title.value,
+    content:content.value,
+    image:imgURL,
+    date:new Date().toLocaleString(),
+    likes:0
+  });
+  title.value="";content.value="";imageFile.value="";
+  loadArticles();
+}
+
+/* LOAD ARTICLES */
+function loadArticles(){
+  db.collection("articles").orderBy("date","desc").onSnapshot(snap=>{
+    list.innerHTML="";
+    snap.forEach(doc=>{
+      let d=doc.data();
+      list.innerHTML+=`
+      <div class="article">
+        <b>${d.title}</b>
+        <div class="meta">${d.date}</div>
+        <button onclick="del('${doc.id}')">Delete</button>
+      </div>`;
+    });
+  });
+}
+function del(id){
+  if(confirm("Delete article?")){
+    db.collection("articles").doc(id).delete();
+  }
+}
+
+/* ANALYTICS */
+function loadAnalytics(){
+  db.collection("articles").onSnapshot(snap=>{
+    let likes=0,comments=0;
+    aCount.innerText=snap.size;
+    snap.forEach(d=>{
+      likes+=d.data().likes||0;
+      db.collection("articles").doc(d.id)
+        .collection("comments")
+        .get().then(c=>cCount.innerText=parseInt(cCount.innerText)+c.size);
+    });
+    lCount.innerText=likes;
+  });
+}
+</script>
+
+</body>
+</html>
