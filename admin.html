@@ -37,21 +37,48 @@ header{background:var(--green);color:#fff;padding:16px;text-align:center}
   padding:20px;border-radius:12px
 }
 input{width:100%;padding:12px;margin-bottom:10px;font-size:16px}
-.toolbar button{margin-right:6px;padding:6px 10px}
+
 .editor{
-  border:1px solid #ccc;min-height:220px;
-  padding:12px;font-size:16px
+  border:1px solid #ccc;
+  min-height:220px;
+  padding:12px;
+  font-size:16px;
 }
-.actions{margin-top:12px}
+
+.toolbar{
+  margin-top:10px;
+}
+.toolbar button{
+  margin-right:6px;
+  padding:6px 12px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  background:#f5f5f5;
+  cursor:pointer;
+}
+
+.actions{margin-top:15px}
 .actions button{
   padding:8px 18px;background:var(--green);color:#fff;
   border:none;border-radius:20px;margin-right:8px;cursor:pointer
 }
+
 .msg{
-  margin-top:10px;
+  margin-top:12px;
   color:var(--green);
   font-weight:600;
 }
+
+/* Footer */
+footer{
+  margin-top:40px;
+  background:#0f2f17;
+  color:#d5e3d5;
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+}
+footer b{color:#fff}
 </style>
 </head>
 
@@ -75,15 +102,16 @@ input{width:100%;padding:12px;margin-bottom:10px;font-size:16px}
 
 <input id="title" placeholder="Post Title / Subject">
 
+<div id="editor" class="editor" contenteditable>
+Write your content here (email-style editor)...
+</div>
+
+<!-- EDITOR TOOLBAR (NOW BELOW, LIKE EMAIL) -->
 <div class="toolbar">
   <button onclick="cmd('bold')"><b>B</b></button>
   <button onclick="cmd('italic')"><i>I</i></button>
   <button onclick="cmd('insertUnorderedList')">• List</button>
   <button onclick="addImage()">Image</button>
-</div>
-
-<div id="editor" class="editor" contenteditable>
-Write your content here (email-style editor)...
 </div>
 
 <input type="datetime-local" id="schedule">
@@ -96,6 +124,12 @@ Write your content here (email-style editor)...
 <div class="msg" id="statusMsg"></div>
 
 </div>
+
+<footer>
+  © 2026 <b>Chahat Organic</b><br>
+  Founded & Managed by <b>Shubham Mishra</b><br>
+  Contact: <b>shubhammishraa052@gmail.com</b>
+</footer>
 
 <script>
 /* ================= LOGIN ================= */
@@ -149,32 +183,40 @@ function addImage(){
 
 /* ================= PUBLISH ================= */
 async function publishNow(){
-  if(!title.value || !editor.innerHTML.trim()){
-    alert("Title and content are required.");
-    return;
+  try{
+    if(!title.value || !editor.innerHTML.trim()){
+      alert("Title and content are required.");
+      return;
+    }
+    await db.collection("posts").add({
+      title:title.value,
+      content:editor.innerHTML,
+      publishTime:new Date()
+    });
+    statusMsg.innerText="✅ Post published successfully and is now live.";
+    clearForm();
+  }catch(err){
+    alert("Error while publishing: " + err.message);
   }
-  await db.collection("posts").add({
-    title:title.value,
-    content:editor.innerHTML,
-    publishTime:new Date()
-  });
-  statusMsg.innerText="✅ Post published successfully and is now live.";
-  clearForm();
 }
 
 /* ================= SCHEDULE ================= */
 async function schedulePost(){
-  if(!schedule.value){
-    alert("Please select a date and time for scheduling.");
-    return;
+  try{
+    if(!schedule.value){
+      alert("Please select a date and time for scheduling.");
+      return;
+    }
+    await db.collection("posts").add({
+      title:title.value,
+      content:editor.innerHTML,
+      publishTime:new Date(schedule.value)
+    });
+    statusMsg.innerText="⏰ Post scheduled successfully. It will go live automatically.";
+    clearForm();
+  }catch(err){
+    alert("Error while scheduling: " + err.message);
   }
-  await db.collection("posts").add({
-    title:title.value,
-    content:editor.innerHTML,
-    publishTime:new Date(schedule.value)
-  });
-  statusMsg.innerText="⏰ Post scheduled successfully. It will go live automatically.";
-  clearForm();
 }
 
 function clearForm(){
