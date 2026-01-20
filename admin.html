@@ -13,8 +13,6 @@
 <style>
 :root{--green:#1b5e20}
 body{margin:0;font-family:Arial;background:#f4f7f4}
-
-/* Header */
 header{background:var(--green);color:#fff;padding:16px;text-align:center}
 
 /* Login */
@@ -30,7 +28,7 @@ header{background:var(--green);color:#fff;padding:16px;text-align:center}
   background:var(--green);color:#fff;border:none;border-radius:20px
 }
 
-/* Admin box */
+/* Admin */
 .box{
   display:none;
   max-width:900px;margin:20px auto;background:#fff;
@@ -106,7 +104,7 @@ footer b{color:#fff}
 Write your content here (email-style editor)...
 </div>
 
-<!-- EDITOR TOOLBAR (NOW BELOW, LIKE EMAIL) -->
+<!-- Toolbar BELOW editor (email-like) -->
 <div class="toolbar">
   <button onclick="cmd('bold')"><b>B</b></button>
   <button onclick="cmd('italic')"><i>I</i></button>
@@ -132,7 +130,7 @@ Write your content here (email-style editor)...
 </footer>
 
 <script>
-/* ================= LOGIN ================= */
+/* ===== LOGIN ===== */
 const ADMIN_USER="admin";
 const ADMIN_PASS="chahat@13";
 
@@ -150,38 +148,44 @@ if(sessionStorage.getItem("admin")==="1"){
   adminBox.style.display="block";
 }
 
-/* ================= FIREBASE ================= */
+/* ===== FIREBASE (REPLACE WITH REAL VALUES) ===== */
 firebase.initializeApp({
-  apiKey: "YOUR_API_KEY",
+  apiKey: "PASTE_YOUR_REAL_API_KEY_HERE",
   authDomain: "YOUR_PROJECT.firebaseapp.com",
   projectId: "YOUR_PROJECT",
   storageBucket: "YOUR_PROJECT.appspot.com"
 });
-const db=firebase.firestore();
-const storage=firebase.storage();
 
-/* ================= EDITOR ================= */
-function cmd(c){document.execCommand(c,false,null);}
+const db = firebase.firestore();
+const storage = firebase.storage();
 
-/* ================= IMAGE ================= */
-function addImage(){
-  let i=document.createElement("input");
-  i.type="file"; i.accept="image/*";
-  i.onchange=async()=>{
-    let f=i.files[0];
-    let r=storage.ref("posts/"+Date.now()+"_"+f.name);
-    await r.put(f);
-    let url=await r.getDownloadURL();
-    document.execCommand(
-      "insertHTML",
-      false,
-      `<img src="${url}" style="max-width:100%;margin:10px 0;border-radius:10px">`
-    );
-  };
-  i.click();
+/* ===== EDITOR ===== */
+function cmd(c){ document.execCommand(c,false,null); }
+
+/* ===== IMAGE UPLOAD ===== */
+async function addImage(){
+  try{
+    let input=document.createElement("input");
+    input.type="file";
+    input.accept="image/*";
+    input.onchange=async()=>{
+      let file=input.files[0];
+      let ref=storage.ref("posts/"+Date.now()+"_"+file.name);
+      await ref.put(file);
+      let url=await ref.getDownloadURL();
+      document.execCommand(
+        "insertHTML",
+        false,
+        `<img src="${url}" style="max-width:100%;margin:10px 0;border-radius:10px">`
+      );
+    };
+    input.click();
+  }catch(err){
+    alert("Image upload failed: "+err.message);
+  }
 }
 
-/* ================= PUBLISH ================= */
+/* ===== PUBLISH ===== */
 async function publishNow(){
   try{
     if(!title.value || !editor.innerHTML.trim()){
@@ -189,33 +193,33 @@ async function publishNow(){
       return;
     }
     await db.collection("posts").add({
-      title:title.value,
-      content:editor.innerHTML,
-      publishTime:new Date()
+      title: title.value,
+      content: editor.innerHTML,
+      publishTime: firebase.firestore.Timestamp.now()
     });
     statusMsg.innerText="✅ Post published successfully and is now live.";
     clearForm();
   }catch(err){
-    alert("Error while publishing: " + err.message);
+    alert("Firebase Error: " + err.message);
   }
 }
 
-/* ================= SCHEDULE ================= */
+/* ===== SCHEDULE ===== */
 async function schedulePost(){
   try{
     if(!schedule.value){
-      alert("Please select a date and time for scheduling.");
+      alert("Please select date & time.");
       return;
     }
     await db.collection("posts").add({
-      title:title.value,
-      content:editor.innerHTML,
-      publishTime:new Date(schedule.value)
+      title: title.value,
+      content: editor.innerHTML,
+      publishTime: firebase.firestore.Timestamp.fromDate(new Date(schedule.value))
     });
-    statusMsg.innerText="⏰ Post scheduled successfully. It will go live automatically.";
+    statusMsg.innerText="⏰ Post scheduled successfully.";
     clearForm();
   }catch(err){
-    alert("Error while scheduling: " + err.message);
+    alert("Firebase Error: " + err.message);
   }
 }
 
