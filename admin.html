@@ -108,9 +108,8 @@ footer b{color:#fff}
 
 <input id="title" placeholder="Article Title">
 
-<div id="editor" class="editor" contenteditable>
-Write your article content here...
-</div>
+<!-- 🔴 placeholder text hata diya -->
+<div id="editor" class="editor" contenteditable="true"></div>
 
 <div class="toolbar">
   <button onclick="cmd('bold')"><b>B</b></button>
@@ -171,40 +170,61 @@ function changePassword(){
 /* ===== EDITOR ===== */
 function cmd(c){document.execCommand(c,false,null);}
 
-/* IMAGE INSERT (BASE64) */
+/* IMAGE INSERT */
 function addImage(){
   let i=document.createElement("input");
   i.type="file"; i.accept="image/*";
   i.onchange=()=>{
     let r=new FileReader();
     r.onload=e=>{
-      document.execCommand("insertHTML",false,
-      `<img src="${e.target.result}" style="max-width:100%;border-radius:10px">`);
+      document.execCommand(
+        "insertHTML",
+        false,
+        `<img src="${e.target.result}" style="max-width:100%;border-radius:10px">`
+      );
     };
     r.readAsDataURL(i.files[0]);
   };
   i.click();
 }
 
-/* ===== POSTS ===== */
+/* ===== FINAL FIXED PUBLISH ===== */
 function publish(){
-  let data=JSON.parse(localStorage.getItem("ARTICLES")||"[]");
-  let obj={
-    title:title.value,
-    content:editor.innerHTML,
-    date:new Date().toLocaleString("en-IN"),
-    likes:0
+  let t = title.value.trim();
+  let c = editor.innerHTML.trim();
+
+  if(!t || c==="" || c==="<br>"){
+    alert("Title aur content dono likhna zaroori hai");
+    return;
+  }
+
+  let data = JSON.parse(localStorage.getItem("ARTICLES") || "[]");
+
+  let obj = {
+    title: t,
+    content: c,
+    date: new Date().toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"}),
+    views: 0,
+    shares: 0,
+    likes: 0,
+    tags: []
   };
+
   if(editIndex!==null){
-    data[editIndex]=obj;
-    editIndex=null;
+    obj.views = data[editIndex].views || 0;
+    obj.shares = data[editIndex].shares || 0;
+    data[editIndex] = obj;
+    editIndex = null;
     statusMsg.innerText="✏️ Post updated successfully";
   }else{
     data.push(obj);
     statusMsg.innerText="✅ Post published successfully";
   }
-  localStorage.setItem("ARTICLES",JSON.stringify(data));
-  title.value=""; editor.innerHTML="";
+
+  localStorage.setItem("ARTICLES", JSON.stringify(data));
+
+  title.value="";
+  editor.innerHTML="";
   renderPosts();
 }
 
