@@ -4,15 +4,14 @@
 <meta charset="UTF-8">
 <title>Chahat Organic – Articles</title>
 
-<!-- ✅ SEO -->
-<meta name="description" content="Read daily organic food articles by Chahat Organic. Learn benefits of pure, natural & chemical-free products directly from farmers.">
-<meta name="keywords" content="organic food, organic turmeric, chemical free food, chahat organic, shubham mishra">
+<meta name="description" content="Read daily organic food articles by Chahat Organic. Pure, natural & chemical-free food directly from farmers.">
+<meta name="keywords" content="organic food, organic spices, haldi, chai, chahat organic, shubham mishra">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- ✅ SOCIAL PREVIEW -->
 <meta property="og:title" content="Chahat Organic – Daily Organic Articles">
 <meta property="og:description" content="Pure • Natural • Direct From Farmers">
 <meta property="og:type" content="website">
+<meta property="og:image" content="Chahat Logo.png">
 
 <style>
 :root{
@@ -22,17 +21,14 @@
   --text:#222;
   --grey:#777;
 }
-
-/* DARK MODE */
 body.dark{
   --light:#121212;
   --card:#1e1e1e;
   --text:#e0e0e0;
 }
-
 body{
   margin:0;
-  font-family:"Segoe UI",Arial,sans-serif;
+  font-family:Segoe UI,Arial,sans-serif;
   background:var(--light);
   color:var(--text);
 }
@@ -41,76 +37,67 @@ body{
 header{
   background:linear-gradient(135deg,#1b5e20,#2e7d32);
   color:#fff;
-  padding:28px 20px;
+  padding:30px 20px;
   text-align:center;
   position:relative;
 }
+header img{max-width:120px;margin-bottom:10px}
 .toggle{
-  position:absolute;
-  top:20px;
-  right:20px;
-  background:#fff;
-  border:none;
-  border-radius:20px;
-  padding:6px 12px;
-  cursor:pointer;
+  position:absolute;top:20px;right:20px;
+  border:none;border-radius:20px;
+  padding:6px 12px;cursor:pointer;
 }
 
 /* SEARCH */
-.search-box{
-  max-width:900px;
-  margin:20px auto;
-  padding:0 20px;
-}
+.search-box{max-width:900px;margin:20px auto;padding:0 20px}
 .search-box input{
-  width:100%;
-  padding:12px 16px;
-  border-radius:999px;
-  border:1px solid #ccc;
+  width:100%;padding:12px 16px;
+  border-radius:999px;border:1px solid #ccc;
 }
 
 /* CTA */
 .cta{
-  max-width:900px;
-  margin:20px auto;
-  background:#e8f5e9;
-  color:#1b5e20;
-  padding:14px 20px;
-  border-radius:14px;
-  text-align:center;
-  font-weight:600;
+  max-width:900px;margin:20px auto;
+  background:#e8f5e9;color:#1b5e20;
+  padding:14px;border-radius:14px;
+  text-align:center;font-weight:600;
 }
 
 /* ARTICLE */
 .article{
   background:var(--card);
-  margin:25px auto;
+  margin:22px auto;
   max-width:900px;
   border-radius:16px;
   padding:25px;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 .article h2{color:var(--green);margin-top:0}
+.meta{font-size:14px;color:var(--grey);display:flex;gap:12px;flex-wrap:wrap}
 
-.meta{
-  font-size:14px;
-  color:var(--grey);
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
+.article-content{font-size:17px;line-height:1.8}
+.article-content img{max-width:100%;border-radius:10px;margin:12px 0}
 
-/* CONTENT */
-.article-content{
-  font-size:17px;
-  line-height:1.8;
+/* ACTIONS */
+.actions{
+  margin-top:18px;
 }
-.article-content img{
-  max-width:100%;
-  border-radius:10px;
-  margin:12px 0;
-  loading:lazy;
+.actions button,
+.buy-btn{
+  margin-right:10px;
+  padding:8px 18px;
+  border:none;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
 }
+.buy-btn{
+  background:#1b5e20;
+  color:#fff;
+  text-decoration:none;
+  display:inline-block;
+}
+.buy-btn:hover{opacity:.9}
 
 /* AUTHOR */
 .author{
@@ -121,45 +108,12 @@ header{
   font-size:14px;
 }
 
-/* PAGINATION */
-.pagination{
-  text-align:center;
-  margin:30px;
-}
-.pagination button{
-  margin:0 5px;
-  padding:6px 14px;
-  border:none;
-  border-radius:999px;
-  cursor:pointer;
-}
-
-/* FLOATING WHATSAPP */
+/* FLOAT */
 .wa-float{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  background:#25D366;
-  color:#fff;
-  padding:14px 16px;
-  border-radius:50%;
-  font-size:22px;
-  text-decoration:none;
-  box-shadow:0 6px 20px rgba(0,0,0,.3);
-}
-
-/* SCROLL TOP */
-#topBtn{
-  position:fixed;
-  left:18px;
-  bottom:20px;
-  padding:10px 14px;
-  border:none;
-  border-radius:50%;
-  background:#1b5e20;
-  color:#fff;
-  display:none;
-  cursor:pointer;
+  position:fixed;right:18px;bottom:18px;
+  background:#25D366;color:#fff;
+  padding:14px;border-radius:50%;
+  text-decoration:none;font-size:22px;
 }
 
 /* FOOTER */
@@ -170,15 +124,17 @@ footer{
   padding:40px;
   text-align:center;
 }
+footer img{max-width:90px;margin-bottom:10px}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Chahat Organic – Daily Articles</h1>
+  <img src="Chahat Logo.png" alt="Chahat Organic Logo">
+  <h1>Chahat Organic – Articles</h1>
   <p>Pure • Natural • Direct From Farmers</p>
-  <button class="toggle" onclick="toggleDark()">🌙 Dark Mode</button>
+  <button class="toggle" onclick="toggleDark()">🌙 Dark</button>
 </header>
 
 <div class="search-box">
@@ -190,126 +146,22 @@ footer{
 </div>
 
 <div id="articles"></div>
-<div class="pagination" id="pager"></div>
 
 <a class="wa-float" href="https://wa.me/917053053863" target="_blank">💬</a>
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
 
-<!-- ===== FOUNDER VISION CARD (PREMIUM) ===== -->
-<style>
-/* Vision Card Styles */
-.vision-wrap{
-  background:linear-gradient(180deg,#f1f8f4,#ffffff);
-  padding:70px 20px 40px;
-}
-
-.vision-card{
-  max-width:900px;
-  margin:auto;
-  background:#ffffff;
-  border-radius:22px;
-  padding:45px 40px;
-  box-shadow:0 18px 40px rgba(0,0,0,.08);
-  text-align:center;
-}
-
-.vision-badge{
-  display:inline-block;
-  background:#e8f5e9;
-  color:#1b5e20;
-  padding:6px 16px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:600;
-  margin-bottom:18px;
-}
-
-.vision-card h2{
-  margin:0 0 18px;
-  font-size:32px;
-  color:#1b5e20;
-}
-
-.vision-text{
-  font-size:18px;
-  line-height:1.9;
-  color:#333;
-  margin-bottom:18px;
-}
-
-.vision-quote{
-  margin:28px auto 22px;
-  font-size:20px;
-  font-style:italic;
-  color:#1b5e20;
-  max-width:720px;
-}
-
-.vision-founder{
-  font-size:15px;
-  color:#555;
-}
-
-/* Dark Mode Support */
-body.dark .vision-wrap{background:#121212}
-body.dark .vision-card{background:#1e1e1e}
-body.dark .vision-text,
-body.dark .vision-founder{color:#cfcfcf}
-body.dark .vision-quote{color:#8bc34a}
-</style>
-
-<section class="vision-wrap">
-  <div class="vision-card">
-    <div class="vision-badge">Founder’s Vision</div>
-
-    <h2>Chahat Organic</h2>
-
-    <p class="vision-text">
-      At <b>Chahat Organic</b>, founder <b>Shubham Mishra</b> envisions a future where
-      every household has access to pure, organic, and chemical-free products —
-      especially spices, which play a vital role in our daily diet and long-term health.
-    </p>
-
-    <p class="vision-text">
-      In an era where adulteration and excessive chemical processing are common,
-      Chahat Organic stands for honesty, farmer-first sourcing, and uncompromised
-      quality — delivering food that families can truly trust.
-    </p>
-
-    <p class="vision-quote">
-      “Delivering pure organic food to every home is not just our business —
-      it is our commitment.”
-    </p>
-
-    <div class="vision-founder">
-      — <b>Shubham Mishra</b><br>
-      Founder, Chahat Organic
-    </div>
-  </div>
-</section>
-<!-- ===== END VISION CARD ===== -->
-  
 <footer>
-  © 2026 Chahat Organic • Founded & Managed by <b>Shubham Mishra</b>
+  <img src="Chahat Logo.png" alt="Chahat Organic">
+  © 2026 Chahat Organic <br>
+  Founded & Managed by <b>Shubham Mishra</b>
 </footer>
 
 <script>
-let page=1, perPage=3;
-
-window.onscroll=()=>topBtn.style.display=scrollY>300?"block":"none";
+let currentArticle=null;
+const BUY_URL = "https://your-main-website.com"; // 👈 CHANGE THIS
 
 function readingTime(html){
   let t=html.replace(/<[^>]+>/g,"");
   return Math.max(1,Math.ceil(t.split(/\s+/).length/200));
-}
-
-function addView(i){
-  let key = "viewed_"+i;
-  if(sessionStorage.getItem(key)) return;
-  let d=JSON.parse(localStorage.getItem("ARTICLES"));
-  d[i].views=(d[i].views||0)+1;
-  localStorage.setItem("ARTICLES",JSON.stringify(d));
-  sessionStorage.setItem(key,"1");
 }
 
 function render(){
@@ -318,43 +170,71 @@ function render(){
   let box=document.getElementById("articles");
   box.innerHTML="";
 
-  let filtered=data.filter(a=>
-    !q || a.title.toLowerCase().includes(q) || a.content.toLowerCase().includes(q)
-  ).reverse();
+  /* SINGLE ARTICLE */
+  if(currentArticle!==null){
+    let a=data[currentArticle];
+    a.views=(a.views||0)+1;
+    localStorage.setItem("ARTICLES",JSON.stringify(data));
 
-  let total=Math.ceil(filtered.length/perPage);
-  let start=(page-1)*perPage;
+    box.innerHTML=`
+      <div class="article">
+        <h2>${a.title}</h2>
+        <div class="meta">
+          <span>${a.date}</span>
+          <span>⏱ ${readingTime(a.content)} min</span>
+          <span>👀 ${a.views}</span>
+        </div>
 
-  filtered.slice(start,start+perPage).forEach((a,i)=>{
-    let idx=data.length-1-(start+i);
-    addView(idx);
+        <div class="article-content">${a.content}</div>
 
-    box.innerHTML+=`
-    <div class="article">
-      <h2>${a.title}</h2>
+        <div class="actions">
+          <button onclick="like(${currentArticle})">❤️ Like (${a.likes||0})</button>
+          <button onclick="share('${a.title}')">🔗 Share</button>
+          <a class="buy-btn" href="${BUY_URL}" target="_blank">🛒 Buy This Product</a>
+        </div>
 
-      <div class="meta">
-        <span>${a.date}</span>
-        <span>⏱️ ${readingTime(a.content)} min read</span>
-        <span>👀 ${a.views||0} views</span>
-      </div>
+        <div class="author">
+          ✍️ <b>Shubham Mishra</b><br>
+          Founder – Chahat Organic
+        </div>
 
-      <div class="article-content">${a.content}</div>
-
-      <div class="author">
-        ✍️ Written by <b>Shubham Mishra</b><br>
-        Founder – Chahat Organic | Promoting Pure & Chemical-Free Food
-      </div>
-    </div>`;
-  });
-
-  pager.innerHTML="";
-  for(let i=1;i<=total;i++){
-    pager.innerHTML+=`<button onclick="page=${i};render()">${i}</button>`;
+        <br>
+        <button onclick="currentArticle=null;render()">⬅ Back</button>
+      </div>`;
+    return;
   }
+
+  /* LIST VIEW */
+  data.filter(a=>
+    !q||a.title.toLowerCase().includes(q)
+  ).reverse().forEach((a,i)=>{
+    let real=data.length-1-i;
+    box.innerHTML+=`
+      <div class="article" onclick="openArticle(${real})">
+        <h2>${a.title}</h2>
+        <div class="meta">
+          <span>${a.date}</span>
+          <span>⏱ ${readingTime(a.content)} min read</span>
+        </div>
+      </div>`;
+  });
 }
 
-search.oninput=()=>{page=1;render()};
+function openArticle(i){currentArticle=i;render();}
+function like(i){
+  let d=JSON.parse(localStorage.getItem("ARTICLES"));
+  d[i].likes=(d[i].likes||0)+1;
+  localStorage.setItem("ARTICLES",JSON.stringify(d));
+  render();
+}
+function share(title){
+  if(navigator.share){
+    navigator.share({title,text:"Chahat Organic Article",url:location.href});
+  }else{
+    window.open("https://wa.me/?text="+encodeURIComponent(title+" "+location.href));
+  }
+}
+search.oninput=render;
 function toggleDark(){document.body.classList.toggle("dark")}
 render();
 </script>
