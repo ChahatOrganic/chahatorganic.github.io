@@ -100,23 +100,6 @@ header{
   gap:10px;
 }
 
-.badge{
-  background:#e8f5e9;
-  color:#1b5e20;
-  padding:3px 10px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:600;
-}
-
-.tags span{
-  background:#f1f1f1;
-  padding:4px 10px;
-  border-radius:999px;
-  font-size:12px;
-  margin-right:6px;
-}
-
 /* CONTENT */
 .article-content{
   font-size:17px;
@@ -126,30 +109,16 @@ header{
   max-width:100%;
   border-radius:10px;
   margin:12px 0;
-  loading:lazy; /* ✅ NEW */
+  loading:lazy;
 }
 
-/* ✅ AUTHOR BOX */
+/* AUTHOR */
 .author{
   margin-top:25px;
   padding:15px;
   border-radius:12px;
   background:#f1f8f4;
   font-size:14px;
-}
-
-/* SOCIAL */
-.social{
-  margin-top:16px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.social button{
-  border:none;
-  padding:6px 14px;
-  border-radius:999px;
-  cursor:pointer;
 }
 
 /* PAGINATION */
@@ -179,7 +148,7 @@ header{
   box-shadow:0 6px 20px rgba(0,0,0,.3);
 }
 
-/* ✅ SCROLL TOP */
+/* SCROLL TOP */
 #topBtn{
   position:fixed;
   left:18px;
@@ -209,7 +178,7 @@ footer{
 <header>
   <h1>Chahat Organic – Daily Articles</h1>
   <p>Pure • Natural • Direct From Farmers</p>
-  <button class="toggle" onclick="toggleDark()">🌙 Dark</button>
+  <button class="toggle" onclick="toggleDark()">🌙 Dark Mode</button>
 </header>
 
 <div class="search-box">
@@ -217,7 +186,7 @@ footer{
 </div>
 
 <div class="cta">
-  🌿 Free organic tips ke liye WhatsApp par juden
+  🌿 Join our WhatsApp for free organic tips & updates
 </div>
 
 <div id="articles"></div>
@@ -233,24 +202,11 @@ footer{
 <script>
 let page=1, perPage=3;
 
-/* SCROLL TOP */
 window.onscroll=()=>topBtn.style.display=scrollY>300?"block":"none";
 
 function readingTime(html){
   let t=html.replace(/<[^>]+>/g,"");
   return Math.max(1,Math.ceil(t.split(/\s+/).length/200));
-}
-
-function autoTags(text){
-  let w=[...new Set(text.toLowerCase().match(/\b[a-z]{5,}\b/g)||[])];
-  return w.slice(0,4);
-}
-
-function addShare(i){
-  let d=JSON.parse(localStorage.getItem("ARTICLES"));
-  d[i].shares=(d[i].shares||0)+1;
-  localStorage.setItem("ARTICLES",JSON.stringify(d));
-  render();
 }
 
 function addView(i){
@@ -285,9 +241,8 @@ function render(){
 
       <div class="meta">
         <span>${a.date}</span>
-        <span>⏱️ ${readingTime(a.content)} min</span>
-        <span>👀 ${a.views||0}</span>
-        <span>🔁 ${a.shares||0}</span>
+        <span>⏱️ ${readingTime(a.content)} min read</span>
+        <span>👀 ${a.views||0} views</span>
       </div>
 
       <div class="article-content">${a.content}</div>
