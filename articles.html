@@ -4,17 +4,18 @@
 <meta charset="UTF-8">
 <title>Chahat Organic – Articles</title>
 
-<meta name="description" content="Explore well-researched articles on organic food, spices, and healthy living by Chahat Organic. Pure, authentic, and chemical-free food sourced directly from farmers.">
-<meta name="keywords" content="organic food, organic spices, turmeric, tea, chemical free food, chahat organic, shubham mishra">
+<meta name="description" content="Explore well-researched articles on organic food, spices, and healthy living by Chahat Organic.">
+<meta name="keywords" content="organic food, organic spices, turmeric, tea, chemical free food, chahat organic">
 <meta name="author" content="Shubham Mishra">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="canonical" href="https://shubhammishra0043.github.io/chahatorganic/articles.html">
 
 <meta property="og:title" content="Chahat Organic – Organic Food Articles">
 <meta property="og:description" content="Pure • Organic • Responsibly Sourced From Farmers">
 <meta property="og:type" content="website">
-<meta property="og:image" content="Chahat Logo.png">
+<meta property="og:image" content="https://shubhammishra0043.github.io/chahatorganic/Chahat%20Logo.png">
 
-<!-- SEO SCHEMA -->
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -22,200 +23,39 @@
   "name":"Chahat Organic",
   "founder":"Shubham Mishra",
   "url":"https://shubhammishra0043.github.io/chahatorganic/",
-  "logo":"Chahat Logo.png",
+  "logo":"https://shubhammishra0043.github.io/chahatorganic/Chahat%20Logo.png",
   "sameAs":["https://wa.me/917053053863"]
 }
 </script>
 
+<script type="application/ld+json" id="articleSchema"></script>
+
 <style>
-:root{
-  --green:#1b5e20;
-  --light:#f4f7f4;
-  --card:#ffffff;
-  --text:#222;
-  --grey:#777;
-}
-body.dark{
-  --light:#121212;
-  --card:#1e1e1e;
-  --text:#e0e0e0;
-}
-body{
-  margin:0;
-  font-family:Segoe UI,Arial,sans-serif;
-  background:var(--light);
-  color:var(--text);
-}
-
-/* HEADER */
-header{
-  background:linear-gradient(135deg,#1b5e20,#2e7d32);
-  color:#fff;
-  padding:32px 20px;
-  text-align:center;
-  position:relative;
-}
+:root{--green:#1b5e20;--light:#f4f7f4;--card:#fff;--text:#222;--grey:#777;}
+body.dark{--light:#121212;--card:#1e1e1e;--text:#e0e0e0}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:var(--light);color:var(--text)}
+#progress{position:fixed;top:0;left:0;height:4px;background:#2e7d32;width:0;z-index:999}
+header{background:linear-gradient(135deg,#1b5e20,#2e7d32);color:#fff;padding:32px 20px;text-align:center;position:relative}
 header img{max-width:120px;margin-bottom:10px}
-.toggle{
-  position:absolute;
-  top:20px;right:20px;
-  border:none;border-radius:20px;
-  padding:6px 14px;
-  cursor:pointer;
-}
-
-/* SEARCH */
-.search-box{max-width:900px;margin:20px auto;padding:0 20px}
-.search-box input{
-  width:100%;padding:12px 16px;
-  border-radius:999px;border:1px solid #ccc;
-}
-
-/* CTA */
-.cta{
-  max-width:900px;
-  margin:20px auto;
-  background:#e8f5e9;
-  color:#1b5e20;
-  padding:18px;
-  border-radius:14px;
-  text-align:center;
-  font-weight:600;
-}
-
-/* ARTICLE */
-.article{
-  background:var(--card);
-  margin:22px auto;
-  max-width:900px;
-  border-radius:16px;
-  padding:26px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-  cursor:pointer;
-}
-.article h2{color:var(--green);margin-top:0}
-.meta{
-  font-size:14px;
-  color:var(--grey);
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-.breadcrumb{
-  font-size:13px;
-  color:#777;
-  margin-bottom:8px;
-}
-.article-content{
-  font-size:17px;
-  line-height:1.85;
-}
-.article-content img{
-  max-width:100%;
-  border-radius:10px;
-  margin:14px 0;
-}
-
-/* ACTIONS */
-.actions{
-  margin-top:26px;
-  text-align:center;
-}
-.actions button{
-  margin-right:10px;
-  padding:8px 18px;
-  border:none;
-  border-radius:999px;
-  cursor:pointer;
-  font-weight:600;
-}
-
-/* BUTTON */
-.visit-btn{
-  display:inline-block;
-  margin-top:18px;
-  padding:14px 34px;
-  background:#1b5e20;
-  color:#fff;
-  font-size:18px;
-  font-weight:700;
-  border-radius:999px;
-  text-decoration:none;
-}
-
-/* AUTHOR */
-.author{
-  margin-top:28px;
-  padding:16px;
-  border-radius:12px;
-  background:#f1f8f4;
-  font-size:14px;
-  text-align:center;
-}
-.disclaimer{
-  font-size:13px;
-  color:#666;
-  margin-top:12px;
-}
-
-/* WHATSAPP */
-.wa-float{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  background:#25D366;
-  color:#fff;
-  padding:14px;
-  border-radius:50%;
-  text-decoration:none;
-  font-size:22px;
-}
-
-/* FOUNDER VISION */
-.vision-wrap{
-  background:linear-gradient(180deg,#f1f8f4,#ffffff);
-  padding:70px 20px 40px;
-}
-.vision-card{
-  max-width:900px;
-  margin:auto;
-  background:#ffffff;
-  border-radius:22px;
-  padding:45px 40px;
-  box-shadow:0 18px 40px rgba(0,0,0,.08);
-  text-align:center;
-}
-.vision-badge{
-  background:#e8f5e9;
-  color:#1b5e20;
-  padding:6px 16px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:600;
-}
-.vision-card h2{font-size:32px;color:#1b5e20}
-.vision-text{font-size:18px;line-height:1.9}
-.vision-quote{
-  font-size:20px;
-  font-style:italic;
-  color:#1b5e20;
-  margin:28px auto;
-}
-.vision-founder{font-size:15px;color:#555}
-
-/* FOOTER */
-footer{
-  margin-top:60px;
-  background:#0f2f17;
-  color:#e0e0e0;
-  padding:40px;
-  text-align:center;
-}
-footer img{max-width:90px}
+.toggle{position:absolute;top:20px;right:20px;border:none;border-radius:20px;padding:6px 14px;cursor:pointer}
+.search-box{max-width:900px;margin:20px auto;padding:0 20px;position:sticky;top:0;background:var(--light);z-index:5}
+.search-box input{width:100%;padding:12px 16px;border-radius:999px;border:1px solid #ccc}
+.article{background:var(--card);margin:22px auto;max-width:900px;border-radius:16px;padding:26px;box-shadow:0 10px 25px rgba(0,0,0,.08);cursor:pointer}
+.article img{width:100%;border-radius:12px;margin-bottom:12px}
+.meta{font-size:14px;color:var(--grey);display:flex;gap:12px;flex-wrap:wrap}
+.article-content{font-size:17px;line-height:1.85}
+.ad-box{background:#f1f8f4;border:2px dashed #1b5e20;padding:20px;border-radius:14px;text-align:center;margin:30px 0;font-size:14px}
+.affiliate{background:#e8f5e9;padding:18px;border-radius:14px;margin-top:30px}
+.visit-btn{display:inline-block;margin-top:14px;padding:12px 28px;background:#1b5e20;color:#fff;border-radius:999px;text-decoration:none;font-weight:700}
+.disclosure{font-size:12px;color:#777;margin-top:20px}
+.wa-float{position:fixed;right:18px;bottom:18px;background:#25D366;color:#fff;padding:14px;border-radius:50%;font-size:22px;text-decoration:none}
+footer{margin-top:60px;background:#0f2f17;color:#e0e0e0;padding:40px;text-align:center;font-size:14px}
 </style>
 </head>
 
 <body>
+
+<div id="progress"></div>
 
 <header>
   <img src="Chahat Logo.png" alt="Chahat Organic Logo">
@@ -225,137 +65,104 @@ footer img{max-width:90px}
 </header>
 
 <div class="search-box">
-  <input id="search" placeholder="🔍 Search articles on organic food & health">
+  <input id="search" placeholder="🔍 Search articles">
 </div>
-
-<div class="cta">
-  🌿 Get expert organic food insights, farmer stories, and wellness guidance  
-  <br><br>
-  <a class="visit-btn" href="https://wa.me/917053053863" target="_blank">
-    Join Our WhatsApp Community
-  </a>
-</div>
-
-<p style="text-align:center;max-width:900px;margin:0 auto 10px;color:#555;font-size:15px">
-Discover thoughtfully written articles on organic food, spices, healthy living,
-and farmer-first nutrition — based on experience, research, and transparency.
-</p>
 
 <div id="articles"></div>
 
-<section class="vision-wrap">
-  <div class="vision-card">
-    <div class="vision-badge">Founder’s Vision</div>
-    <h2>Chahat Organic</h2>
-
-    <p class="vision-text">
-      At <b>Chahat Organic</b>, founder <b>Shubham Mishra</b> envisions a future where
-      every household has access to genuinely organic, chemical-free food — without compromise on purity or honesty.
-    </p>
-
-    <p class="vision-quote">
-      “Delivering honest, chemical-free organic food to every household is not just our business — it is our responsibility.”
-    </p>
-
-    <div class="vision-founder">
-      — <b>Shubham Mishra</b><br>
-      Founder, Chahat Organic
-    </div>
-  </div>
-</section>
-
-<a class="wa-float" href="https://wa.me/917053053863" target="_blank">💬</a>
+<a class="wa-float" href="https://wa.me/917053053863">💬</a>
 
 <footer>
-  <img src="Chahat Logo.png"><br>
-  © 2026 Chahat Organic  
-  <br>Founded and independently managed by <b>Shubham Mishra</b>
-  <br><small>Committed to purity, transparency, and farmer-first sourcing.</small>
+  © 2026 Chahat Organic<br>
+  Founded by <b>Shubham Mishra</b>
+  <div class="disclosure">
+    Disclosure: This website may display ads and contain affiliate links.
+  </div>
 </footer>
 
 <script>
-let currentArticle=null;
+let currentArticle=null, ARTICLES=[];
 const MAIN_SITE_URL="https://shubhammishra0043.github.io/chahatorganic/";
 
 function readingTime(html){
-  let t=html.replace(/<[^>]+>/g,"");
-  return Math.max(1,Math.ceil(t.split(/\s+/).length/200));
+  return Math.max(1,Math.ceil(html.replace(/<[^>]+>/g,"").split(/\s+/).length/200));
+}
+
+fetch("articles.json")
+.then(r=>r.json())
+.then(d=>{ARTICLES=d;render();})
+.catch(()=>articles.innerHTML="<p style='text-align:center'>⚠️ Articles not available.</p>");
+
+function injectSchema(a){
+  articleSchema.innerHTML=JSON.stringify({
+    "@context":"https://schema.org",
+    "@type":"BlogPosting",
+    "headline":a.title,
+    "image":a.image,
+    "author":{"@type":"Person","name":"Shubham Mishra"},
+    "publisher":{"@type":"Organization","name":"Chahat Organic"},
+    "datePublished":a.date,
+    "mainEntityOfPage":{"@type":"WebPage","@id":MAIN_SITE_URL}
+  });
 }
 
 function render(){
   let q=(search.value||"").toLowerCase();
-  let data=JSON.parse(localStorage.getItem("ARTICLES")||"[]");
-  let box=document.getElementById("articles");
-  box.innerHTML="";
+  articles.innerHTML="";
 
   if(currentArticle!==null){
-    let a=data[currentArticle];
-    a.views=(a.views||0)+1;
-    localStorage.setItem("ARTICLES",JSON.stringify(data));
+    let a=ARTICLES[currentArticle];
+    injectSchema(a);
 
-    box.innerHTML=`
-      <div class="article">
-        <div class="breadcrumb">🏠 Home › 📚 Articles</div>
-        <h2>${a.title}</h2>
+    document.querySelector("meta[name=description]")
+    .setAttribute("content", a.excerpt || a.title);
 
-        <div class="meta">
-          <span>${a.date}</span>
-          <span>⏱ ${readingTime(a.content)} min read</span>
-          <span>👀 ${a.views}</span>
-        </div>
+    articles.innerHTML=`
+    <article class="article">
+      <h2>${a.title}</h2>
+      <div class="meta">${a.date} • ⏱ ${readingTime(a.content)} min</div>
 
-        <div class="article-content">${a.content}</div>
+      <div class="ad-box">🔔 Google AdSense (After Approval)</div>
 
-        <div class="actions">
-          <button onclick="like(${currentArticle})">❤️ Like (${a.likes||0})</button>
-          <button onclick="share('${a.title}')">🔗 Share</button><br>
-          <a class="visit-btn" href="${MAIN_SITE_URL}" target="_blank">🌿 Visit Official Store</a>
-        </div>
+      <div class="article-content">${a.content}</div>
 
-        <div class="author">
-          ✍️ <b>Shubham Mishra</b><br>
-          Founder – Chahat Organic
-          <div class="disclaimer">
-            This content is intended for educational and awareness purposes only and should not be considered a substitute for professional medical advice.
-          </div>
-        </div>
-
+      <div class="affiliate">
+        <b>🌿 Recommended Organic Product</b><br>
+        ${a.affiliate || "Affiliate link coming soon"}
         <br>
-        <button onclick="currentArticle=null;render()">⬅ Back to Articles</button>
-      </div>`;
+        <a class="visit-btn" href="https://wa.me/917053053863">Buy via WhatsApp</a>
+      </div>
+
+      <div class="disclosure">
+        As an affiliate, we may earn from qualifying purchases.
+      </div>
+
+      <br><button onclick="currentArticle=null;render()">⬅ Back to Articles</button>
+    </article>`;
     return;
   }
 
-  data.filter(a=>!q||a.title.toLowerCase().includes(q))
-    .reverse()
-    .forEach((a,i)=>{
-      let real=data.length-1-i;
-      box.innerHTML+=`
-        <div class="article" onclick="openArticle(${real})">
-          <h2>${a.title}</h2>
-          <div class="meta">
-            <span>${a.date}</span>
-            <span>⏱ ${readingTime(a.content)} min read</span>
-          </div>
-        </div>`;
-    });
+  ARTICLES
+  .filter(a=>!q || a.title.toLowerCase().includes(q) || a.content.toLowerCase().includes(q))
+  .slice().reverse()
+  .forEach((a,i)=>{
+    articles.innerHTML+=`
+    <article class="article" onclick="currentArticle=${ARTICLES.length-1-i};render()">
+      <img src="${a.image}" alt="${a.title}" loading="lazy">
+      <h2>${a.title}</h2>
+      <div class="meta">${a.date}</div>
+    </article>`;
+  });
 }
 
-function openArticle(i){currentArticle=i;render();}
-function like(i){
-  let d=JSON.parse(localStorage.getItem("ARTICLES"));
-  d[i].likes=(d[i].likes||0)+1;
-  localStorage.setItem("ARTICLES",JSON.stringify(d));
-  render();
+function toggleDark(){
+  document.body.classList.toggle("dark");
+  document.querySelector(".toggle").textContent =
+  document.body.classList.contains("dark")?"☀ Light":"🌙 Dark";
 }
-function share(title){
-  navigator.share
-    ? navigator.share({title:title,text:"Read this article by Chahat Organic",url:location.href})
-    : window.open("https://wa.me/?text="+encodeURIComponent(title+" "+location.href));
-}
+
 search.oninput=render;
-function toggleDark(){document.body.classList.toggle("dark")}
-render();
+window.onscroll=()=>progress.style.width=(scrollY/(document.body.scrollHeight-innerHeight))*100+"%";
 </script>
 
 </body>
