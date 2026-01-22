@@ -56,21 +56,6 @@ input{width:100%;padding:12px;margin-bottom:10px;font-size:16px}
 
 .msg{margin-top:10px;color:var(--green);font-weight:600}
 
-/* Posts List */
-.post{
-  border-bottom:1px solid #ddd;
-  padding:10px 0
-}
-.post b{color:#1b5e20}
-.post button{
-  margin-right:6px;
-  padding:4px 10px;
-  border:none;border-radius:12px;
-  cursor:pointer
-}
-.edit{background:#e3f2fd}
-.del{background:#fdecea}
-
 footer{
   margin-top:40px;
   background:#0f2f17;color:#d5e3d5;
@@ -84,7 +69,7 @@ footer b{color:#fff}
 
 <header>
   <h2>Chahat Organic – Admin Panel</h2>
-  <p>Secure • Full Control • Working</p>
+  <p>Secure • Full Control • Permanent System</p>
 </header>
 
 <!-- LOGIN -->
@@ -108,7 +93,6 @@ footer b{color:#fff}
 
 <input id="title" placeholder="Article Title">
 
-<!-- 🔴 placeholder text hata diya -->
 <div id="editor" class="editor" contenteditable="true"></div>
 
 <div class="toolbar">
@@ -119,110 +103,13 @@ footer b{color:#fff}
 </div>
 
 <div class="actions">
-  <button onclick="publish()">Publish / Update</button>
+  <button onclick="publish()">Publish (Permanent)</button>
 </div>
 
 <div class="msg" id="statusMsg"></div>
 
-<h3>🗂️ Existing Posts</h3>
-<div id="postList"></div>
-
 </div>
 
-<!-- ===== FOUNDER VISION CARD (PREMIUM) ===== -->
-<style>
-/* Vision Card Styles */
-.vision-wrap{
-  background:linear-gradient(180deg,#f1f8f4,#ffffff);
-  padding:70px 20px 40px;
-}
-
-.vision-card{
-  max-width:900px;
-  margin:auto;
-  background:#ffffff;
-  border-radius:22px;
-  padding:45px 40px;
-  box-shadow:0 18px 40px rgba(0,0,0,.08);
-  text-align:center;
-}
-
-.vision-badge{
-  display:inline-block;
-  background:#e8f5e9;
-  color:#1b5e20;
-  padding:6px 16px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:600;
-  margin-bottom:18px;
-}
-
-.vision-card h2{
-  margin:0 0 18px;
-  font-size:32px;
-  color:#1b5e20;
-}
-
-.vision-text{
-  font-size:18px;
-  line-height:1.9;
-  color:#333;
-  margin-bottom:18px;
-}
-
-.vision-quote{
-  margin:28px auto 22px;
-  font-size:20px;
-  font-style:italic;
-  color:#1b5e20;
-  max-width:720px;
-}
-
-.vision-founder{
-  font-size:15px;
-  color:#555;
-}
-
-/* Dark Mode Support */
-body.dark .vision-wrap{background:#121212}
-body.dark .vision-card{background:#1e1e1e}
-body.dark .vision-text,
-body.dark .vision-founder{color:#cfcfcf}
-body.dark .vision-quote{color:#8bc34a}
-</style>
-
-<section class="vision-wrap">
-  <div class="vision-card">
-    <div class="vision-badge">Founder’s Vision</div>
-
-    <h2>Chahat Organic</h2>
-
-    <p class="vision-text">
-      At <b>Chahat Organic</b>, founder <b>Shubham Mishra</b> envisions a future where
-      every household has access to pure, organic, and chemical-free products —
-      especially spices, which play a vital role in our daily diet and long-term health.
-    </p>
-
-    <p class="vision-text">
-      In an era where adulteration and excessive chemical processing are common,
-      Chahat Organic stands for honesty, farmer-first sourcing, and uncompromised
-      quality — delivering food that families can truly trust.
-    </p>
-
-    <p class="vision-quote">
-      “Delivering pure organic food to every home is not just our business —
-      it is our commitment.”
-    </p>
-
-    <div class="vision-founder">
-      — <b>Shubham Mishra</b><br>
-      Founder, Chahat Organic
-    </div>
-  </div>
-</section>
-<!-- ===== END VISION CARD ===== -->
-  
 <footer>
   © 2026 <b>Chahat Organic</b><br>
   Founded & Managed by <b>Shubham Mishra</b>
@@ -232,7 +119,6 @@ body.dark .vision-quote{color:#8bc34a}
 /* ===== AUTH ===== */
 let ADMIN_USER="admin";
 let ADMIN_PASS=localStorage.getItem("ADMIN_PASS") || "chahat@13";
-let editIndex=null;
 
 function login(){
   if(username.value===ADMIN_USER && password.value===ADMIN_PASS){
@@ -240,20 +126,22 @@ function login(){
     adminBox.style.display="block";
     passBox.style.display="block";
     sessionStorage.setItem("admin","1");
-    renderPosts();
-  }else alert("Invalid login");
+  }else{
+    alert("Invalid login");
+  }
 }
+
 if(sessionStorage.getItem("admin")==="1"){
   loginBox.style.display="none";
   adminBox.style.display="block";
   passBox.style.display="block";
-  renderPosts();
 }
 
 /* ===== PASSWORD CHANGE ===== */
 function changePassword(){
   if(oldPass.value!==ADMIN_PASS){
-    alert("Old password incorrect"); return;
+    alert("Old password incorrect");
+    return;
   }
   ADMIN_PASS=newPass.value;
   localStorage.setItem("ADMIN_PASS",newPass.value);
@@ -262,12 +150,15 @@ function changePassword(){
 }
 
 /* ===== EDITOR ===== */
-function cmd(c){document.execCommand(c,false,null);}
+function cmd(c){
+  document.execCommand(c,false,null);
+}
 
 /* IMAGE INSERT */
 function addImage(){
   let i=document.createElement("input");
-  i.type="file"; i.accept="image/*";
+  i.type="file";
+  i.accept="image/*";
   i.onchange=()=>{
     let r=new FileReader();
     r.onload=e=>{
@@ -282,7 +173,7 @@ function addImage(){
   i.click();
 }
 
-/* ===== FINAL FIXED PUBLISH ===== */
+/* ===== ✅ PERMANENT JSON PUBLISH ===== */
 function publish(){
   let t = title.value.trim();
   let c = editor.innerHTML.trim();
@@ -292,63 +183,28 @@ function publish(){
     return;
   }
 
-  let data = JSON.parse(localStorage.getItem("ARTICLES") || "[]");
-
-  let obj = {
+  let article = {
     title: t,
     content: c,
     date: new Date().toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"}),
     views: 0,
-    shares: 0,
-    likes: 0,
-    tags: []
+    likes: 0
   };
 
-  if(editIndex!==null){
-    obj.views = data[editIndex].views || 0;
-    obj.shares = data[editIndex].shares || 0;
-    data[editIndex] = obj;
-    editIndex = null;
-    statusMsg.innerText="✏️ Post updated successfully";
-  }else{
-    data.push(obj);
-    statusMsg.innerText="✅ Post published successfully";
-  }
+  let json = JSON.stringify(article, null, 2);
 
-  localStorage.setItem("ARTICLES", JSON.stringify(data));
+  // Download JSON file
+  let blob = new Blob([json], {type:"application/json"});
+  let a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = t.replace(/\s+/g,"-").toLowerCase()+".json";
+  a.click();
+
+  statusMsg.innerText =
+    "✅ JSON downloaded. GitHub ke articles.json me add karo (PERMANENT).";
 
   title.value="";
   editor.innerHTML="";
-  renderPosts();
-}
-
-function renderPosts(){
-  let data=JSON.parse(localStorage.getItem("ARTICLES")||"[]");
-  postList.innerHTML="";
-  data.forEach((p,i)=>{
-    postList.innerHTML+=`
-      <div class="post">
-        <b>${p.title}</b><br>
-        <button class="edit" onclick="editPost(${i})">Edit</button>
-        <button class="del" onclick="deletePost(${i})">Delete</button>
-      </div>`;
-  });
-}
-
-function editPost(i){
-  let d=JSON.parse(localStorage.getItem("ARTICLES"));
-  title.value=d[i].title;
-  editor.innerHTML=d[i].content;
-  editIndex=i;
-}
-
-function deletePost(i){
-  if(confirm("Delete this post?")){
-    let d=JSON.parse(localStorage.getItem("ARTICLES"));
-    d.splice(i,1);
-    localStorage.setItem("ARTICLES",JSON.stringify(d));
-    renderPosts();
-  }
 }
 </script>
 
