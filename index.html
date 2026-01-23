@@ -58,11 +58,8 @@ header.shrink h1{font-size:26px}
   color:#fff;
   background:
     linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
-    url("01_hero-main.jpg") center/cover no-repeat;
+    url("01_brand_hero_banner.jpg") center/cover no-repeat;
   padding:0 8%;
-}
-.hero-inner{
-  max-width:900px;
 }
 .hero h2{
   font-size:52px;
@@ -75,19 +72,18 @@ header.shrink h1{font-size:26px}
   margin-top:16px;
 }
 
-/* SECTION BASE */
+/* SECTION */
 section{padding:90px 8%;background:#fff}
 section.alt{background:#f0f4f1}
 section h2{
   text-align:center;
   font-size:38px;
   color:var(--green);
-  margin-bottom:20px;
 }
 section p.lead{
   text-align:center;
   max-width:900px;
-  margin:0 auto 40px;
+  margin:20px auto 50px;
   font-size:18px;
   line-height:1.9;
 }
@@ -102,8 +98,8 @@ section p.lead{
   background:#fff;
   border-radius:22px;
   box-shadow:0 10px 28px rgba(0,0,0,.12);
-  text-align:center;
   padding:20px;
+  text-align:center;
   cursor:pointer;
   transition:.3s;
 }
@@ -114,7 +110,7 @@ section p.lead{
   object-fit:cover;
   border-radius:16px;
 }
-.product h3{color:var(--green2);margin:16px 0 6px}
+.product h3{color:var(--green2);margin:14px 0}
 .badge{
   display:inline-block;
   padding:6px 16px;
@@ -124,7 +120,59 @@ section p.lead{
   font-size:13px;
 }
 
-/* QUALITY ASSURANCE (24th IMAGE HERE) */
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+.modal-box{
+  background:#fff;
+  width:92%;
+  max-width:860px;
+  padding:32px;
+  border-radius:22px;
+  max-height:90vh;
+  overflow:auto;
+}
+.modal-box img{
+  width:100%;
+  max-width:360px;
+  border-radius:18px;
+}
+.close{
+  float:right;
+  font-size:22px;
+  cursor:pointer;
+}
+.qty{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin:18px 0;
+}
+.qty button{
+  width:36px;height:36px;
+  border-radius:50%;
+  border:none;
+  background:var(--green2);
+  color:#fff;
+  font-size:20px;
+}
+.buy{
+  width:100%;
+  padding:14px;
+  background:#ccc;
+  border:none;
+  border-radius:30px;
+  cursor:not-allowed;
+}
+
+/* QUALITY */
 .quality{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -136,43 +184,13 @@ section p.lead{
   border-radius:22px;
   box-shadow:0 14px 36px rgba(0,0,0,.2);
 }
-.quality h3{
-  font-size:32px;
-  color:var(--green2);
-}
-.quality p{
-  font-size:17px;
-  line-height:1.9;
-}
-
-/* ARTICLES */
-.article-card{
-  background:#fff;
-  border-radius:20px;
-  box-shadow:0 10px 28px rgba(0,0,0,.12);
-  padding:18px;
-  text-align:center;
-}
-.article-card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  border-radius:14px;
-}
-.article-card a{
-  display:inline-block;
-  margin-top:14px;
-  color:var(--green2);
-  font-weight:600;
-  text-decoration:none;
-}
 
 /* FOOTER */
 footer{
   background:var(--dark);
   color:#eee;
   text-align:center;
-  padding:50px 16px;
+  padding:60px 16px;
   font-size:14px;
 }
 
@@ -193,39 +211,29 @@ footer{
 
 <!-- HERO -->
 <div class="hero" id="hero">
-  <div class="hero-inner">
+  <div>
     <h2>Pure Organic <span>From Farmers</span><br>To Your Family</h2>
-    <p>
-      Carefully sourced organic spices and wellness essentials,
-      grown with honesty and delivered with care.
-    </p>
+    <p>Carefully sourced organic spices grown with honesty and delivered with care.</p>
   </div>
 </div>
 
 <!-- PRODUCTS -->
 <section>
 <h2>Our Organic Products</h2>
-<p class="lead">
-  Everyday essentials crafted with purity, transparency and farmer-first values.
-</p>
+<p class="lead">Premium everyday essentials crafted with purity and transparency.</p>
 <div class="products" id="productGrid"></div>
 </section>
 
-<!-- QUALITY ASSURANCE -->
+<!-- QUALITY -->
 <section class="alt">
 <div class="quality">
-  <img src="24_quality-assurance-packaging.jpg" alt="Quality Assurance">
+  <img src="24_quality-assurance-packaging.jpg">
   <div>
-    <h3>Our Commitment to Quality</h3>
-    <p>
-      At Chahat Organic, quality is not a label — it is a process.
-      From careful sourcing and hygienic handling to secure packaging,
-      every step is handled with responsibility and care.
-    </p>
-    <p>
-      We work closely with farmers, test in small batches,
-      and prioritise purity over mass production —
-      ensuring what reaches your kitchen is safe, honest and natural.
+    <h2>Our Commitment to Quality</h2>
+    <p class="lead">
+      Quality at Chahat Organic is a process — not a promise.
+      We work directly with farmers, handle produce in small batches,
+      and ensure every product is safe, honest and chemical-free.
     </p>
   </div>
 </div>
@@ -234,24 +242,20 @@ footer{
 <!-- ARTICLES -->
 <section>
 <h2>Organic Knowledge & Health Articles</h2>
-<p class="lead">
-  Learn how organic food supports long-term health and conscious living.
-</p>
+<p class="lead">Educating families for healthier, conscious living.</p>
 
 <div class="products">
-  <div class="article-card">
+  <div class="product">
     <img src="16_article-header-organic-turmeric.jpg">
     <h3>Why Organic Turmeric Matters</h3>
     <a href="articles.html#turmeric">Read Article →</a>
   </div>
-
-  <div class="article-card">
+  <div class="product">
     <img src="17_article-header-organic-tea.jpg">
     <h3>The Truth About Organic Tea</h3>
     <a href="articles.html#tea">Read Article →</a>
   </div>
-
-  <div class="article-card">
+  <div class="product">
     <img src="18_article-header-chemical-free-food.jpg">
     <h3>Chemical-Free Food & Health</h3>
     <a href="articles.html#chemicalfree">Read Article →</a>
@@ -262,50 +266,129 @@ footer{
 <footer>
 © 2026 Chahat Organic • Honest Food • Honest Living<br><br>
 <b>Founder & Managed by Shubham Mishra</b><br><br>
-Instagram: @chahatorganic • WhatsApp: 7053053863 • Email: shubhammishraa052@gmail.com
+WhatsApp: 7053053863 • Email: shubhammishraa052@gmail.com
 </footer>
 
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <span class="close" onclick="closeModal()">✖</span>
+    <h2 id="mName"></h2>
+    <img id="mImg">
+    <ul id="mBen"></ul>
+
+    <div class="qty">
+      <button onclick="changeQty(-1)">−</button>
+      <span id="qty">100g</span>
+      <button onclick="changeQty(1)">+</button>
+    </div>
+
+    <div><b>Price:</b> ₹<span id="price"></span></div>
+    <div class="badge" id="stockBadge">OUT OF STOCK</div>
+    <button class="buy" onclick="buyAlert()">BUY</button>
+  </div>
+</div>
+
 <script>
-/* HEADER SHRINK */
+/* HEADER */
 window.addEventListener("scroll",()=>{
-  document.getElementById("header")
-  .classList.toggle("shrink",window.scrollY>80);
+  header.classList.toggle("shrink",window.scrollY>80);
 });
 
-/* HERO IMAGE ROTATION */
-const hero=document.getElementById("hero");
-const heroImgs=[
-  "01_hero-main.jpg",
-  "02_hero-farmer.jpg",
-  "05_mission-statement.jpg"
-];
-let h=0;
-setInterval(()=>{
-  h=(h+1)%heroImgs.length;
-  hero.style.backgroundImage=
-    "linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),url('"+heroImgs[h]+"')";
-},10000);
-
-/* PRODUCT DATA */
+/* PRODUCTS DATA */
 const products=[
-{name:"Organic Turmeric Powder",img:"06_organic-turmeric.jpg"},
-{name:"Organic Black Pepper",img:"07_organic-black-pepper.jpg"},
-{name:"Organic Green Cardamom",img:"08_organic-green-cardamom.jpg"},
-{name:"Organic Cumin Seeds",img:"09_organic-cumin-seeds-jeera.jpg"},
-{name:"Organic Tea Leaves",img:"10_organic-tea-leaves.jpg"},
-{name:"Organic Honey",img:"11_organic-honey.jpg"},
-{name:"More Organic Products",img:"15_coming-soon.jpg",coming:true}
+{
+ name:"Organic Turmeric Powder",
+ img:"06_organic-turmeric-haldi-powder.jpg",
+ market:280,
+ ben:["Boosts immunity","Anti-inflammatory","Improves digestion","Rich in antioxidants","100% chemical-free"]
+},
+{
+ name:"Organic Black Pepper",
+ img:"07_organic-black-pepper-kali-mirch.jpg",
+ market:480,
+ ben:["Improves metabolism","Better nutrient absorption","Immunity support","Natural spice power","Chemical-free"]
+},
+{
+ name:"Organic Green Cardamom",
+ img:"08_organic-green-cardamom-elaichi.jpg",
+ market:620,
+ ben:["Digestive support","Rich aroma","Improves taste","Natural freshness","Pure quality"]
+},
+{
+ name:"Organic Cumin Seeds",
+ img:"09_organic-cumin-seeds-jeera.jpg",
+ market:300,
+ ben:["Improves digestion","Supports metabolism","Gut health","Natural detox","Chemical-free"]
+},
+{
+ name:"Organic Tea Leaves",
+ img:"10_organic-tea-leaves.jpg",
+ market:360,
+ ben:["Natural aroma","No artificial flavour","Gentle on stomach","Farm fresh","Chemical-free"]
+},
+{
+ name:"Organic Honey",
+ img:"11_organic-natural-honey.jpg",
+ market:420,
+ ben:["Natural immunity booster","Healthy sugar alternative","Raw & pure","Supports digestion","No additives"]
+},
+{
+ name:"More Organic Products",
+ img:"15_coming-soon-products.jpg",
+ coming:true,
+ ben:[
+  "We are working closely with trusted farmers",
+  "Researching and sourcing premium quality produce",
+  "Ensuring purity and safety at every step",
+  "New organic products launching very soon",
+  "Stay connected with us for updates"
+ ]
+}
 ];
 
 const grid=document.getElementById("productGrid");
-products.forEach(p=>{
-  grid.innerHTML+=`
-  <div class="product">
-    <img src="${p.img}" onerror="this.src='Chahat.png'">
-    <h3>${p.name}</h3>
-    <span class="badge">${p.coming?"COMING SOON":"OUT OF STOCK"}</span>
-  </div>`;
+products.forEach((p,i)=>{
+ grid.innerHTML+=`
+ <div class="product" onclick="openProduct(${i})">
+   <img src="${p.img}">
+   <h3>${p.name}</h3>
+   <span class="badge">${p.coming?"COMING SOON":"OUT OF STOCK"}</span>
+ </div>`;
 });
+
+let cur,qtyIndex=0;
+const qtyArr=[100,250,500,1000];
+
+function openProduct(i){
+ cur=products[i];
+ qtyIndex=0;
+ mName.innerText=cur.name;
+ mImg.src=cur.img;
+ mBen.innerHTML=cur.ben.map(b=>`<li>${b}</li>`).join("");
+ updatePrice();
+ modal.style.display="flex";
+}
+
+function closeModal(){modal.style.display="none";}
+function changeQty(d){
+ qtyIndex=Math.max(0,Math.min(qtyArr.length-1,qtyIndex+d));
+ updatePrice();
+}
+function updatePrice(){
+ qty.innerText=qtyArr[qtyIndex]+"g";
+ if(cur.coming){price.innerText="—";return;}
+ const base=cur.market*(qtyArr[qtyIndex]/250);
+ price.innerText=Math.round(base*1.1);
+}
+function buyAlert(){
+ alert(
+  "This product is currently out of stock.\n\n"+
+  "We are working closely with farmers to bring\n"+
+  "new organic products very soon.\n\n"+
+  "WhatsApp: 7053053863"
+ );
+}
 </script>
 
 </body>
