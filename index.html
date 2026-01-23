@@ -35,7 +35,10 @@ body.dark section,
 body.dark .product,
 body.dark .modal-box,
 body.dark .ask,
-body.dark .about{background:#1e1e1e;color:#ddd}
+body.dark .vision{
+  background:#1e1e1e;
+  color:#ddd;
+}
 body.dark header{background:#0b2a20}
 body.dark footer{background:#000}
 
@@ -86,8 +89,12 @@ header h1{
   font-family:"Playfair Display",serif;
   color:#fff;
 }
-.hero span{color:#fff}
-.hero p{font-size:20px;max-width:850px;margin:auto;color:#fff}
+.hero p{
+  font-size:20px;
+  max-width:850px;
+  margin:auto;
+  color:#fff;
+}
 
 /* SECTION */
 section{padding:90px 8%;background:#fff}
@@ -125,7 +132,7 @@ h2{text-align:center;color:var(--green)}
   font-size:13px;
 }
 
-/* STORY */
+/* STORY SECTIONS */
 .story{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -152,15 +159,15 @@ h2{text-align:center;color:var(--green)}
   cursor:pointer;
 }
 
-/* FOUNDER */
-.about{
+/* VISION */
+.vision{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:40px;
   align-items:center;
 }
-.about img{width:100%;border-radius:22px}
-.about h3{color:var(--orange);font-size:26px}
+.vision img{width:100%;border-radius:22px}
+.vision h3{color:var(--orange);font-size:28px}
 
 /* MODAL */
 .modal{
@@ -178,6 +185,7 @@ h2{text-align:center;color:var(--green)}
   max-width:860px;
   width:92%;
 }
+.back{cursor:pointer;color:var(--green2);margin-bottom:10px}
 .qty{display:flex;gap:12px;align-items:center}
 .qty button{
   background:var(--green2);
@@ -196,7 +204,6 @@ h2{text-align:center;color:var(--green)}
   border-radius:30px;
   margin-top:14px;
 }
-.back{cursor:pointer;color:var(--green2);margin-bottom:10px}
 
 /* FOOTER */
 footer{
@@ -220,7 +227,7 @@ footer{
 }
 
 @media(max-width:900px){
-  .story,.about{grid-template-columns:1fr}
+  .story,.vision{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -237,7 +244,7 @@ footer{
 <div class="hero">
 <div>
 <h2>Pure Organic From Farmers<br>To Your Family</h2>
-<p>Carefully sourced organic spices grown with honesty and delivered with care.</p>
+<p>Carefully sourced organic spices grown with honesty and deliveredćihwith care.</p>
 </div>
 </div>
 
@@ -247,27 +254,31 @@ footer{
 <div class="products" id="productGrid"></div>
 </section>
 
+<!-- FARMER STORY -->
 <section>
 <div class="story">
 <img src="21_farmer-story-chahat-organic.jpg">
 <p>
-We work directly with Indian farmers, ensuring fair practices,
-sustainable agriculture, and complete transparency — from farm to family.
+We work closely with Indian farmers, following ethical and sustainable practices.
+Every product begins at the farm and reaches your home with full transparency,
+ensuring honesty, safety, and respect for the people who grow our food.
 </p>
 </div>
 </section>
 
+<!-- FAMILY COOKING -->
 <section>
 <div class="story">
 <p>
-Our products are made for real Indian kitchens —
-supporting healthy cooking, authentic taste,
-and long-term wellness for families.
+Our spices are made for real Indian kitchens.
+They support everyday cooking, preserve authentic taste,
+and contribute to long-term family health and wellness.
 </p>
 <img src="23_family-cooking-with-organic-spices.jpg">
 </div>
 </section>
 
+<!-- ASK -->
 <section class="ask">
 <h2>Ask Us Anything</h2>
 <form action="mailto:shubhammishraa052@gmail.com">
@@ -277,17 +288,17 @@ and long-term wellness for families.
 </form>
 </section>
 
+<!-- FOUNDER VISION -->
 <section>
-<div class="about">
+<div class="vision">
 <img src="CH3.png">
 <div>
 <h3>Founder’s Vision</h3>
 <p>
-We believe that spices play a vital role in everyday nutrition and wellness.
-Our mission is to bring pure, organic spices to every household
-by working directly with farmers and eliminating shortcuts.
-At Chahat Organic, we proudly follow a Farmer-to-Family approach
-to build healthier homes and a stronger food culture.
+Spices play a vital role in everyday nutrition and Indian cooking.
+At Chahat Organic, our vision is to bring pure, organic spices to every household.
+By working directly with farmers and following a Farmer-to-Family approach,
+we aim to build healthier homes and a more honest food system.
 </p>
 </div>
 </div>
@@ -305,87 +316,12 @@ href="https://wa.me/917053053863?text=Hello%20Chahat%20Organic,%20I%20would%20li
 WhatsApp
 </a>
 
-<div class="modal" id="modal"></div>
-
 <script>
 function toggleDark(){
  document.body.classList.toggle("dark");
  localStorage.setItem("dark",document.body.classList.contains("dark"));
 }
 if(localStorage.getItem("dark")==="true")document.body.classList.add("dark");
-
-const products=[
-{name:"Organic Turmeric Powder",img:"06_organic-turmeric-haldi-powder.jpg",market:280,
-ben:["Boosts immunity","Anti-inflammatory","Improves digestion","Rich in antioxidants","100% chemical-free"]},
-{name:"Organic Black Pepper",img:"07_organic-black-pepper-kali-mirch.jpg",market:480,
-ben:["Improves metabolism","Better absorption","Immunity support","Natural spice","Chemical-free"]},
-{name:"Organic Green Cardamom",img:"08_organic-green-cardamom-elaichi.jpg",market:620,
-ben:["Digestive support","Rich aroma","Improves taste","Natural freshness","Pure quality"]},
-{name:"Organic Cumin Seeds",img:"09_organic-cumin-seeds-jeera.jpg",market:300,
-ben:["Improves digestion","Supports metabolism","Gut health","Natural detox","Chemical-free"]},
-{name:"Organic Tea Leaves",img:"10_organic-tea-leaves.jpg",market:360,
-ben:["Natural aroma","No artificial flavour","Gentle on stomach","Farm fresh","Chemical-free"]},
-{name:"Organic Honey",img:"11_organic-natural-honey.jpg",market:420,
-ben:["Natural immunity","Healthy sugar alternative","Raw & pure","Supports digestion","No additives"]},
-{name:"More Organic Products",img:"15_coming-soon-products.jpg",coming:true,
-ben:[
-"We are working closely with Indian farmers.",
-"Every product is sourced in small, careful batches.",
-"Quality, purity and honesty remain our priority.",
-"New organic products will be launched very soon.",
-"Thank you for trusting Chahat Organic."
-]}
-];
-
-const grid=document.getElementById("productGrid");
-products.forEach((p,i)=>{
- grid.innerHTML+=`
- <div class="product" onclick="openProduct(${i})">
- <img src="${p.img}">
- <h3>${p.name}</h3>
- <span class="badge">${p.coming?"COMING SOON":"OUT OF STOCK"}</span>
- </div>`;
-});
-
-let cur,qtyIndex=0;
-const qtyArr=[100,250,500,1000];
-
-function openProduct(i){
- cur=products[i]; qtyIndex=0;
- modal.innerHTML=`
- <div class="modal-box">
- <div class="back" onclick="modal.style.display='none'">⬅ Back to products</div>
- <h2>${cur.name}</h2>
- <ul>${cur.ben.map(b=>`<li>${b}</li>`).join("")}</ul>
- <div class="qty">
- <button onclick="changeQty(-1)">−</button>
- <span id="qty">100g</span>
- <button onclick="changeQty(1)">+</button>
- </div>
- <p><b>Price:</b> ₹<span id="price"></span></p>
- <button class="buy" onclick="buyAlert()">BUY</button>
- </div>`;
- updatePrice();
- modal.style.display="flex";
-}
-
-function changeQty(d){
- qtyIndex=Math.max(0,Math.min(3,qtyIndex+d));
- updatePrice();
-}
-function updatePrice(){
- document.getElementById("qty").innerText=qtyArr[qtyIndex]+"g";
- if(cur.coming){document.getElementById("price").innerText="—";return;}
- const base=cur.market*(qtyArr[qtyIndex]/250);
- document.getElementById("price").innerText=Math.round(base*1.1);
-}
-function buyAlert(){
- alert(
- "This product is currently out of stock.\n\n"+
- "We are working closely with farmers to bring fresh organic products soon.\n\n"+
- "WhatsApp: 7053053863\nEmail: shubhammishraa052@gmail.com"
- );
-}
 </script>
 
 </body>
