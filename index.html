@@ -59,7 +59,6 @@ header h1{
 }
 .hindi{color:var(--gold)}
 .tagline{font-size:14px;opacity:.9}
-
 .toggle{
   position:absolute;
   right:16px;
@@ -132,7 +131,7 @@ h2{text-align:center;color:var(--green)}
   font-size:13px;
 }
 
-/* STORY SECTIONS */
+/* STORY */
 .story{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -177,6 +176,7 @@ h2{text-align:center;color:var(--green)}
   background:rgba(0,0,0,.75);
   justify-content:center;
   align-items:center;
+  z-index:2000;
 }
 .modal-box{
   background:#fff;
@@ -185,8 +185,14 @@ h2{text-align:center;color:var(--green)}
   max-width:860px;
   width:92%;
 }
-.back{cursor:pointer;color:var(--green2);margin-bottom:10px}
-.qty{display:flex;gap:12px;align-items:center}
+.back{
+  cursor:pointer;
+  color:var(--green2);
+  font-weight:600;
+  margin-bottom:10px;
+  display:inline-block;
+}
+.qty{display:flex;gap:12px;align-items:center;margin:12px 0}
 .qty button{
   background:var(--green2);
   color:#fff;
@@ -244,7 +250,7 @@ footer{
 <div class="hero">
 <div>
 <h2>Pure Organic From Farmers<br>To Your Family</h2>
-<p>Carefully sourced organic spices grown with honesty and deliveredćihwith care.</p>
+<p>Carefully sourced organic spices grown with honesty and delivered with care.</p>
 </div>
 </div>
 
@@ -260,7 +266,7 @@ footer{
 <img src="21_farmer-story-chahat-organic.jpg">
 <p>
 We work closely with Indian farmers, following ethical and sustainable practices.
-Every product begins at the farm and reaches your home with full transparency,
+Every product begins at the farm and reaches your home with complete transparency,
 ensuring honesty, safety, and respect for the people who grow our food.
 </p>
 </div>
@@ -270,9 +276,8 @@ ensuring honesty, safety, and respect for the people who grow our food.
 <section>
 <div class="story">
 <p>
-Our spices are made for real Indian kitchens.
-They support everyday cooking, preserve authentic taste,
-and contribute to long-term family health and wellness.
+Designed for real Indian kitchens, our spices support everyday cooking,
+preserve authentic taste, and contribute to long-term family health and wellness.
 </p>
 <img src="23_family-cooking-with-organic-spices.jpg">
 </div>
@@ -291,14 +296,15 @@ and contribute to long-term family health and wellness.
 <!-- FOUNDER VISION -->
 <section>
 <div class="vision">
-<img src="CH3.png">
+<img src="CH03.png">
 <div>
 <h3>Founder’s Vision</h3>
 <p>
 Spices play a vital role in everyday nutrition and Indian cooking.
-At Chahat Organic, our vision is to bring pure, organic spices to every household.
-By working directly with farmers and following a Farmer-to-Family approach,
-we aim to build healthier homes and a more honest food system.
+At Chahat Organic, we believe every household deserves access to pure,
+chemical-free organic spices. By working directly with farmers and
+following a Farmer-to-Family approach, we aim to build healthier homes
+and a more honest food system for the future.
 </p>
 </div>
 </div>
@@ -316,12 +322,122 @@ href="https://wa.me/917053053863?text=Hello%20Chahat%20Organic,%20I%20would%20li
 WhatsApp
 </a>
 
+<!-- MODAL -->
+<div class="modal" id="modal"></div>
+
 <script>
 function toggleDark(){
  document.body.classList.toggle("dark");
  localStorage.setItem("dark",document.body.classList.contains("dark"));
 }
 if(localStorage.getItem("dark")==="true")document.body.classList.add("dark");
+
+/* PRODUCTS */
+const products=[
+{
+ name:"Organic Turmeric Powder",
+ img:"06_organic-turmeric-haldi-powder.jpg",
+ market:280,
+ ben:["Boosts immunity","Anti-inflammatory","Improves digestion","Rich in antioxidants","100% chemical-free"]
+},
+{
+ name:"Organic Black Pepper",
+ img:"07_organic-black-pepper-kali-mirch.jpg",
+ market:480,
+ ben:["Improves metabolism","Better absorption","Immunity support","Natural spice","Chemical-free"]
+},
+{
+ name:"Organic Green Cardamom",
+ img:"08_organic-green-cardamom-elaichi.jpg",
+ market:620,
+ ben:["Digestive support","Rich aroma","Improves taste","Natural freshness","Pure quality"]
+},
+{
+ name:"Organic Cumin Seeds",
+ img:"09_organic-cumin-seeds-jeera.jpg",
+ market:300,
+ ben:["Improves digestion","Supports metabolism","Gut health","Natural detox","Chemical-free"]
+},
+{
+ name:"Organic Tea Leaves",
+ img:"10_organic-tea-leaves.jpg",
+ market:360,
+ ben:["Natural aroma","No artificial flavour","Gentle on stomach","Farm fresh","Chemical-free"]
+},
+{
+ name:"Organic Honey",
+ img:"11_organic-natural-honey.jpg",
+ market:420,
+ ben:["Natural immunity","Healthy sugar alternative","Raw & pure","Supports digestion","No additives"]
+},
+{
+ name:"More Organic Products",
+ img:"15_coming-soon-products.jpg",
+ coming:true,
+ ben:[
+  "We are actively working with Indian farmers.",
+  "Products are sourced in small, careful batches.",
+  "Quality, purity, and honesty remain our priority.",
+  "New organic products will be launched very soon.",
+  "Thank you for trusting Chahat Organic."
+ ]
+}
+];
+
+const grid=document.getElementById("productGrid");
+products.forEach((p,i)=>{
+ grid.innerHTML+=`
+ <div class="product" onclick="openProduct(${i})">
+ <img src="${p.img}">
+ <h3>${p.name}</h3>
+ <span class="badge">${p.coming?"COMING SOON":"OUT OF STOCK"}</span>
+ </div>`;
+});
+
+let cur,qtyIndex=0;
+const qtyArr=[100,250,500,1000];
+
+function openProduct(i){
+ cur=products[i];
+ qtyIndex=0;
+ modal.innerHTML=`
+ <div class="modal-box">
+ <span class="back" onclick="modal.style.display='none'">⬅️ Back to page</span>
+ <h2>${cur.name}</h2>
+ <img src="${cur.img}" style="max-width:300px;border-radius:16px">
+ <ul>${cur.ben.map(b=>`<li>${b}</li>`).join("")}</ul>
+ <div class="qty">
+ <button onclick="changeQty(-1)">−</button>
+ <span id="qty">100g</span>
+ <button onclick="changeQty(1)">+</button>
+ </div>
+ <p><b>Price:</b> ₹<span id="price"></span></p>
+ <button class="buy" onclick="buyAlert()">BUY</button>
+ </div>`;
+ updatePrice();
+ modal.style.display="flex";
+}
+
+function changeQty(d){
+ qtyIndex=Math.max(0,Math.min(3,qtyIndex+d));
+ updatePrice();
+}
+function updatePrice(){
+ document.getElementById("qty").innerText=qtyArr[qtyIndex]+"g";
+ if(cur.coming){
+ document.getElementById("price").innerText="—";
+ return;
+ }
+ const base=cur.market*(qtyArr[qtyIndex]/250);
+ document.getElementById("price").innerText=Math.round(base*1.1);
+}
+function buyAlert(){
+ alert(
+ "This product is currently out of stock.\n\n"+
+ "We are working closely with farmers to bring fresh organic products soon.\n\n"+
+ "WhatsApp: 7053053863\nEmail: shubhammishraa052@gmail.com"
+ );
+}
 </script>
 
 </body>
