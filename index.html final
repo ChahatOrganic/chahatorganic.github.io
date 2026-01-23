@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chahat Organic | Pure • Honest • Farmer Sourced</title>
+
+<meta name="description" content="Chahat Organic offers premium organic spices, tea and wellness products sourced directly from Indian farmers. Pure, natural and chemical-free.">
+<meta name="keywords" content="Chahat Organic, organic spices India, organic haldi, organic tea, chemical free food">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --green:#0f3d2e;
+  --green2:#1b5e20;
+  --gold:#f4d03f;
+  --light:#f6f8f6;
+  --dark:#111;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,Arial,sans-serif;
+  background:var(--light);
+  color:#333;
+}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:999;
+  background:rgba(15,61,46,.95);
+  color:#fff;
+  text-align:center;
+  padding:26px 16px;
+  transition:.3s;
+}
+header.shrink{padding:12px}
+header h1{
+  margin:0;
+  font-family:"Playfair Display",serif;
+  font-size:40px;
+}
+header.shrink h1{font-size:26px}
+.hindi{color:var(--gold);font-size:18px}
+.tagline{opacity:.9;font-size:14px}
+
+/* HERO */
+.hero{
+  min-height:90vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+    url("01_hero-main.jpg") center/cover no-repeat;
+  padding:0 8%;
+}
+.hero-inner{
+  max-width:900px;
+}
+.hero h2{
+  font-size:52px;
+  font-family:"Playfair Display",serif;
+}
+.hero h2 span{color:var(--gold)}
+.hero p{
+  font-size:20px;
+  line-height:1.8;
+  margin-top:16px;
+}
+
+/* SECTION BASE */
+section{padding:90px 8%;background:#fff}
+section.alt{background:#f0f4f1}
+section h2{
+  text-align:center;
+  font-size:38px;
+  color:var(--green);
+  margin-bottom:20px;
+}
+section p.lead{
+  text-align:center;
+  max-width:900px;
+  margin:0 auto 40px;
+  font-size:18px;
+  line-height:1.9;
+}
+
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+.product{
+  background:#fff;
+  border-radius:22px;
+  box-shadow:0 10px 28px rgba(0,0,0,.12);
+  text-align:center;
+  padding:20px;
+  cursor:pointer;
+  transition:.3s;
+}
+.product:hover{transform:translateY(-6px)}
+.product img{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  border-radius:16px;
+}
+.product h3{color:var(--green2);margin:16px 0 6px}
+.badge{
+  display:inline-block;
+  padding:6px 16px;
+  background:#fdecea;
+  color:#c0392b;
+  border-radius:999px;
+  font-size:13px;
+}
+
+/* QUALITY ASSURANCE (24th IMAGE HERE) */
+.quality{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+.quality img{
+  width:100%;
+  border-radius:22px;
+  box-shadow:0 14px 36px rgba(0,0,0,.2);
+}
+.quality h3{
+  font-size:32px;
+  color:var(--green2);
+}
+.quality p{
+  font-size:17px;
+  line-height:1.9;
+}
+
+/* ARTICLES */
+.article-card{
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 10px 28px rgba(0,0,0,.12);
+  padding:18px;
+  text-align:center;
+}
+.article-card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:14px;
+}
+.article-card a{
+  display:inline-block;
+  margin-top:14px;
+  color:var(--green2);
+  font-weight:600;
+  text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+  background:var(--dark);
+  color:#eee;
+  text-align:center;
+  padding:50px 16px;
+  font-size:14px;
+}
+
+@media(max-width:900px){
+  .quality{grid-template-columns:1fr}
+  .hero h2{font-size:40px}
+}
+</style>
+</head>
+
+<body>
+
+<header id="header">
+  <h1>Chahat Organic</h1>
+  <div class="hindi">🌿 अपनों के लिए चाह</div>
+  <div class="tagline">Pure • Natural • Farmer Sourced</div>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-inner">
+    <h2>Pure Organic <span>From Farmers</span><br>To Your Family</h2>
+    <p>
+      Carefully sourced organic spices and wellness essentials,
+      grown with honesty and delivered with care.
+    </p>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section>
+<h2>Our Organic Products</h2>
+<p class="lead">
+  Everyday essentials crafted with purity, transparency and farmer-first values.
+</p>
+<div class="products" id="productGrid"></div>
+</section>
+
+<!-- QUALITY ASSURANCE -->
+<section class="alt">
+<div class="quality">
+  <img src="24_quality-assurance-packaging.jpg" alt="Quality Assurance">
+  <div>
+    <h3>Our Commitment to Quality</h3>
+    <p>
+      At Chahat Organic, quality is not a label — it is a process.
+      From careful sourcing and hygienic handling to secure packaging,
+      every step is handled with responsibility and care.
+    </p>
+    <p>
+      We work closely with farmers, test in small batches,
+      and prioritise purity over mass production —
+      ensuring what reaches your kitchen is safe, honest and natural.
+    </p>
+  </div>
+</div>
+</section>
+
+<!-- ARTICLES -->
+<section>
+<h2>Organic Knowledge & Health Articles</h2>
+<p class="lead">
+  Learn how organic food supports long-term health and conscious living.
+</p>
+
+<div class="products">
+  <div class="article-card">
+    <img src="16_article-header-organic-turmeric.jpg">
+    <h3>Why Organic Turmeric Matters</h3>
+    <a href="articles.html#turmeric">Read Article →</a>
+  </div>
+
+  <div class="article-card">
+    <img src="17_article-header-organic-tea.jpg">
+    <h3>The Truth About Organic Tea</h3>
+    <a href="articles.html#tea">Read Article →</a>
+  </div>
+
+  <div class="article-card">
+    <img src="18_article-header-chemical-free-food.jpg">
+    <h3>Chemical-Free Food & Health</h3>
+    <a href="articles.html#chemicalfree">Read Article →</a>
+  </div>
+</div>
+</section>
+
+<footer>
+© 2026 Chahat Organic • Honest Food • Honest Living<br><br>
+<b>Founder & Managed by Shubham Mishra</b><br><br>
+Instagram: @chahatorganic • WhatsApp: 7053053863 • Email: shubhammishraa052@gmail.com
+</footer>
+
+<script>
+/* HEADER SHRINK */
+window.addEventListener("scroll",()=>{
+  document.getElementById("header")
+  .classList.toggle("shrink",window.scrollY>80);
+});
+
+/* HERO IMAGE ROTATION */
+const hero=document.getElementById("hero");
+const heroImgs=[
+  "01_hero-main.jpg",
+  "02_hero-farmer.jpg",
+  "05_mission-statement.jpg"
+];
+let h=0;
+setInterval(()=>{
+  h=(h+1)%heroImgs.length;
+  hero.style.backgroundImage=
+    "linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),url('"+heroImgs[h]+"')";
+},10000);
+
+/* PRODUCT DATA */
+const products=[
+{name:"Organic Turmeric Powder",img:"06_organic-turmeric.jpg"},
+{name:"Organic Black Pepper",img:"07_organic-black-pepper.jpg"},
+{name:"Organic Green Cardamom",img:"08_organic-green-cardamom.jpg"},
+{name:"Organic Cumin Seeds",img:"09_organic-cumin-seeds-jeera.jpg"},
+{name:"Organic Tea Leaves",img:"10_organic-tea-leaves.jpg"},
+{name:"Organic Honey",img:"11_organic-honey.jpg"},
+{name:"More Organic Products",img:"15_coming-soon.jpg",coming:true}
+];
+
+const grid=document.getElementById("productGrid");
+products.forEach(p=>{
+  grid.innerHTML+=`
+  <div class="product">
+    <img src="${p.img}" onerror="this.src='Chahat.png'">
+    <h3>${p.name}</h3>
+    <span class="badge">${p.coming?"COMING SOON":"OUT OF STOCK"}</span>
+  </div>`;
+});
+</script>
+
+</body>
+</html>
