@@ -1,5 +1,51 @@
 [
   {
+    "id": 1,
+    "title": "Benefits of Organic Turmeric (Haldi): A Complete Health Guide",
+    "image": "16_article-header-organic-turmeric.jpg",
+    "excerpt": "Discover the complete benefits of organic turmeric (haldi). Learn how chemical-free turmeric supports immunity, digestion, inflammation control, joint health, and everyday Indian cooking.",
+    "date": "2026-01-26",
+    "author": "Shubham Mishra",
+    "category": "Organic Spices",
+    "url": "organic-turmeric-benefits-guide.html",
+    "readingTime": "12 min read"
+  },
+  {
+    "id": 2,
+    "title": "Why Choose Organic Tea? Health, Taste & Purity Explained",
+    "image": "17_article-header-organic-tea.jpg",
+    "excerpt": "Organic tea offers a cleaner taste, fewer toxins, and better long-term health benefits. Learn why switching to chemical-free tea matters for daily wellness.",
+    "date": "2026-01-26",
+    "author": "Shubham Mishra",
+    "category": "Organic Beverages",
+    "url": "organic-tea-benefits.html",
+    "readingTime": "8 min read"
+  },
+  {
+    "id": 3,
+    "title": "The Importance of Chemical-Free Food for Healthy Living",
+    "image": "18_article-header-chemical-free-food.jpg",
+    "excerpt": "Chemical-free food reduces long-term health risks and supports a sustainable lifestyle. Understand how organic food protects families and future generations.",
+    "date": "2026-01-26",
+    "author": "Shubham Mishra",
+    "category": "Healthy Living",
+    "url": "chemical-free-food-importance.html",
+    "readingTime": "9 min read"
+  },
+  {
+    "id": 4,
+    "title": "Health Benefits of Organic Spices in Everyday Indian Cooking",
+    "image": "20_health-benefits-organic-spices.jpg",
+    "excerpt": "Organic spices enhance flavor naturally while supporting digestion, immunity, and overall wellness. Learn why organic spices are essential in Indian kitchens.",
+    "date": "2026-01-26",
+    "author": "Shubham Mishra",
+    "category": "Organic Spices",
+    "url": "health-benefits-organic-spices.html",
+    "readingTime": "10 min read"
+  }
+]
+[
+  {
     "title": "Organic Turmeric (Haldi) Benefits – Why Pure Turmeric Matters for Health",
     "date": "2026-01-20",
     "image": "haldi.jpg",
