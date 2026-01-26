@@ -1,276 +1,130 @@
 [
   {
-    "id": 1,
+    "slug": "turmeric",
     "title": "Benefits of Organic Turmeric (Haldi): A Complete Health Guide",
     "image": "16_article-header-organic-turmeric.jpg",
     "excerpt": "Discover the complete benefits of organic turmeric (haldi). Learn how chemical-free turmeric supports immunity, digestion, inflammation control, joint health, and everyday Indian cooking.",
     "date": "2026-01-26",
     "author": "Shubham Mishra",
-    "category": "Organic Spices",
-    "readingTime": "12 min read",
-    "url": "organic-turmeric-benefits-guide.html"
+    "category": "Spices",
+    "content": "
+      <img src='16_article-header-organic-turmeric.jpg' alt='Organic Turmeric'>
+      <h2>Why Organic Turmeric Matters</h2>
+      <p>
+        Organic turmeric (haldi) has been an essential part of Indian kitchens and Ayurveda for centuries.
+        Unlike chemically treated turmeric, organic haldi is grown without synthetic pesticides or artificial color.
+      </p>
+
+      <h2>Major Health Benefits of Organic Turmeric</h2>
+      <ul>
+        <li>Boosts natural immunity</li>
+        <li>Powerful anti-inflammatory properties</li>
+        <li>Supports digestion and gut health</li>
+        <li>Helps with joint pain and stiffness</li>
+        <li>Rich source of antioxidants</li>
+      </ul>
+
+      <h2>Daily Uses in Indian Cooking</h2>
+      <p>
+        Organic turmeric can be safely used every day in vegetables, dal, curries,
+        and even turmeric milk (haldi doodh) at night.
+      </p>
+
+      <h2>Better Absorption Tip</h2>
+      <p>
+        Always consume turmeric with a pinch of black pepper.
+        Piperine in black pepper increases curcumin absorption naturally.
+      </p>
+
+      <h2>Frequently Asked Questions</h2>
+      <p><strong>Is organic turmeric safe for daily use?</strong><br>Yes, when used in normal cooking quantities.</p>
+      <p><strong>Does organic turmeric contain artificial color?</strong><br>No. It has a natural yellow shade only.</p>
+
+      <p style='font-size:13px;color:#666'>
+        Disclaimer: This article is for educational purposes only and does not replace medical advice.
+      </p>
+    ",
+    "affiliate": "<a href='haldi.html'>Buy Organic Turmeric</a>"
   },
+
   {
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    "slug": "tea",
+    "title": "Why Choose Organic Tea? Health, Taste & Purity Explained",
+    "image": "17_article-header-organic-tea.jpg",
+    "excerpt": "Organic tea offers a cleaner taste, fewer toxins, and better long-term health benefits. Learn why switching to chemical-free tea matters for daily wellness.",
+    "date": "2026-01-26",
+    "author": "Shubham Mishra",
+    "category": "Tea",
+    "content": "
+      <img src='17_article-header-organic-tea.jpg' alt='Organic Tea'>
+      <h2>What Makes Organic Tea Different?</h2>
+      <p>
+        Organic tea is grown without chemical pesticides and artificial flavoring agents,
+        making it a healthier daily beverage choice.
+      </p>
 
-<title>Organic Turmeric (Haldi): Benefits, Uses & Truth | Chahat Organic</title>
+      <h2>Key Benefits of Organic Tea</h2>
+      <ul>
+        <li>Rich in natural antioxidants</li>
+        <li>Gentle on digestion</li>
+        <li>Cleaner taste and aroma</li>
+        <li>Lower toxin exposure</li>
+      </ul>
 
-<meta name="description" content="Organic turmeric complete guide. Benefits, daily uses, absorption tips, reviews, FAQs, and farmer-sourced truth by Chahat Organic.">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-body{
-  margin:0;
-  font-family:Poppins,Arial,sans-serif;
-  background:#f6f8f6;
-  color:#333;
-  line-height:1.85;
-}
-header{
-  background:linear-gradient(135deg,#0f3d2e,#1b5e20);
-  color:#fff;
-  padding:90px 8%;
-}
-header h1{
-  font-family:"Playfair Display",serif;
-  font-size:46px;
-}
-.trust-points{
-  margin-top:16px;
-  font-size:15px;
-  opacity:.9;
-}
-section{
-  padding:80px 8%;
-  background:#fff;
-}
-article{
-  max-width:1100px;
-  margin:auto;
-}
-img{
-  width:100%;
-  border-radius:22px;
-  margin:40px 0;
-}
-h2{
-  color:#1b5e20;
-  font-size:32px;
-  margin-top:70px;
-}
-.highlight{
-  background:#f0f4f1;
-  padding:30px;
-  border-left:6px solid #1b5e20;
-  border-radius:14px;
-}
-.review-box{
-  background:#fafafa;
-  padding:30px;
-  border-radius:16px;
-  margin:40px 0;
-  box-shadow:0 10px 30px rgba(0,0,0,.05);
-}
-.faq details{
-  margin:18px 0;
-  padding:18px;
-  background:#f9f9f9;
-  border-radius:12px;
-  cursor:pointer;
-}
-.faq summary{
-  font-weight:600;
-}
-.cta{
-  background:#0f3d2e;
-  color:#fff;
-  text-align:center;
-  padding:50px;
-  border-radius:18px;
-  margin:80px 0;
-}
-.cta a{
-  display:inline-block;
-  margin-top:18px;
-  padding:14px 36px;
-  background:#f4d03f;
-  color:#000;
-  border-radius:30px;
-  font-weight:600;
-  text-decoration:none;
-}
-.link-box{
-  background:#ffffff;
-  padding:30px;
-  border-radius:16px;
-  margin:50px 0;
-  border:1px solid #eee;
-}
-.share{
-  margin:50px 0;
-  text-align:center;
-}
-.share a{
-  margin:0 10px;
-  text-decoration:none;
-  font-weight:600;
-  color:#1b5e20;
-}
-footer{
-  background:#111;
-  color:#eee;
-  padding:60px 16px;
-  text-align:center;
-  font-size:14px;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1>Organic Turmeric (Haldi): Benefits, Uses & Honest Truth</h1>
-  <p>Pure, farmer-sourced organic turmeric for daily wellness.</p>
-  <div class="trust-points">
-    ✔ 100% Organic • ✔ Farmer Sourced • ✔ No Artificial Color
-  </div>
-</header>
-
-<section>
-<article>
-
-<img src="16_article-header-organic-turmeric.jpg" alt="Organic Turmeric" loading="lazy">
-
-<h2>Why Organic Turmeric Matters</h2>
-<p>
-Haldi has been part of Indian kitchens for centuries. Organic turmeric protects you from chemical residue and preserves natural curcumin.
-</p>
-
-<img src="06_organic-turmeric-haldi-powder.jpg" alt="Turmeric Powder" loading="lazy">
-
-<h2>Daily Uses</h2>
-<div class="highlight">
-<ul>
-<li>½ tsp in daily cooking</li>
-<li>¼ tsp turmeric milk at night</li>
-<li>With black pepper for absorption</li>
-</ul>
-</div>
-
-<h2>Real Customer Reviews</h2>
-
-<div class="review-box">
-⭐⭐⭐⭐⭐ <br>
-<strong>Neha (Delhi)</strong><br>
-“Color natural hai, smell pure. Market haldi se kaafi better.”
-</div>
-
-<div class="review-box">
-⭐⭐⭐⭐⭐ <br>
-<strong>Ramesh (Lucknow)</strong><br>
-“Haldi milk lene ke baad digestion improve hua.”
-</div>
-
-<h2>FAQ – Click to Open</h2>
-<div class="faq">
-<details>
-<summary>Is organic turmeric safe daily?</summary>
-<p>Yes, safe when used in normal cooking quantities.</p>
-</details>
-
-<details>
-<summary>Why add black pepper?</summary>
-<p>It increases curcumin absorption.</p>
-</details>
-
-<details>
-<summary>Does it contain artificial color?</summary>
-<p>No. Natural yellow shade only.</p>
-</details>
-</div>
-
-<!-- Product Conversion Boost -->
-<div class="cta">
-<h2>Buy Pure Organic Turmeric</h2>
-<p>Chemical-free, farmer-sourced turmeric trusted by Indian families.</p>
-<a href="haldi.html">Buy Now</a>
-</div>
-
-<img src="25_organic-turmeric-packaging.jpg" alt="Organic Turmeric Packaging" loading="lazy">
-
-<!-- Related Articles -->
-<h2>Explore Related Articles</h2>
-<div class="link-box">
-<ul>
-<li><a href="organic-tea-benefits.html">Organic Tea: Benefits & Daily Wellness</a></li>
-<li><a href="organic-masala-guide.html">Complete Guide to Organic Masala & Spices</a></li>
-<li><a href="articles.html">View All Articles</a></li>
-</ul>
-</div>
-
-<img src="26_organic-tea-and-spices.jpg" alt="Organic Tea and Spices" loading="lazy">
-
-<!-- Homepage Preview -->
-<h2>Discover Chahat Organic</h2>
-<div class="highlight">
-<p>
-Explore our journey, farmer stories, and complete range of organic products crafted
-with honesty and care.
-</p>
-<p>
-<a href="index.html"><strong>Visit Our Homepage →</strong></a>
-</p>
-</div>
-
-<!-- Sitemap Note -->
-<p style="font-size:13px;color:#666;text-align:center;margin-top:60px;max-width:900px;margin-left:auto;margin-right:auto;">
-<strong>Note:</strong> This article is part of our regularly updated sitemap to ensure
-better discovery and indexing by search engines.
-</p>
-
-<div class="share">
-<p><strong>Like & Share this Article</strong></p>
-<a href="#">WhatsApp</a> |
-<a href="#">Facebook</a> |
-<a href="#">Twitter</a>
-</div>
-
-</article>
-</section>
-
-<footer>
-© 2026 Chahat Organic • Honest Food • Honest Living<br>
-📞 7053053863 | 📧 care@chahatorganic.in
-</footer>
-
-</body>
-</html>
+      <p style='font-size:13px;color:#666'>
+        Educational content only. Not medical advice.
+      </p>
+    ",
+    "affiliate": "<a href='tea.html'>Buy Organic Tea</a>"
   },
+
   {
-    "id": 3,
+    "slug": "chemical-free",
     "title": "The Importance of Chemical-Free Food for Healthy Living",
     "image": "18_article-header-chemical-free-food.jpg",
     "excerpt": "Chemical-free food reduces long-term health risks and supports a sustainable lifestyle. Understand how organic food protects families and future generations.",
     "date": "2026-01-26",
     "author": "Shubham Mishra",
-    "category": "Healthy Living",
-    "readingTime": "9 min read",
-    "url": "chemical-free-food-importance.html"
+    "category": "Health",
+    "content": "
+      <img src='18_article-header-chemical-free-food.jpg' alt='Chemical Free Food'>
+      <h2>Why Chemical-Free Food Matters</h2>
+      <p>
+        Long-term consumption of pesticide residues may cause serious health issues.
+        Choosing chemical-free food reduces this risk naturally.
+      </p>
+
+      <ul>
+        <li>Safer for children and families</li>
+        <li>Better digestion</li>
+        <li>Supports sustainable farming</li>
+      </ul>
+    ",
+    "affiliate": ""
   },
+
   {
-    "id": 4,
+    "slug": "organic-spices",
     "title": "Health Benefits of Organic Spices in Everyday Indian Cooking",
     "image": "20_health-benefits-organic-spices.jpg",
     "excerpt": "Organic spices enhance flavor naturally while supporting digestion, immunity, and overall wellness. Learn why organic spices are essential in Indian kitchens.",
     "date": "2026-01-26",
     "author": "Shubham Mishra",
-    "category": "Organic Spices",
-    "readingTime": "10 min read",
-    "url": "health-benefits-organic-spices.html"
+    "category": "Spices",
+    "content": "
+      <img src='20_health-benefits-organic-spices.jpg' alt='Organic Spices'>
+      <h2>Why Choose Organic Spices?</h2>
+      <p>
+        Organic spices are free from chemical residues and artificial colors,
+        preserving natural aroma, taste, and health benefits.
+      </p>
+
+      <ul>
+        <li>Improved digestion</li>
+        <li>Natural immunity support</li>
+        <li>Authentic Indian flavor</li>
+      </ul>
+    ",
+    "affiliate": ""
   }
 ]
