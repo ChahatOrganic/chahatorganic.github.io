@@ -11,15 +11,245 @@
     "url": "organic-turmeric-benefits-guide.html"
   },
   {
-    "id": 2,
-    "title": "Why Choose Organic Tea? Health, Taste & Purity Explained",
-    "image": "17_article-header-organic-tea.jpg",
-    "excerpt": "Organic tea offers a cleaner taste, fewer toxins, and better long-term health benefits. Learn why switching to chemical-free tea matters for daily wellness.",
-    "date": "2026-01-26",
-    "author": "Shubham Mishra",
-    "category": "Organic Beverages",
-    "readingTime": "8 min read",
-    "url": "organic-tea-benefits.html"
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Organic Turmeric (Haldi): Benefits, Uses & Truth | Chahat Organic</title>
+
+<meta name="description" content="Organic turmeric complete guide. Benefits, daily uses, absorption tips, reviews, FAQs, and farmer-sourced truth by Chahat Organic.">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:Poppins,Arial,sans-serif;
+  background:#f6f8f6;
+  color:#333;
+  line-height:1.85;
+}
+header{
+  background:linear-gradient(135deg,#0f3d2e,#1b5e20);
+  color:#fff;
+  padding:90px 8%;
+}
+header h1{
+  font-family:"Playfair Display",serif;
+  font-size:46px;
+}
+.trust-points{
+  margin-top:16px;
+  font-size:15px;
+  opacity:.9;
+}
+section{
+  padding:80px 8%;
+  background:#fff;
+}
+article{
+  max-width:1100px;
+  margin:auto;
+}
+img{
+  width:100%;
+  border-radius:22px;
+  margin:40px 0;
+}
+h2{
+  color:#1b5e20;
+  font-size:32px;
+  margin-top:70px;
+}
+.highlight{
+  background:#f0f4f1;
+  padding:30px;
+  border-left:6px solid #1b5e20;
+  border-radius:14px;
+}
+.review-box{
+  background:#fafafa;
+  padding:30px;
+  border-radius:16px;
+  margin:40px 0;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+.faq details{
+  margin:18px 0;
+  padding:18px;
+  background:#f9f9f9;
+  border-radius:12px;
+  cursor:pointer;
+}
+.faq summary{
+  font-weight:600;
+}
+.cta{
+  background:#0f3d2e;
+  color:#fff;
+  text-align:center;
+  padding:50px;
+  border-radius:18px;
+  margin:80px 0;
+}
+.cta a{
+  display:inline-block;
+  margin-top:18px;
+  padding:14px 36px;
+  background:#f4d03f;
+  color:#000;
+  border-radius:30px;
+  font-weight:600;
+  text-decoration:none;
+}
+.link-box{
+  background:#ffffff;
+  padding:30px;
+  border-radius:16px;
+  margin:50px 0;
+  border:1px solid #eee;
+}
+.share{
+  margin:50px 0;
+  text-align:center;
+}
+.share a{
+  margin:0 10px;
+  text-decoration:none;
+  font-weight:600;
+  color:#1b5e20;
+}
+footer{
+  background:#111;
+  color:#eee;
+  padding:60px 16px;
+  text-align:center;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Organic Turmeric (Haldi): Benefits, Uses & Honest Truth</h1>
+  <p>Pure, farmer-sourced organic turmeric for daily wellness.</p>
+  <div class="trust-points">
+    ✔ 100% Organic • ✔ Farmer Sourced • ✔ No Artificial Color
+  </div>
+</header>
+
+<section>
+<article>
+
+<img src="16_article-header-organic-turmeric.jpg" alt="Organic Turmeric" loading="lazy">
+
+<h2>Why Organic Turmeric Matters</h2>
+<p>
+Haldi has been part of Indian kitchens for centuries. Organic turmeric protects you from chemical residue and preserves natural curcumin.
+</p>
+
+<img src="06_organic-turmeric-haldi-powder.jpg" alt="Turmeric Powder" loading="lazy">
+
+<h2>Daily Uses</h2>
+<div class="highlight">
+<ul>
+<li>½ tsp in daily cooking</li>
+<li>¼ tsp turmeric milk at night</li>
+<li>With black pepper for absorption</li>
+</ul>
+</div>
+
+<h2>Real Customer Reviews</h2>
+
+<div class="review-box">
+⭐⭐⭐⭐⭐ <br>
+<strong>Neha (Delhi)</strong><br>
+“Color natural hai, smell pure. Market haldi se kaafi better.”
+</div>
+
+<div class="review-box">
+⭐⭐⭐⭐⭐ <br>
+<strong>Ramesh (Lucknow)</strong><br>
+“Haldi milk lene ke baad digestion improve hua.”
+</div>
+
+<h2>FAQ – Click to Open</h2>
+<div class="faq">
+<details>
+<summary>Is organic turmeric safe daily?</summary>
+<p>Yes, safe when used in normal cooking quantities.</p>
+</details>
+
+<details>
+<summary>Why add black pepper?</summary>
+<p>It increases curcumin absorption.</p>
+</details>
+
+<details>
+<summary>Does it contain artificial color?</summary>
+<p>No. Natural yellow shade only.</p>
+</details>
+</div>
+
+<!-- Product Conversion Boost -->
+<div class="cta">
+<h2>Buy Pure Organic Turmeric</h2>
+<p>Chemical-free, farmer-sourced turmeric trusted by Indian families.</p>
+<a href="haldi.html">Buy Now</a>
+</div>
+
+<img src="25_organic-turmeric-packaging.jpg" alt="Organic Turmeric Packaging" loading="lazy">
+
+<!-- Related Articles -->
+<h2>Explore Related Articles</h2>
+<div class="link-box">
+<ul>
+<li><a href="organic-tea-benefits.html">Organic Tea: Benefits & Daily Wellness</a></li>
+<li><a href="organic-masala-guide.html">Complete Guide to Organic Masala & Spices</a></li>
+<li><a href="articles.html">View All Articles</a></li>
+</ul>
+</div>
+
+<img src="26_organic-tea-and-spices.jpg" alt="Organic Tea and Spices" loading="lazy">
+
+<!-- Homepage Preview -->
+<h2>Discover Chahat Organic</h2>
+<div class="highlight">
+<p>
+Explore our journey, farmer stories, and complete range of organic products crafted
+with honesty and care.
+</p>
+<p>
+<a href="index.html"><strong>Visit Our Homepage →</strong></a>
+</p>
+</div>
+
+<!-- Sitemap Note -->
+<p style="font-size:13px;color:#666;text-align:center;margin-top:60px;max-width:900px;margin-left:auto;margin-right:auto;">
+<strong>Note:</strong> This article is part of our regularly updated sitemap to ensure
+better discovery and indexing by search engines.
+</p>
+
+<div class="share">
+<p><strong>Like & Share this Article</strong></p>
+<a href="#">WhatsApp</a> |
+<a href="#">Facebook</a> |
+<a href="#">Twitter</a>
+</div>
+
+</article>
+</section>
+
+<footer>
+© 2026 Chahat Organic • Honest Food • Honest Living<br>
+📞 7053053863 | 📧 care@chahatorganic.in
+</footer>
+
+</body>
+</html>
   },
   {
     "id": 3,
