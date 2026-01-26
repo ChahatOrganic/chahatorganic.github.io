@@ -2,117 +2,225 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Chahat Organic – Admin Panel</title>
+<title>Chahat Organic | Admin Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-:root{--green:#1b5e20}
-body{margin:0;font-family:Arial;background:#f4f7f4}
-header{background:var(--green);color:#fff;padding:16px;text-align:center}
-
-/* Login */
-.login,.password-box{
-  max-width:380px;margin:40px auto;background:#fff;
-  padding:25px;border-radius:12px;
-  box-shadow:0 8px 20px rgba(0,0,0,.1)
+:root{
+  --green:#1b5e20;
+  --dark:#0f2f17;
+  --light:#f4f7f4;
 }
-.login h2,.password-box h3{text-align:center;color:var(--green)}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--light);
+  color:#222;
+}
+
+/* ===== HEADER / HERO ===== */
+header{
+  background:linear-gradient(135deg,#1b5e20,#2e7d32);
+  color:#fff;
+  padding:30px 20px;
+  text-align:center;
+}
+header h1{
+  margin:0;
+  font-size:28px;
+  letter-spacing:.5px;
+}
+header p{
+  margin-top:8px;
+  opacity:.95;
+  font-size:15px;
+}
+
+/* ===== CONTAINERS ===== */
+.container{
+  max-width:1100px;
+  margin:30px auto;
+  padding:0 16px;
+}
+
+/* ===== LOGIN & PASSWORD ===== */
+.login,.password-box{
+  max-width:420px;
+  margin:40px auto;
+  background:#fff;
+  padding:28px;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+.login h2,.password-box h3{
+  margin-top:0;
+  text-align:center;
+  color:var(--green);
+}
 .login input,.password-box input{
-  width:100%;padding:12px;margin-top:10px
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  font-size:15px;
+  border-radius:8px;
+  border:1px solid #ccc;
 }
 .login button,.password-box button{
-  width:100%;margin-top:15px;padding:12px;
-  background:var(--green);color:#fff;border:none;border-radius:20px
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  background:var(--green);
+  color:#fff;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
 }
+.login button:hover,
+.password-box button:hover{opacity:.9}
 
-/* Admin */
+/* ===== ADMIN PANEL ===== */
 .box{
   display:none;
-  max-width:1000px;margin:20px auto;background:#fff;
-  padding:20px;border-radius:12px
+  background:#fff;
+  padding:26px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
-input{width:100%;padding:12px;margin-bottom:10px;font-size:16px}
+.box h2{
+  margin-top:0;
+  color:var(--green);
+}
 
+/* ===== FORM ===== */
+input#title{
+  width:100%;
+  padding:14px;
+  font-size:18px;
+  margin-bottom:14px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+/* ===== EDITOR ===== */
 .editor{
   border:1px solid #ccc;
-  min-height:220px;
-  padding:12px;
+  min-height:260px;
+  padding:14px;
   font-size:16px;
+  border-radius:10px;
+  background:#fff;
 }
 
+/* ===== TOOLBAR ===== */
+.toolbar{
+  margin:12px 0;
+}
 .toolbar button{
   margin-right:6px;
-  padding:6px 12px;
-  border-radius:6px;
+  padding:8px 14px;
+  border-radius:8px;
   border:1px solid #ccc;
-  background:#f5f5f5;
-  cursor:pointer
+  background:#f6f6f6;
+  cursor:pointer;
+  font-size:14px;
 }
+.toolbar button:hover{background:#eee}
 
+/* ===== ACTIONS ===== */
+.actions{
+  margin-top:20px;
+}
 .actions button{
-  padding:10px 22px;background:var(--green);color:#fff;
-  border:none;border-radius:20px;cursor:pointer
+  padding:14px 28px;
+  background:var(--green);
+  color:#fff;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+}
+.actions button:hover{opacity:.9}
+
+.msg{
+  margin-top:14px;
+  color:var(--green);
+  font-weight:600;
 }
 
-.msg{margin-top:10px;color:var(--green);font-weight:600}
-
+/* ===== FOOTER ===== */
 footer{
-  margin-top:40px;
-  background:#0f2f17;color:#d5e3d5;
-  text-align:center;padding:20px;font-size:14px
+  margin-top:60px;
+  background:var(--dark);
+  color:#d5e3d5;
+  text-align:center;
+  padding:26px 16px;
+  font-size:14px;
 }
 footer b{color:#fff}
+footer p{margin:6px 0}
 </style>
 </head>
 
 <body>
 
+<!-- ===== HEADER ===== -->
 <header>
-  <h2>Chahat Organic – Admin Panel</h2>
-  <p>Secure • Full Control • Permanent System</p>
+  <h1>Chahat Organic – Admin Dashboard</h1>
+  <p>Secure Content Management • Permanent Articles • Full Editorial Control</p>
 </header>
 
-<!-- LOGIN -->
+<div class="container">
+
+<!-- ===== LOGIN ===== -->
 <div class="login" id="loginBox">
-  <h2>Admin Login</h2>
+  <h2>Administrator Login</h2>
   <input id="username" placeholder="Username">
   <input id="password" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
+  <button onclick="login()">Sign In</button>
 </div>
 
-<!-- CHANGE PASSWORD -->
+<!-- ===== CHANGE PASSWORD ===== -->
 <div class="password-box" id="passBox" style="display:none">
-  <h3>🔐 Change Password</h3>
-  <input id="oldPass" type="password" placeholder="Old Password">
+  <h3>🔐 Change Admin Password</h3>
+  <input id="oldPass" type="password" placeholder="Current Password">
   <input id="newPass" type="password" placeholder="New Password">
   <button onclick="changePassword()">Update Password</button>
 </div>
 
-<!-- ADMIN PANEL -->
+<!-- ===== ADMIN PANEL ===== -->
 <div class="box" id="adminBox">
 
-<input id="title" placeholder="Article Title">
+  <h2>Create New Article</h2>
 
-<div id="editor" class="editor" contenteditable="true"></div>
+  <input id="title" placeholder="Enter Article Title">
 
-<div class="toolbar">
-  <button onclick="cmd('bold')"><b>B</b></button>
-  <button onclick="cmd('italic')"><i>I</i></button>
-  <button onclick="cmd('insertUnorderedList')">• List</button>
-  <button onclick="addImage()">🖼️ Image</button>
+  <div id="editor" class="editor" contenteditable="true">
+    <p>Start writing your article content here...</p>
+  </div>
+
+  <div class="toolbar">
+    <button onclick="cmd('bold')"><b>B</b></button>
+    <button onclick="cmd('italic')"><i>I</i></button>
+    <button onclick="cmd('insertUnorderedList')">• List</button>
+    <button onclick="addImage()">🖼️ Add Image</button>
+  </div>
+
+  <div class="actions">
+    <button onclick="publish()">Publish Article (JSON)</button>
+  </div>
+
+  <div class="msg" id="statusMsg"></div>
+
+</div>
 </div>
 
-<div class="actions">
-  <button onclick="publish()">Publish (Permanent)</button>
-</div>
-
-<div class="msg" id="statusMsg"></div>
-
-</div>
-
+<!-- ===== FOOTER ===== -->
 <footer>
-  © 2026 <b>Chahat Organic</b><br>
-  Founded & Managed by <b>Shubham Mishra</b>
+  <p>© 2026 <b>Chahat Organic</b></p>
+  <p>Pure • Honest • Farmer Sourced</p>
+  <p>Admin System Designed & Managed by <b>Shubham Mishra</b></p>
 </footer>
 
 <script>
@@ -127,7 +235,7 @@ function login(){
     passBox.style.display="block";
     sessionStorage.setItem("admin","1");
   }else{
-    alert("Invalid login");
+    alert("Invalid username or password");
   }
 }
 
@@ -140,7 +248,7 @@ if(sessionStorage.getItem("admin")==="1"){
 /* ===== PASSWORD CHANGE ===== */
 function changePassword(){
   if(oldPass.value!==ADMIN_PASS){
-    alert("Old password incorrect");
+    alert("Current password is incorrect");
     return;
   }
   ADMIN_PASS=newPass.value;
@@ -165,7 +273,7 @@ function addImage(){
       document.execCommand(
         "insertHTML",
         false,
-        `<img src="${e.target.result}" style="max-width:100%;border-radius:10px">`
+        `<img src="${e.target.result}" style="max-width:100%;border-radius:12px;margin:10px 0">`
       );
     };
     r.readAsDataURL(i.files[0]);
@@ -173,13 +281,13 @@ function addImage(){
   i.click();
 }
 
-/* ===== ✅ PERMANENT JSON PUBLISH ===== */
+/* ===== JSON PUBLISH ===== */
 function publish(){
   let t = title.value.trim();
   let c = editor.innerHTML.trim();
 
   if(!t || c==="" || c==="<br>"){
-    alert("Title aur content dono likhna zaroori hai");
+    alert("Please enter both title and content");
     return;
   }
 
@@ -193,7 +301,6 @@ function publish(){
 
   let json = JSON.stringify(article, null, 2);
 
-  // Download JSON file
   let blob = new Blob([json], {type:"application/json"});
   let a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
@@ -201,10 +308,10 @@ function publish(){
   a.click();
 
   statusMsg.innerText =
-    "✅ JSON downloaded. GitHub ke articles.json me add karo (PERMANENT).";
+    "✅ Article JSON downloaded. Add it to your main articles.json file.";
 
   title.value="";
-  editor.innerHTML="";
+  editor.innerHTML="<p>Start writing your article content here...</p>";
 }
 </script>
 
