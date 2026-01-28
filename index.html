@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chahat Organic | Pure • Honest • Farmer Sourced</title>
+
+<meta name="description" content="Chahat Organic offers premium organic spices sourced directly from Indian farmers. Pure, chemical-free and honest food.">
+<meta name="keywords" content="Chahat Organic, organic spices India, organic turmeric, chemical free food, farmer sourced">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --green:#0f3d2e;
+  --green2:#1b5e20;
+  --gold:#f4d03f;
+  --orange:#e67e22;
+  --light:#f6f8f6;
+  --dark:#111;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,Arial,sans-serif;
+  background:var(--light);
+  color:#333;
+  transition:.3s;
+}
+
+/* DARK MODE */
+body.dark{background:#121212;color:#e0e0e0}
+body.dark section,
+body.dark .product,
+body.dark .modal-box,
+body.dark .ask,
+body.dark .vision{
+  background:#1e1e1e;
+  color:#ddd;
+}
+body.dark header{background:#0b2a20}
+body.dark footer{background:#000}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:999;
+  background:rgba(15,61,46,.95);
+  color:#fff;
+  text-align:center;
+  padding:22px 16px;
+}
+header h1{
+  margin:0;
+  font-family:"Playfair Display",serif;
+  font-size:38px;
+}
+.hindi{color:var(--gold)}
+.tagline{font-size:14px;opacity:.9}
+.toggle{
+  position:absolute;
+  right:16px;
+  top:16px;
+  border:1px solid #ccc;
+  background:none;
+  color:#fff;
+  padding:6px 14px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* ===== HERO SLIDER ===== */
+.hero{
+  min-height:95vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  position:relative;
+  background-size:cover;
+  background-position:center;
+  transition:background-image 1s ease-in-out;
+  overflow:hidden;
+}
+
+/* CINEMATIC ZOOM */
+.hero.zoom{
+  animation:zoomEffect 6s ease-in-out forwards;
+}
+@keyframes zoomEffect{
+  from{transform:scale(1)}
+  to{transform:scale(1.08)}
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:1;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  padding:0 20px;
+}
+
+.hero h2{
+  font-size:52px;
+  font-family:"Playfair Display",serif;
+}
+.hero p{
+  font-size:20px;
+  max-width:850px;
+  margin:auto;
+}
+
+/* DOTS */
+.hero-dots{
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+.hero-dots span{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,.4);
+  cursor:pointer;
+  transition:.3s;
+}
+.hero-dots span.active{
+  background:#f4d03f;
+  transform:scale(1.5);
+}
+
+/* बाकी का CSS UNCHANGED */
+section{padding:90px 8%;background:#fff}
+h2{text-align:center;color:var(--green)}
+.lead{text-align:center;max-width:900px;margin:20px auto 50px}
+
+/* FOOTER */
+footer{
+  background:var(--dark);
+  color:#eee;
+  text-align:center;
+  padding:60px 16px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Chahat Organic</h1>
+<div class="hindi">🌿 अपनों के लिए चाह</div>
+<div class="tagline">Pure • Natural • Farmer Sourced</div>
+<button class="toggle" onclick="toggleDark()">🌙 Dark</button>
+</header>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-content">
+    <h2>Pure Organic From Farmers<br>To Your Family</h2>
+    <p>Carefully sourced organic spices grown with honesty and delivered with care.</p>
+    <div class="hero-dots" id="heroDots"></div>
+  </div>
+</div>
+
+<footer>
+© 2026 Chahat Organic • Honest Food • Honest Living<br><br>
+<b>Founder & Managed by Shubham Mishra</b>
+</footer>
+
+<script>
+function toggleDark(){
+ document.body.classList.toggle("dark");
+ localStorage.setItem("dark",document.body.classList.contains("dark"));
+}
+if(localStorage.getItem("dark")==="true")document.body.classList.add("dark");
+
+/* HERO SLIDER JS */
+const heroImages=[
+ "25_firstpage.png",
+ "01_Hero_Spice_Flat_Lay.png",
+ "02_Hero_Farmer_Harvest.png",
+ "03_Hero_Oxen_Plough.png",
+ "04_Hero_Spice_Drying.png",
+ "05_Hero_Spice_Market.png",
+ "06_Hero_Turmeric_Macro.png",
+ "07_Hero_Product_Packaging.png",
+ "08_Hero_Masala_Making.png",
+ "09_Hero_Export_Ready.png",
+ "10_Hero_Family_Farmers.png"
+];
+
+const hero=document.getElementById("hero");
+const dotsContainer=document.getElementById("heroDots");
+let index=0;
+let startX=0;
+
+/* CREATE DOTS */
+heroImages.forEach((_,i)=>{
+  const dot=document.createElement("span");
+  dot.addEventListener("click",()=>changeSlide(i));
+  dotsContainer.appendChild(dot);
+});
+const dots=document.querySelectorAll(".hero-dots span");
+
+/* SET IMAGE */
+function setHeroImage(i){
+  hero.classList.remove("zoom");
+  void hero.offsetWidth;
+  hero.classList.add("zoom");
+
+  hero.style.backgroundImage=
+   `linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url('${heroImages[i]}')`;
+
+  dots.forEach(d=>d.classList.remove("active"));
+  dots[i].classList.add("active");
+}
+
+/* CHANGE SLIDE */
+function changeSlide(i){
+  index=i;
+  setHeroImage(index);
+}
+
+/* AUTO SLIDE */
+setHeroImage(0);
+setInterval(()=>{
+  index=(index+1)%heroImages.length;
+  setHeroImage(index);
+},3000);
+
+/* MOBILE SWIPE */
+hero.addEventListener("touchstart",e=>{
+  startX=e.touches[0].clientX;
+});
+hero.addEventListener("touchend",e=>{
+  let endX=e.changedTouches[0].clientX;
+  if(startX-endX>50) index=(index+1)%heroImages.length;
+  else if(endX-startX>50) index=(index-1+heroImages.length)%heroImages.length;
+  setHeroImage(index);
+});
+</script>
+
+</body>
+</html>
