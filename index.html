@@ -88,7 +88,7 @@ header h1{
 
 /* CINEMATIC ZOOM */
 .hero.zoom{
-  animation:zoomEffect 6s ease-in-out forwards;
+  animation:zoomEffect 7s ease-in-out forwards;
 }
 @keyframes zoomEffect{
   from{transform:scale(1)}
@@ -139,10 +139,121 @@ header h1{
   transform:scale(1.5);
 }
 
-/* बाकी का CSS UNCHANGED */
+/* SECTIONS */
 section{padding:90px 8%;background:#fff}
 h2{text-align:center;color:var(--green)}
 .lead{text-align:center;max-width:900px;margin:20px auto 50px}
+
+/* PRODUCTS */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+.product{
+  background:#fff;
+  border-radius:22px;
+  padding:20px;
+  box-shadow:0 10px 28px rgba(0,0,0,.12);
+  cursor:pointer;
+  text-align:center;
+  transition:.3s;
+}
+.product:hover{transform:translateY(-6px)}
+.product img{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  border-radius:16px;
+}
+.product h3{color:var(--green2)}
+.badge{
+  background:#fdecea;
+  color:#c0392b;
+  padding:6px 16px;
+  border-radius:999px;
+  font-size:13px;
+}
+
+/* STORY */
+.story{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+.story img{width:100%;border-radius:22px}
+.story p{font-size:17px;line-height:1.9}
+
+/* ASK */
+.ask{text-align:center;background:#f8fbf8}
+.ask form{max-width:520px;margin:auto}
+.ask input,.ask textarea{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:1px solid #ccc;
+}
+.ask button{
+  padding:12px 26px;
+  background:var(--green2);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+
+/* VISION */
+.vision{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+.vision img{width:100%;border-radius:22px}
+.vision h3{color:var(--orange);font-size:28px}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
+.modal-box{
+  background:#fff;
+  padding:30px;
+  border-radius:22px;
+  max-width:860px;
+  width:92%;
+}
+.back{
+  cursor:pointer;
+  color:var(--green2);
+  font-weight:600;
+  margin-bottom:10px;
+  display:inline-block;
+}
+.qty{display:flex;gap:12px;align-items:center;margin:12px 0}
+.qty button{
+  background:var(--green2);
+  color:#fff;
+  border:none;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+}
+.buy{
+  width:100%;
+  padding:14px;
+  background:var(--green2);
+  color:#fff;
+  border:none;
+  border-radius:30px;
+  margin-top:14px;
+}
 
 /* FOOTER */
 footer{
@@ -150,6 +261,23 @@ footer{
   color:#eee;
   text-align:center;
   padding:60px 16px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25d366;
+  color:#fff;
+  padding:14px 18px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+@media(max-width:900px){
+  .story,.vision{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -172,6 +300,40 @@ footer{
   </div>
 </div>
 
+<section>
+<h2>Our Organic Products</h2>
+<p class="lead">Premium everyday essentials crafted with purity and transparency.</p>
+<div class="products" id="productGrid"></div>
+</section>
+
+<!-- ARTICLES -->
+<section class="articles" style="background:#f9faf9">
+<h2>Our Articles</h2>
+<p class="lead">Explore our thoughtfully written articles to understand organic living.</p>
+<div class="products">
+<div class="product" onclick="location.href='articles.html?post=turmeric'">
+<img src="16_article-header-organic-turmeric.jpg">
+<h3>Benefits of Organic Turmeric</h3>
+<span class="badge">READ ARTICLE</span>
+</div>
+<div class="product" onclick="location.href='articles.html?post=tea'">
+<img src="17_article-header-organic-tea.jpg">
+<h3>Why Choose Organic Tea?</h3>
+<span class="badge">READ ARTICLE</span>
+</div>
+<div class="product" onclick="location.href='articles.html?post=chemical-free'">
+<img src="18_article-header-chemical-free-food.jpg">
+<h3>Chemical-Free Food</h3>
+<span class="badge">READ ARTICLE</span>
+</div>
+<div class="product" onclick="location.href='articles.html?post=organic-spices'">
+<img src="20_health-benefits-organic-spices.jpg">
+<h3>Organic Spices Benefits</h3>
+<span class="badge">READ ARTICLE</span>
+</div>
+</div>
+</section>
+
 <footer>
 © 2026 Chahat Organic • Honest Food • Honest Living<br><br>
 <b>Founder & Managed by Shubham Mishra</b>
@@ -184,7 +346,7 @@ function toggleDark(){
 }
 if(localStorage.getItem("dark")==="true")document.body.classList.add("dark");
 
-/* HERO SLIDER JS */
+/* HERO SLIDER JS – 7 SECONDS */
 const heroImages=[
  "25_firstpage.png",
  "01_Hero_Spice_Flat_Lay.png",
@@ -201,52 +363,35 @@ const heroImages=[
 
 const hero=document.getElementById("hero");
 const dotsContainer=document.getElementById("heroDots");
-let index=0;
-let startX=0;
+let index=0,startX=0;
 
-/* CREATE DOTS */
 heroImages.forEach((_,i)=>{
-  const dot=document.createElement("span");
-  dot.addEventListener("click",()=>changeSlide(i));
-  dotsContainer.appendChild(dot);
+ const dot=document.createElement("span");
+ dot.onclick=()=>setHeroImage(i);
+ dotsContainer.appendChild(dot);
 });
 const dots=document.querySelectorAll(".hero-dots span");
 
-/* SET IMAGE */
 function setHeroImage(i){
-  hero.classList.remove("zoom");
-  void hero.offsetWidth;
-  hero.classList.add("zoom");
-
-  hero.style.backgroundImage=
-   `linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url('${heroImages[i]}')`;
-
-  dots.forEach(d=>d.classList.remove("active"));
-  dots[i].classList.add("active");
+ index=i;
+ hero.classList.remove("zoom");
+ void hero.offsetWidth;
+ hero.classList.add("zoom");
+ hero.style.backgroundImage=
+ `linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),url('${heroImages[i]}')`;
+ dots.forEach(d=>d.classList.remove("active"));
+ dots[i].classList.add("active");
 }
 
-/* CHANGE SLIDE */
-function changeSlide(i){
-  index=i;
-  setHeroImage(index);
-}
-
-/* AUTO SLIDE */
 setHeroImage(0);
-setInterval(()=>{
-  index=(index+1)%heroImages.length;
-  setHeroImage(index);
-},3000);
+setInterval(()=>setHeroImage((index+1)%heroImages.length),7000);
 
-/* MOBILE SWIPE */
-hero.addEventListener("touchstart",e=>{
-  startX=e.touches[0].clientX;
-});
+/* SWIPE */
+hero.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
 hero.addEventListener("touchend",e=>{
-  let endX=e.changedTouches[0].clientX;
-  if(startX-endX>50) index=(index+1)%heroImages.length;
-  else if(endX-startX>50) index=(index-1+heroImages.length)%heroImages.length;
-  setHeroImage(index);
+ let endX=e.changedTouches[0].clientX;
+ if(startX-endX>50) setHeroImage((index+1)%heroImages.length);
+ else if(endX-startX>50) setHeroImage((index-1+heroImages.length)%heroImages.length);
 });
 </script>
 
