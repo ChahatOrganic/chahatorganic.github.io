@@ -141,21 +141,70 @@ h2{text-align:center;color:var(--green)}
 .story img{width:100%;border-radius:22px}
 .story p{font-size:17px;line-height:1.9}
 
-/* ASK */
-.ask{text-align:center;background:#f8fbf8}
-.ask form{max-width:520px;margin:auto}
-.ask input,.ask textarea{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border:1px solid #ccc;
+/* ASK SECTION */
+.ask{
+max-width:650px;
+margin:60px auto;
+padding:40px;
+background:#ffffff;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+text-align:center;
+transition:0.3s;
 }
+
+.ask h2{
+font-size:30px;
+margin-bottom:25px;
+color:#0f3d2e;
+font-weight:600;
+}
+
+.ask form{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.ask input,
+.ask textarea{
+width:100%;
+padding:14px 16px;
+font-size:16px;
+border-radius:8px;
+border:1px solid #dcdcdc;
+outline:none;
+transition:all 0.25s ease;
+font-family:Poppins, Arial, sans-serif;
+}
+
+.ask input:focus,
+.ask textarea:focus{
+border-color:#1b5e20;
+box-shadow:0 0 0 2px rgba(27,94,32,0.15);
+}
+
+.ask textarea{
+min-height:150px;
+resize:vertical;
+}
+
 .ask button{
-  padding:12px 26px;
-  background:var(--green2);
-  color:#fff;
-  border:none;
-  cursor:pointer;
+background:#1b5e20;
+color:#fff;
+border:none;
+padding:14px;
+border-radius:30px;
+font-size:16px;
+font-weight:500;
+cursor:pointer;
+transition:all 0.3s ease;
+}
+
+.ask button:hover{
+background:#145c1d;
+transform:translateY(-2px);
+box-shadow:0 6px 15px rgba(0,0,0,0.15);
 }
 
 /* VISION */
@@ -351,9 +400,13 @@ preserve authentic taste, and contribute to long-term family health and wellness
 
 <form action="https://formspree.io/f/mnjgnqlo" method="POST">
 
+<input type="hidden" name="_next" value="thankyou.html">
+
 <input type="text" name="name" placeholder="Your Name" required>
 
 <input type="email" name="email" placeholder="Your Email" required>
+
+<input type="tel" name="phone" placeholder="Mobile Number (Optional)" pattern="[0-9]{10}">
 
 <textarea name="message" placeholder="Your Message" required></textarea>
 
