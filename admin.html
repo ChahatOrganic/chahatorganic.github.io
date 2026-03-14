@@ -143,12 +143,10 @@ margin:4px 0;
 <h2>Chahat Organic Admin Dashboard</h2>
 </header>
 
-<!-- LOGIN -->
-
 <div id="loginBox">
 
-<input id="email" placeholder="Admin Email">
-<input id="password" type="password" placeholder="Password">
+<input id="emailInput" placeholder="Admin Email">
+<input id="passwordInput" type="password" placeholder="Password">
 
 <button onclick="login()">Login</button>
 
@@ -156,18 +154,16 @@ margin:4px 0;
 
 </div>
 
-<!-- ADMIN PANEL -->
-
 <div class="container" id="adminPanel" style="display:none">
 
 <button class="logout" onclick="logout()">Logout</button>
 
 <input id="title" placeholder="Article Title (max 100 characters)">
-<input id="metaTitle" placeholder="SEO Meta Title">
-<textarea id="metaDesc" placeholder="SEO Meta Description"></textarea>
+<input id="metaTitleInput" placeholder="SEO Meta Title">
+<textarea id="metaDescInput" placeholder="SEO Meta Description"></textarea>
 
-<input id="tags" placeholder="Tags (example: organic food, turmeric)">
-<input id="imgAlt" placeholder="Image ALT text (SEO)">
+<input id="tagsInput" placeholder="Tags (example: organic food, turmeric)">
+<input id="imgAltInput" placeholder="Image ALT text (SEO)">
 
 <div class="toolbar">
 <button onclick="format('bold')"><b>B</b></button>
@@ -198,8 +194,6 @@ import { getFirestore, collection, addDoc } from "https://www.gstatic.com/fireba
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-/* FIREBASE CONFIG */
-
 const firebaseConfig={
 apiKey:"AIzaSyDzdiSsRnH3NHbaqVT5PYEZHe7eqE6Gb0A",
 authDomain:"chahatorganic-ca1a1.firebaseapp.com",
@@ -215,23 +209,19 @@ const db=getFirestore(app);
 const auth=getAuth(app);
 const storage=getStorage(app);
 
-/* AUTH CHECK */
-
 onAuthStateChanged(auth,(user)=>{
 
 if(user){
-loginBox.style.display="none";
-adminPanel.style.display="block";
+document.getElementById("loginBox").style.display="none";
+document.getElementById("adminPanel").style.display="block";
 }
 
 });
 
-/* LOGIN */
-
 window.login=async function(){
 
-let email=email.value;
-let pass=password.value;
+let email=document.getElementById("emailInput").value;
+let pass=document.getElementById("passwordInput").value;
 
 try{
 
@@ -239,32 +229,24 @@ await signInWithEmailAndPassword(auth,email,pass);
 
 }catch(err){
 
-loginMsg.innerText="❌ "+err.message;
+document.getElementById("loginMsg").innerText="❌ "+err.message;
 
 }
 
 }
-
-/* LOGOUT */
 
 window.logout=function(){
 
 if(confirm("Logout from admin panel?")){
-
 signOut(auth);
 location.reload();
-
 }
 
 }
-
-/* TEXT FORMAT */
 
 window.format=function(cmd){
 document.execCommand(cmd,false,null);
 }
-
-/* IMAGE UPLOAD */
 
 window.addImage=function(){
 
@@ -277,10 +259,8 @@ input.onchange=async()=>{
 let file=input.files[0];
 
 if(file.size>2*1024*1024){
-
 alert("Image must be smaller than 2MB");
 return;
-
 }
 
 statusMsg.innerHTML="Uploading image <span class='spinner'></span>";
@@ -291,7 +271,7 @@ await uploadBytes(imageRef,file);
 
 let url=await getDownloadURL(imageRef);
 
-let alt=document.getElementById("imgAlt").value;
+let alt=document.getElementById("imgAltInput").value;
 
 document.execCommand(
 "insertHTML",
@@ -307,8 +287,6 @@ input.click();
 
 }
 
-/* CLEAN HTML */
-
 function clean(html){
 
 return html
@@ -317,8 +295,6 @@ return html
 .trim();
 
 }
-
-/* PREVIEW */
 
 window.preview=function(){
 
@@ -330,19 +306,17 @@ previewBox.style.display="block";
 
 }
 
-/* PUBLISH */
-
 window.publish=async function(){
 
 let btn=document.getElementById("publishBtn");
 
 let title=document.getElementById("title").value.trim();
-let content=clean(editor.innerHTML);
+let content=clean(document.getElementById("editor").innerHTML);
 
-let metaTitle=metaTitle.value.trim();
-let metaDesc=metaDesc.value.trim();
+let metaTitle=document.getElementById("metaTitleInput").value.trim();
+let metaDesc=document.getElementById("metaDescInput").value.trim();
 
-let tags=document.getElementById("tags").value.split(",");
+let tags=document.getElementById("tagsInput").value.split(",");
 tags=tags.map(t=>t.trim()).filter(t=>t);
 
 if(!title){
@@ -364,12 +338,12 @@ try{
 
 await addDoc(collection(db,"articles"),{
 
-title:title,
-slug:slug,
-content:content,
-metaTitle:metaTitle,
-metaDesc:metaDesc,
-tags:tags,
+title,
+slug,
+content,
+metaTitle,
+metaDesc,
+tags,
 date:new Date().toISOString(),
 views:0,
 likes:0
@@ -380,9 +354,9 @@ statusMsg.innerText="✅ Article Published";
 
 document.getElementById("title").value="";
 document.getElementById("editor").innerHTML="<p><b>Start writing your article...</b></p>";
-document.getElementById("tags").value="";
-document.getElementById("metaTitle").value="";
-document.getElementById("metaDesc").value="";
+document.getElementById("tagsInput").value="";
+document.getElementById("metaTitleInput").value="";
+document.getElementById("metaDescInput").value="";
 
 }catch(e){
 
@@ -395,15 +369,13 @@ btn.innerText="Publish Article";
 
 }
 
-/* SEO PREVIEW */
-
-document.getElementById("metaTitle").oninput=updateSEO;
-document.getElementById("metaDesc").oninput=updateSEO;
+document.getElementById("metaTitleInput").oninput=updateSEO;
+document.getElementById("metaDescInput").oninput=updateSEO;
 
 function updateSEO(){
 
-let title=metaTitle.value;
-let desc=metaDesc.value;
+let title=document.getElementById("metaTitleInput").value;
+let desc=document.getElementById("metaDescInput").value;
 
 seoPreview.innerHTML=
 
