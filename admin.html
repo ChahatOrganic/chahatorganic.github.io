@@ -1,318 +1,418 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <title>Chahat Organic | Admin Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-:root{
-  --green:#1b5e20;
-  --dark:#0f2f17;
-  --light:#f4f7f4;
-}
-*{box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--light);
-  color:#222;
+font-family:Arial,Helvetica,sans-serif;
+background:#f4f7f4;
+margin:0;
 }
 
-/* ===== HEADER / HERO ===== */
 header{
-  background:linear-gradient(135deg,#1b5e20,#2e7d32);
-  color:#fff;
-  padding:30px 20px;
-  text-align:center;
-}
-header h1{
-  margin:0;
-  font-size:28px;
-  letter-spacing:.5px;
-}
-header p{
-  margin-top:8px;
-  opacity:.95;
-  font-size:15px;
+background:#1b5e20;
+color:white;
+padding:25px;
+text-align:center;
 }
 
-/* ===== CONTAINERS ===== */
 .container{
-  max-width:1100px;
-  margin:30px auto;
-  padding:0 16px;
+max-width:900px;
+margin:auto;
+padding:20px;
 }
 
-/* ===== LOGIN & PASSWORD ===== */
-.login,.password-box{
-  max-width:420px;
-  margin:40px auto;
-  background:#fff;
-  padding:28px;
-  border-radius:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,.1);
-}
-.login h2,.password-box h3{
-  margin-top:0;
-  text-align:center;
-  color:var(--green);
-}
-.login input,.password-box input{
-  width:100%;
-  padding:14px;
-  margin-top:12px;
-  font-size:15px;
-  border-radius:8px;
-  border:1px solid #ccc;
-}
-.login button,.password-box button{
-  width:100%;
-  margin-top:18px;
-  padding:14px;
-  background:var(--green);
-  color:#fff;
-  border:none;
-  border-radius:25px;
-  font-size:16px;
-  cursor:pointer;
-}
-.login button:hover,
-.password-box button:hover{opacity:.9}
-
-/* ===== ADMIN PANEL ===== */
-.box{
-  display:none;
-  background:#fff;
-  padding:26px;
-  border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-.box h2{
-  margin-top:0;
-  color:var(--green);
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
 }
 
-/* ===== FORM ===== */
-input#title{
-  width:100%;
-  padding:14px;
-  font-size:18px;
-  margin-bottom:14px;
-  border-radius:10px;
-  border:1px solid #ccc;
-}
-
-/* ===== EDITOR ===== */
 .editor{
-  border:1px solid #ccc;
-  min-height:260px;
-  padding:14px;
-  font-size:16px;
-  border-radius:10px;
-  background:#fff;
+border:1px solid #ccc;
+padding:15px;
+min-height:220px;
+border-radius:10px;
+background:white;
+margin-top:10px;
 }
 
-/* ===== TOOLBAR ===== */
 .toolbar{
-  margin:12px 0;
+margin-top:10px;
+display:flex;
+flex-wrap:wrap;
+gap:6px;
 }
-.toolbar button{
-  margin-right:6px;
-  padding:8px 14px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  background:#f6f6f6;
-  cursor:pointer;
-  font-size:14px;
-}
-.toolbar button:hover{background:#eee}
 
-/* ===== ACTIONS ===== */
-.actions{
-  margin-top:20px;
+.toolbar button{
+padding:8px 12px;
+border-radius:6px;
+border:1px solid #ccc;
+background:#f3f3f3;
+cursor:pointer;
 }
-.actions button{
-  padding:14px 28px;
-  background:var(--green);
-  color:#fff;
-  border:none;
-  border-radius:30px;
-  font-size:16px;
-  cursor:pointer;
+
+button{
+padding:12px 25px;
+background:#1b5e20;
+color:white;
+border:none;
+border-radius:25px;
+margin-top:15px;
+cursor:pointer;
 }
-.actions button:hover{opacity:.9}
+
+.preview{
+background:#444;
+}
+
+.logout{
+background:#b71c1c;
+float:right;
+}
 
 .msg{
-  margin-top:14px;
-  color:var(--green);
-  font-weight:600;
+margin-top:15px;
+font-weight:bold;
 }
 
-/* ===== FOOTER ===== */
-footer{
-  margin-top:60px;
-  background:var(--dark);
-  color:#d5e3d5;
-  text-align:center;
-  padding:26px 16px;
-  font-size:14px;
+.previewBox{
+background:white;
+padding:20px;
+border-radius:10px;
+border:1px solid #ccc;
+margin-top:20px;
+display:none;
 }
-footer b{color:#fff}
-footer p{margin:6px 0}
+
+#loginBox{
+max-width:400px;
+margin:80px auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.spinner{
+border:3px solid #eee;
+border-top:3px solid #1b5e20;
+border-radius:50%;
+width:18px;
+height:18px;
+display:inline-block;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+}
+
+.seoPreview{
+background:white;
+border:1px solid #ddd;
+padding:15px;
+margin-top:15px;
+}
+
+.seoPreview h3{
+color:#1a0dab;
+margin:0;
+}
+
+.seoPreview p{
+color:#545454;
+margin:4px 0;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- ===== HEADER ===== -->
 <header>
-  <h1>Chahat Organic – Admin Dashboard</h1>
-  <p>Secure Content Management • Permanent Articles • Full Editorial Control</p>
+<h2>Chahat Organic Admin Dashboard</h2>
 </header>
 
-<div class="container">
+<!-- LOGIN -->
 
-<!-- ===== LOGIN ===== -->
-<div class="login" id="loginBox">
-  <h2>Administrator Login</h2>
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
-  <button onclick="login()">Sign In</button>
-</div>
+<div id="loginBox">
 
-<!-- ===== CHANGE PASSWORD ===== -->
-<div class="password-box" id="passBox" style="display:none">
-  <h3>🔐 Change Admin Password</h3>
-  <input id="oldPass" type="password" placeholder="Current Password">
-  <input id="newPass" type="password" placeholder="New Password">
-  <button onclick="changePassword()">Update Password</button>
-</div>
+<input id="email" placeholder="Admin Email">
+<input id="password" type="password" placeholder="Password">
 
-<!-- ===== ADMIN PANEL ===== -->
-<div class="box" id="adminBox">
+<button onclick="login()">Login</button>
 
-  <h2>Create New Article</h2>
-
-  <input id="title" placeholder="Enter Article Title">
-
-  <div id="editor" class="editor" contenteditable="true">
-    <p>Start writing your article content here...</p>
-  </div>
-
-  <div class="toolbar">
-    <button onclick="cmd('bold')"><b>B</b></button>
-    <button onclick="cmd('italic')"><i>I</i></button>
-    <button onclick="cmd('insertUnorderedList')">• List</button>
-    <button onclick="addImage()">🖼️ Add Image</button>
-  </div>
-
-  <div class="actions">
-    <button onclick="publish()">Publish Article (JSON)</button>
-  </div>
-
-  <div class="msg" id="statusMsg"></div>
+<div class="msg" id="loginMsg"></div>
 
 </div>
+
+<!-- ADMIN PANEL -->
+
+<div class="container" id="adminPanel" style="display:none">
+
+<button class="logout" onclick="logout()">Logout</button>
+
+<input id="title" placeholder="Article Title (max 100 characters)">
+<input id="metaTitle" placeholder="SEO Meta Title">
+<textarea id="metaDesc" placeholder="SEO Meta Description"></textarea>
+
+<input id="tags" placeholder="Tags (example: organic food, turmeric)">
+<input id="imgAlt" placeholder="Image ALT text (SEO)">
+
+<div class="toolbar">
+<button onclick="format('bold')"><b>B</b></button>
+<button onclick="format('italic')"><i>I</i></button>
+<button onclick="format('insertUnorderedList')">• List</button>
+<button onclick="addImage()">🖼 Image</button>
 </div>
 
-<!-- ===== FOOTER ===== -->
-<footer>
-  <p>© 2026 <b>Chahat Organic</b></p>
-  <p>Pure • Honest • Farmer Sourced</p>
-  <p>Admin System Designed & Managed by <b>Shubham Mishra</b></p>
-</footer>
+<div id="editor" class="editor" contenteditable="true">
+<p><b>Start writing your article...</b></p>
+</div>
 
-<script>
-/* ===== AUTH ===== */
-let ADMIN_USER="admin";
-let ADMIN_PASS=localStorage.getItem("ADMIN_PASS") || "chahat@13";
+<button class="preview" onclick="preview()">Preview</button>
+<button id="publishBtn" onclick="publish()">Publish Article</button>
 
-function login(){
-  if(username.value===ADMIN_USER && password.value===ADMIN_PASS){
-    loginBox.style.display="none";
-    adminBox.style.display="block";
-    passBox.style.display="block";
-    sessionStorage.setItem("admin","1");
-  }else{
-    alert("Invalid username or password");
-  }
+<div class="msg" id="statusMsg"></div>
+
+<div id="previewBox" class="previewBox"></div>
+
+<div class="seoPreview" id="seoPreview"></div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig={
+apiKey:"AIzaSyDzdiSsRnH3NHbaqVT5PYEZHe7eqE6Gb0A",
+authDomain:"chahatorganic-ca1a1.firebaseapp.com",
+projectId:"chahatorganic-ca1a1",
+storageBucket:"chahatorganic-ca1a1.firebasestorage.app",
+messagingSenderId:"687378359578",
+appId:"1:687378359578:web:94b28c0dff9431a9e4f8a3"
+};
+
+const app=initializeApp(firebaseConfig);
+
+const db=getFirestore(app);
+const auth=getAuth(app);
+const storage=getStorage(app);
+
+/* AUTH CHECK */
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+loginBox.style.display="none";
+adminPanel.style.display="block";
 }
 
-if(sessionStorage.getItem("admin")==="1"){
-  loginBox.style.display="none";
-  adminBox.style.display="block";
-  passBox.style.display="block";
+});
+
+/* LOGIN */
+
+window.login=async function(){
+
+let email=email.value;
+let pass=password.value;
+
+try{
+
+await signInWithEmailAndPassword(auth,email,pass);
+
+}catch(err){
+
+loginMsg.innerText="❌ "+err.message;
+
 }
 
-/* ===== PASSWORD CHANGE ===== */
-function changePassword(){
-  if(oldPass.value!==ADMIN_PASS){
-    alert("Current password is incorrect");
-    return;
-  }
-  ADMIN_PASS=newPass.value;
-  localStorage.setItem("ADMIN_PASS",newPass.value);
-  alert("Password updated successfully ✅");
-  oldPass.value=newPass.value="";
 }
 
-/* ===== EDITOR ===== */
-function cmd(c){
-  document.execCommand(c,false,null);
+/* LOGOUT */
+
+window.logout=function(){
+
+if(confirm("Logout from admin panel?")){
+
+signOut(auth);
+location.reload();
+
 }
 
-/* IMAGE INSERT */
-function addImage(){
-  let i=document.createElement("input");
-  i.type="file";
-  i.accept="image/*";
-  i.onchange=()=>{
-    let r=new FileReader();
-    r.onload=e=>{
-      document.execCommand(
-        "insertHTML",
-        false,
-        `<img src="${e.target.result}" style="max-width:100%;border-radius:12px;margin:10px 0">`
-      );
-    };
-    r.readAsDataURL(i.files[0]);
-  };
-  i.click();
 }
 
-/* ===== JSON PUBLISH ===== */
-function publish(){
-  let t = title.value.trim();
-  let c = editor.innerHTML.trim();
+/* TEXT FORMAT */
 
-  if(!t || c==="" || c==="<br>"){
-    alert("Please enter both title and content");
-    return;
-  }
-
-  let article = {
-    title: t,
-    content: c,
-    date: new Date().toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"}),
-    views: 0,
-    likes: 0
-  };
-
-  let json = JSON.stringify(article, null, 2);
-
-  let blob = new Blob([json], {type:"application/json"});
-  let a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = t.replace(/\s+/g,"-").toLowerCase()+".json";
-  a.click();
-
-  statusMsg.innerText =
-    "✅ Article JSON downloaded. Add it to your main articles.json file.";
-
-  title.value="";
-  editor.innerHTML="<p>Start writing your article content here...</p>";
+window.format=function(cmd){
+document.execCommand(cmd,false,null);
 }
+
+/* IMAGE UPLOAD */
+
+window.addImage=function(){
+
+let input=document.createElement("input");
+input.type="file";
+input.accept="image/*";
+
+input.onchange=async()=>{
+
+let file=input.files[0];
+
+if(file.size>2*1024*1024){
+
+alert("Image must be smaller than 2MB");
+return;
+
+}
+
+statusMsg.innerHTML="Uploading image <span class='spinner'></span>";
+
+let imageRef=ref(storage,"articles/"+Date.now()+"-"+file.name);
+
+await uploadBytes(imageRef,file);
+
+let url=await getDownloadURL(imageRef);
+
+let alt=document.getElementById("imgAlt").value;
+
+document.execCommand(
+"insertHTML",
+false,
+`<img src="${url}" alt="${alt}" style="max-width:100%;border-radius:10px;margin:10px 0">`
+);
+
+statusMsg.innerText="";
+
+}
+
+input.click();
+
+}
+
+/* CLEAN HTML */
+
+function clean(html){
+
+return html
+.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi,"")
+.replace(/\s+/g," ")
+.trim();
+
+}
+
+/* PREVIEW */
+
+window.preview=function(){
+
+let title=document.getElementById("title").value;
+let content=document.getElementById("editor").innerHTML;
+
+previewBox.innerHTML=`<h2>${title}</h2><hr>${content}`;
+previewBox.style.display="block";
+
+}
+
+/* PUBLISH */
+
+window.publish=async function(){
+
+let btn=document.getElementById("publishBtn");
+
+let title=document.getElementById("title").value.trim();
+let content=clean(editor.innerHTML);
+
+let metaTitle=metaTitle.value.trim();
+let metaDesc=metaDesc.value.trim();
+
+let tags=document.getElementById("tags").value.split(",");
+tags=tags.map(t=>t.trim()).filter(t=>t);
+
+if(!title){
+
+statusMsg.innerText="❌ Title required";
+return;
+
+}
+
+let slug=title
+.toLowerCase()
+.replace(/[^\w ]+/g,"")
+.replace(/ +/g,"-");
+
+btn.disabled=true;
+btn.innerHTML="<span class='spinner'></span> Publishing";
+
+try{
+
+await addDoc(collection(db,"articles"),{
+
+title:title,
+slug:slug,
+content:content,
+metaTitle:metaTitle,
+metaDesc:metaDesc,
+tags:tags,
+date:new Date().toISOString(),
+views:0,
+likes:0
+
+});
+
+statusMsg.innerText="✅ Article Published";
+
+document.getElementById("title").value="";
+document.getElementById("editor").innerHTML="<p><b>Start writing your article...</b></p>";
+document.getElementById("tags").value="";
+document.getElementById("metaTitle").value="";
+document.getElementById("metaDesc").value="";
+
+}catch(e){
+
+statusMsg.innerText="❌ Publishing failed";
+
+}
+
+btn.disabled=false;
+btn.innerText="Publish Article";
+
+}
+
+/* SEO PREVIEW */
+
+document.getElementById("metaTitle").oninput=updateSEO;
+document.getElementById("metaDesc").oninput=updateSEO;
+
+function updateSEO(){
+
+let title=metaTitle.value;
+let desc=metaDesc.value;
+
+seoPreview.innerHTML=
+
+`<h3>${title}</h3>
+<p>${desc}</p>
+<small>chahatorganic.com</small>`;
+
+}
+
 </script>
 
 </body>
