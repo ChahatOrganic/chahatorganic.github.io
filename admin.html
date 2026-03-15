@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<meta charset="UTF-8">
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8">
 <title>Chahat Organic | Admin Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
 
 body{
 font-family:Arial,Helvetica,sans-serif;
@@ -19,6 +14,17 @@ background:#1b5e20;
 color:white;
 padding:25px;
 text-align:center;
+}
+
+nav{
+margin-top:10px;
+}
+
+nav a{
+color:white;
+margin:0 10px;
+text-decoration:none;
+font-weight:bold;
 }
 
 .container{
@@ -93,13 +99,16 @@ margin-top:20px;
 display:none;
 }
 
-#loginBox{
-max-width:400px;
-margin:80px auto;
+.articleList{
 background:white;
-padding:25px;
+margin-top:25px;
+padding:20px;
 border-radius:10px;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.articleItem{
+border-bottom:1px solid #eee;
+padding:10px 0;
 }
 
 .spinner{
@@ -124,75 +133,62 @@ padding:15px;
 margin-top:15px;
 }
 
-.seoPreview h3{
-color:#1a0dab;
-margin:0;
-}
+</style></head><body><header><h2>Chahat Organic Admin Dashboard</h2><nav><a href="https://chahatorganic.github.io/">Home</a>
+<a href="https://chahatorganic.github.io/articles.html">Articles</a>
+<a href="https://chahatorganic.github.io/about.html">About</a>
+<a href="https://chahatorganic.github.io/contact.html">Contact</a>
+<a href="https://instagram.com/chahatorganic" target="_blank">Instagram</a>
 
-.seoPreview p{
-color:#545454;
-margin:4px 0;
-}
+</nav></header><div id="loginBox" class="container"><input id="emailInput" placeholder="Admin Email">
+<input id="passwordInput" type="password" placeholder="Password"><button onclick="login()">Login</button>
 
-</style>
-</head>
+<div class="msg" id="loginMsg"></div></div><div class="container" id="adminPanel" style="display:none"><button class="logout" onclick="logout()">Logout</button>
 
-<body>
-
-<header>
-<h2>Chahat Organic Admin Dashboard</h2>
-</header>
-
-<div id="loginBox">
-
-<input id="emailInput" placeholder="Admin Email">
-<input id="passwordInput" type="password" placeholder="Password">
-
-<button onclick="login()">Login</button>
-
-<div class="msg" id="loginMsg"></div>
-
-</div>
-
-<div class="container" id="adminPanel" style="display:none">
-
-<button class="logout" onclick="logout()">Logout</button>
-
-<input id="title" placeholder="Article Title (max 100 characters)">
-<input id="metaTitleInput" placeholder="SEO Meta Title">
-<textarea id="metaDescInput" placeholder="SEO Meta Description"></textarea>
-
-<input id="tagsInput" placeholder="Tags (example: organic food, turmeric)">
-<input id="imgAltInput" placeholder="Image ALT text (SEO)">
-
-<div class="toolbar">
-<button onclick="format('bold')"><b>B</b></button>
+<input id="title" placeholder="Article Title"><input id="metaTitleInput" placeholder="SEO Meta Title">
+<textarea id="metaDescInput" placeholder="SEO Meta Description"></textarea><input id="tagsInput" placeholder="Tags (example: organic food, turmeric)">
+<input id="imgAltInput" placeholder="Image ALT text"><div class="toolbar"><button onclick="format('bold')"><b>B</b></button>
 <button onclick="format('italic')"><i>I</i></button>
 <button onclick="format('insertUnorderedList')">• List</button>
 <button onclick="addImage()">🖼 Image</button>
-</div>
 
-<div id="editor" class="editor" contenteditable="true">
+</div><div id="editor" class="editor" contenteditable="true">
 <p><b>Start writing your article...</b></p>
-</div>
+</div><button onclick="aiWriter()">AI Write Article</button>
 
 <button class="preview" onclick="preview()">Preview</button>
+
+<button onclick="saveDraft()">Save Draft</button>
+
 <button id="publishBtn" onclick="publish()">Publish Article</button>
 
-<div class="msg" id="statusMsg"></div>
-
-<div id="previewBox" class="previewBox"></div>
-
-<div class="seoPreview" id="seoPreview"></div>
-
-</div>
-
-<script type="module">
+<div class="msg" id="statusMsg"></div><div id="previewBox" class="previewBox"></div><div class="seoPreview" id="seoPreview"></div><div class="articleList"><h3>Published Articles</h3><div id="articlesList"></div></div></div><script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+doc,
+deleteDoc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword,
+signOut,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+getStorage,
+ref,
+uploadBytes,
+getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
 
 const firebaseConfig={
 apiKey:"AIzaSyDzdiSsRnH3NHbaqVT5PYEZHe7eqE6Gb0A",
@@ -209,27 +205,30 @@ const db=getFirestore(app);
 const auth=getAuth(app);
 const storage=getStorage(app);
 
+
 onAuthStateChanged(auth,(user)=>{
 
 if(user){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("adminPanel").style.display="block";
+
+loginBox.style.display="none";
+adminPanel.style.display="block";
+
+loadArticles();
+
 }
 
 });
 
-window.login=async function(){
 
-let email=document.getElementById("emailInput").value;
-let pass=document.getElementById("passwordInput").value;
+window.login=async function(){
 
 try{
 
-await signInWithEmailAndPassword(auth,email,pass);
+await signInWithEmailAndPassword(auth,emailInput.value,passwordInput.value);
 
 }catch(err){
 
-document.getElementById("loginMsg").innerText="❌ "+err.message;
+loginMsg.innerText="❌ "+err.message;
 
 }
 
@@ -237,31 +236,27 @@ document.getElementById("loginMsg").innerText="❌ "+err.message;
 
 window.logout=function(){
 
-if(confirm("Logout from admin panel?")){
 signOut(auth);
 location.reload();
-}
 
 }
 
 window.format=function(cmd){
+
 document.execCommand(cmd,false,null);
+
 }
+
 
 window.addImage=function(){
 
 let input=document.createElement("input");
+
 input.type="file";
-input.accept="image/*";
 
 input.onchange=async()=>{
 
 let file=input.files[0];
-
-if(file.size>2*1024*1024){
-alert("Image must be smaller than 2MB");
-return;
-}
 
 statusMsg.innerHTML="Uploading image <span class='spinner'></span>";
 
@@ -271,7 +266,7 @@ await uploadBytes(imageRef,file);
 
 let url=await getDownloadURL(imageRef);
 
-let alt=document.getElementById("imgAltInput").value;
+let alt=imgAltInput.value;
 
 document.execCommand(
 "insertHTML",
@@ -287,105 +282,155 @@ input.click();
 
 }
 
-function clean(html){
 
-return html
-.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi,"")
-.replace(/\s+/g," ")
-.trim();
+window.aiWriter=function(){
+
+let topic=prompt("Enter article topic");
+
+editor.innerHTML=`
+<h2>${topic}</h2>
+
+<p>${topic} is an important part of organic living.</p>
+
+<h3>Benefits</h3>
+
+<ul>
+<li>Supports natural health</li>
+<li>Improves immunity</li>
+<li>Better digestion</li>
+</ul>
+`;
 
 }
 
+
+function clean(html){
+
+return html.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi,"").trim();
+
+}
+
+
 window.preview=function(){
 
-let title=document.getElementById("title").value;
-let content=document.getElementById("editor").innerHTML;
+previewBox.innerHTML=`<h2>${title.value}</h2><hr>${editor.innerHTML}`;
 
-previewBox.innerHTML=`<h2>${title}</h2><hr>${content}`;
 previewBox.style.display="block";
 
 }
 
-window.publish=async function(){
 
-let btn=document.getElementById("publishBtn");
+window.saveDraft=async function(){
 
-let title=document.getElementById("title").value.trim();
-let content=clean(document.getElementById("editor").innerHTML);
+await addDoc(collection(db,"drafts"),{
 
-let metaTitle=document.getElementById("metaTitleInput").value.trim();
-let metaDesc=document.getElementById("metaDescInput").value.trim();
+title:title.value,
+content:editor.innerHTML,
+date:new Date().toISOString()
 
-let tags=document.getElementById("tagsInput").value.split(",");
-tags=tags.map(t=>t.trim()).filter(t=>t);
+});
 
-if(!title){
-
-statusMsg.innerText="❌ Title required";
-return;
+statusMsg.innerText="Draft saved";
 
 }
 
-let slug=title
-.toLowerCase()
-.replace(/[^\w ]+/g,"")
-.replace(/ +/g,"-");
+
+window.publish=async function(){
+
+let btn=publishBtn;
+
+let t=title.value.trim();
+
+let slug=t.toLowerCase().replace(/[^\w ]+/g,"").replace(/ +/g,"-");
 
 btn.disabled=true;
-btn.innerHTML="<span class='spinner'></span> Publishing";
 
-try{
+btn.innerHTML="<span class='spinner'></span> Publishing";
 
 await addDoc(collection(db,"articles"),{
 
-title,
+title:t,
 slug,
-content,
-metaTitle,
-metaDesc,
-tags,
+content:clean(editor.innerHTML),
+metaTitle:metaTitleInput.value,
+metaDesc:metaDescInput.value,
+tags:tagsInput.value.split(","),
 date:new Date().toISOString(),
 views:0,
 likes:0
 
 });
 
-statusMsg.innerText="✅ Article Published";
+statusMsg.innerText="Article Published";
 
-document.getElementById("title").value="";
-document.getElementById("editor").innerHTML="<p><b>Start writing your article...</b></p>";
-document.getElementById("tagsInput").value="";
-document.getElementById("metaTitleInput").value="";
-document.getElementById("metaDescInput").value="";
-
-}catch(e){
-
-statusMsg.innerText="❌ Publishing failed";
-
-}
+editor.innerHTML="<p><b>Start writing your article...</b></p>";
 
 btn.disabled=false;
+
 btn.innerText="Publish Article";
 
-}
-
-document.getElementById("metaTitleInput").oninput=updateSEO;
-document.getElementById("metaDescInput").oninput=updateSEO;
-
-function updateSEO(){
-
-let title=document.getElementById("metaTitleInput").value;
-let desc=document.getElementById("metaDescInput").value;
-
-seoPreview.innerHTML=
-
-`<h3>${title}</h3>
-<p>${desc}</p>
-<small>chahatorganic.com</small>`;
+loadArticles();
 
 }
 
-</script>
 
-</body>
+async function loadArticles(){
+
+articlesList.innerHTML="Loading...";
+
+let snap=await getDocs(collection(db,"articles"));
+
+articlesList.innerHTML="";
+
+snap.forEach(docSnap=>{
+
+let a=docSnap.data();
+
+articlesList.innerHTML+=`
+
+<div class="articleItem">
+
+<b>${a.title}</b>
+
+<br>
+
+<button onclick="editArticle('${docSnap.id}','${a.title}')">Edit</button>
+
+<button class="deleteBtn" onclick="deleteArticle('${docSnap.id}')">Delete</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+window.deleteArticle=async function(id){
+
+if(!confirm("Delete article?")) return;
+
+await deleteDoc(doc(db,"articles",id));
+
+loadArticles();
+
+}
+
+
+window.editArticle=async function(id,title){
+
+let newTitle=prompt("Edit title",title);
+
+await updateDoc(doc(db,"articles",id),{
+
+title:newTitle
+
+});
+
+loadArticles();
+
+}
+
+</script></body>
 </html>
