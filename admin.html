@@ -1,535 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <title>Chahat Organic | Admin Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:#f4f7f4;
-margin:0;
-}
-
-header{
-background:#1b5e20;
-color:white;
-padding:25px;
-text-align:center;
-}
-
-nav{
-margin-top:10px;
-}
-
-nav a{
-color:white;
-margin:0 10px;
-text-decoration:none;
-font-weight:bold;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
-
-input,textarea{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
-border:1px solid #ccc;
-font-size:16px;
-}
-
-.editor{
-border:1px solid #ccc;
-padding:15px;
-min-height:220px;
-border-radius:10px;
-background:white;
-margin-top:10px;
-}
-
-.toolbar{
-margin-top:10px;
-display:flex;
-flex-wrap:wrap;
-gap:6px;
-}
-
-.toolbar button{
-padding:8px 12px;
-border-radius:6px;
-border:1px solid #ccc;
-background:#f3f3f3;
-cursor:pointer;
-}
-
-button{
-padding:12px 25px;
-background:#1b5e20;
-color:white;
-border:none;
-border-radius:25px;
-margin-top:15px;
-cursor:pointer;
-}
-
-.preview{
-background:#444;
-}
-
-.logout{
-background:#b71c1c;
-float:right;
-}
-
-.msg{
-margin-top:15px;
-font-weight:bold;
-}
-
-.previewBox{
-background:white;
-padding:20px;
-border-radius:10px;
-border:1px solid #ccc;
-margin-top:20px;
-display:none;
-}
-
-.articleList{
-background:white;
-margin-top:25px;
-padding:20px;
-border-radius:10px;
-}
-
-.articleItem{
-border-bottom:1px solid #eee;
-padding:10px 0;
-}
-
-.spinner{
-border:3px solid #eee;
-border-top:3px solid #1b5e20;
-border-radius:50%;
-width:18px;
-height:18px;
-display:inline-block;
-animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
-}
-
-.seoPreview{
-background:white;
-border:1px solid #ddd;
-padding:15px;
-margin-top:15px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-
-<h2>Chahat Organic Admin Dashboard</h2>
-
-<nav>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><style>
+body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f4f7f4;}
+header{background:#1b5e20;color:white;padding:20px;text-align:center;}
+nav{background:#2e7d32;padding:10px;text-align:center;}
+nav a{color:white;margin:10px;text-decoration:none;font-weight:bold;}
+.auth{text-align:right;padding:10px 20px;}
+button{padding:8px 15px;border:none;background:#1b5e20;color:white;cursor:pointer;border-radius:5px;margin:5px;}
+.container{max-width:900px;margin:auto;padding:20px;}
+input,textarea,select{width:100%;padding:10px;margin-top:10px;border-radius:8px;border:1px solid #ccc;}
+.category-bar{padding:10px;text-align:center;background:#e8f5e9;}
+.category-bar span{margin:10px;font-weight:bold;}
+.editor{border:1px solid #ccc;padding:15px;min-height:200px;border-radius:10px;background:white;margin-top:10px;}
+.toolbar{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;}
+.toolbar button,.toolbar select{padding:8px;border-radius:6px;border:1px solid #ccc;cursor:pointer;}
+.actions{text-align:center;margin-top:15px;}
+.previewBox{background:white;padding:20px;border-radius:10px;margin-top:20px;display:none;}
+.articleList{background:white;margin-top:25px;padding:20px;border-radius:10px;}
+.articleItem{border-bottom:1px solid #eee;padding:10px 0;}
+.likeBtn{background:#ff4081;}
+.shareBox i{font-size:20px;margin:10px;cursor:pointer;}
+</style></head><body><header>
+<h1>🌿 Chahat Organic Admin Dashboard</h1>
+</header><nav>
 <a href="https://chahatorganic.github.io/">Home</a>
 <a href="https://chahatorganic.github.io/articles.html">Articles</a>
 <a href="https://chahatorganic.github.io/about.html">About</a>
-<a href="https://chahatorganic.github.io/contact.html">Contact</a>
+<a href="mailto:chahatorganic@gmail.com">Email</a>
 <a href="https://instagram.com/chahatorganic" target="_blank">Instagram</a>
-
-</nav>
-
-</header>
-
-
-<div id="loginBox" class="container">
-
-<input id="emailInput" placeholder="Admin Email">
-<input id="passwordInput" type="password" placeholder="Password">
-
+</nav><div class="auth">
 <button onclick="login()">Login</button>
-
-<div class="msg" id="loginMsg"></div>
-
-</div>
-
-
-<div class="container" id="adminPanel" style="display:none">
-
-<button class="logout" onclick="logout()">Logout</button>
-
-<input id="title" placeholder="Article Title">
-
-<input id="metaTitleInput" placeholder="SEO Meta Title">
-<textarea id="metaDescInput" placeholder="SEO Meta Description"></textarea>
-
-<input id="tagsInput" placeholder="Tags (example: organic food, turmeric)">
-<input id="imgAltInput" placeholder="Image ALT text">
-
-<div class="toolbar">
-
+<button onclick="logout()">Logout</button>
+</div><div class="container"><input id="title" placeholder="Article Title">
+<textarea id="description" placeholder="Short Description"></textarea>
+<input id="image" placeholder="Featured Image URL"><div class="category-bar">
+<span>Health</span>
+<span>Organic Food</span>
+<span>Ayurveda</span>
+<span>Recipes</span>
+</div><select id="category">
+<option>Health</option>
+<option>Organic Food</option>
+<option>Ayurveda</option>
+<option>Recipes</option>
+</select><div class="toolbar">
 <button onclick="format('bold')"><b>B</b></button>
 <button onclick="format('italic')"><i>I</i></button>
-<button onclick="format('insertUnorderedList')">• List</button>
-<button onclick="addImage()">🖼 Image</button>
-
-</div>
-
-<div id="editor" class="editor" contenteditable="true">
-<p><b>Start writing your article...</b></p>
-</div>
-
-<button onclick="aiWriter()">AI Write Article</button>
-
-<button class="preview" onclick="preview()">Preview</button>
-
-<button onclick="saveDraft()">Save Draft</button>
-
-<button id="publishBtn" onclick="publish()">Publish Article</button>
-
-<div class="msg" id="statusMsg"></div>
-
-<div id="previewBox" class="previewBox"></div>
-
-<div class="seoPreview" id="seoPreview"></div>
-
-<div class="articleList">
-
-<h3>Published Articles</h3>
-
+<button onclick="format('insertUnorderedList')">•</button>
+<button onclick="addImage()">🖼</button>
+<select onchange="changeFont(this.value)">
+<option>Font</option>
+<option>Arial</option>
+<option>Georgia</option>
+<option>Courier</option>
+</select>
+<input type="color" onchange="changeColor(this.value)">
+</div><div id="editor" class="editor" contenteditable="true">
+Start writing your article...
+</div><div class="actions">
+<button onclick="aiWriter()">🤖 AI Write Article</button>
+<button onclick="preview()">👁 Preview</button>
+<button onclick="publish()">🚀 Publish Article</button>
+</div><div id="previewBox" class="previewBox"></div><div class="articleList">
+<h3>📚 Published Articles</h3>
 <div id="articlesList"></div>
+</div></div><script>
+function format(cmd){document.execCommand(cmd);}
+function changeColor(c){document.execCommand("foreColor",false,c);}
+function changeFont(f){document.execCommand("fontName",false,f);}
 
-</div>
-
-</div>
-
-
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-addDoc,
-getDocs,
-doc,
-deleteDoc,
-updateDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-import {
-getAuth,
-signInWithEmailAndPassword,
-signOut,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-getStorage,
-ref,
-uploadBytes,
-getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-
-
-const firebaseConfig={
-apiKey:"AIzaSyDzdiSsRnH3NHbaqVT5PYEZHe7eqE6Gb0A",
-authDomain:"chahatorganic-ca1a1.firebaseapp.com",
-projectId:"chahatorganic-ca1a1",
-storageBucket:"chahatorganic-ca1a1.firebasestorage.app",
-messagingSenderId:"687378359578",
-appId:"1:687378359578:web:94b28c0dff9431a9e4f8a3"
-};
-
-const app=initializeApp(firebaseConfig);
-
-const db=getFirestore(app);
-const auth=getAuth(app);
-const storage=getStorage(app);
-
-let editingId=null;
-
-
-/* LOGIN */
-
-onAuthStateChanged(auth,(user)=>{
-
-if(user){
-
-loginBox.style.display="none";
-adminPanel.style.display="block";
-
-loadArticles();
-
+function addImage(){
+let url=prompt("Paste Image URL");
+if(url){document.execCommand("insertHTML",false,`<img src="${url}" style="max-width:100%;border-radius:10px">`);}
 }
 
-});
-
-
-window.login=async function(){
-
-try{
-
-await signInWithEmailAndPassword(auth,emailInput.value,passwordInput.value);
-
-}catch(err){
-
-loginMsg.innerText="❌ "+err.message;
-
+function aiWriter(){
+let topic=prompt("Enter topic");
+editor.innerHTML=`<h2>${topic}</h2><p>${topic} is important for organic life.</p>`;
 }
 
-}
-
-
-window.logout=function(){
-
-signOut(auth);
-location.reload();
-
-}
-
-
-/* EDITOR */
-
-window.format=function(cmd){
-
-document.execCommand(cmd,false,null);
-
-}
-
-
-/* FAST IMAGE UPLOAD */
-
-window.addImage=function(){
-
-let input=document.createElement("input");
-input.type="file";
-input.accept="image/*";
-
-input.onchange=async()=>{
-
-let file=input.files[0];
-
-statusMsg.innerHTML="Uploading image <span class='spinner'></span>";
-
-let imageRef=ref(storage,"articles/"+Date.now()+"-"+file.name);
-
-await uploadBytes(imageRef,file);
-
-let url=await getDownloadURL(imageRef);
-
-let alt=imgAltInput.value;
-
-document.execCommand(
-"insertHTML",
-false,
-`<img src="${url}" alt="${alt}" style="max-width:100%;border-radius:10px;margin:10px 0">`
-);
-
-statusMsg.innerText="Image uploaded";
-
-}
-
-input.click();
-
-}
-
-
-/* AI WRITER */
-
-window.aiWriter=function(){
-
-let topic=prompt("Enter article topic");
-
-editor.innerHTML=`
-<h2>${topic}</h2>
-<p>${topic} is an important part of organic lifestyle.</p>
-<ul>
-<li>Improves health</li>
-<li>Boosts immunity</li>
-<li>Supports natural living</li>
-</ul>
-`;
-
-}
-
-
-/* PREVIEW */
-
-window.preview=function(){
-
-previewBox.innerHTML=`<h2>${title.value}</h2><hr>${editor.innerHTML}`;
-
+function preview(){
 previewBox.style.display="block";
-
+previewBox.innerHTML=`
+<h2>${title.value}</h2>
+<img src="${image.value}" style="width:100%;border-radius:10px">
+<p>${description.value}</p>
+${editor.innerHTML}
+<button class="likeBtn">❤️ Like</button>
+<div class="shareBox">
+<i class="fab fa-whatsapp" onclick="share('whatsapp')"></i>
+<i class="fab fa-facebook" onclick="share('facebook')"></i>
+<i class="fa fa-share" onclick="share('other')"></i>
+</div>`;
 }
 
-
-/* SAVE DRAFT */
-
-window.saveDraft=async function(){
-
-await addDoc(collection(db,"drafts"),{
-
-title:title.value,
-content:editor.innerHTML,
-date:new Date().toISOString()
-
-});
-
-statusMsg.innerText="Draft saved";
-
+function publish(){
+let div=document.createElement("div");
+div.className="articleItem";
+div.innerHTML=`<b>${title.value}</b><br><button onclick="this.parentElement.remove()">Delete</button>`;
+articlesList.appendChild(div);
+alert("Published");
 }
 
-
-/* PUBLISH / UPDATE */
-
-window.publish=async function(){
-
-let t=title.value.trim();
-
-let slug=t.toLowerCase().replace(/[^\w ]+/g,"").replace(/ +/g,"-");
-
-if(editingId){
-
-await updateDoc(doc(db,"articles",editingId),{
-
-title:t,
-slug,
-content:editor.innerHTML,
-metaTitle:metaTitleInput.value,
-metaDesc:metaDescInput.value,
-tags:tagsInput.value.split(",")
-
-});
-
-statusMsg.innerText="Article Updated";
-
-editingId=null;
-
-}else{
-
-await addDoc(collection(db,"articles"),{
-
-title:t,
-slug,
-content:editor.innerHTML,
-metaTitle:metaTitleInput.value,
-metaDesc:metaDescInput.value,
-tags:tagsInput.value.split(","),
-date:new Date().toISOString(),
-views:0,
-likes:0
-
-});
-
-statusMsg.innerText="Article Published";
-
+function share(type){
+let url=encodeURIComponent(location.href);
+if(type==='whatsapp') window.open(`https://wa.me/?text=${url}`);
+if(type==='facebook') window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
+if(type==='other') navigator.share({url:location.href});
 }
 
-loadArticles();
-
-}
-
-
-/* LOAD ARTICLES */
-
-async function loadArticles(){
-
-articlesList.innerHTML="Loading...";
-
-let snap=await getDocs(collection(db,"articles"));
-
-articlesList.innerHTML="";
-
-snap.forEach(docSnap=>{
-
-let a=docSnap.data();
-
-articlesList.innerHTML+=`
-
-<div class="articleItem">
-
-<b>${a.title}</b>
-
-<br>
-
-<button onclick="editArticle('${docSnap.id}')">Edit</button>
-
-<button onclick="deleteArticle('${docSnap.id}')">Delete</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-
-/* DELETE */
-
-window.deleteArticle=async function(id){
-
-if(!confirm("Delete article?")) return;
-
-await deleteDoc(doc(db,"articles",id));
-
-loadArticles();
-
-}
-
-
-/* FULL ARTICLE EDIT */
-
-window.editArticle=async function(id){
-
-editingId=id;
-
-let snap=await getDocs(collection(db,"articles"));
-
-snap.forEach(docSnap=>{
-
-if(docSnap.id===id){
-
-let a=docSnap.data();
-
-title.value=a.title;
-metaTitleInput.value=a.metaTitle;
-metaDescInput.value=a.metaDesc;
-tagsInput.value=(a.tags||[]).join(",");
-
-editor.innerHTML=a.content;
-
-window.scrollTo({top:0,behavior:"smooth"});
-
-}
-
-});
-
-}
-
-</script>
-
-</body>
+function login(){alert('Login logic add karo Firebase wala');}
+function logout(){alert('Logout');}
+</script></body>
 </html>
