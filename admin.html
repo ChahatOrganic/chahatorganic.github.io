@@ -3,140 +3,51 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Chahat Organic | Admin Dashboard</title>
+<title>Chahat Organic Admin Panel</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:#f4f7f4;
-margin:0;
-}
+body{font-family:Poppins,Arial;background:#f4f7f4;margin:0;}
+header{background:#0f3d2e;color:#fff;padding:25px;text-align:center;}
 
-header{
-background:#1b5e20;
-color:white;
-padding:25px;
-text-align:center;
-}
-
-nav{
-margin-top:10px;
-}
-
-nav a{
-color:white;
-margin:0 10px;
-text-decoration:none;
-font-weight:bold;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
+.container{max-width:900px;margin:auto;padding:20px;}
 
 input,textarea{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
-border:1px solid #ccc;
-font-size:16px;
-}
-
-.editor{
-border:1px solid #ccc;
-padding:15px;
-min-height:220px;
-border-radius:10px;
-background:white;
-margin-top:10px;
-}
-
-.toolbar{
-margin-top:10px;
-display:flex;
-flex-wrap:wrap;
-gap:6px;
-}
-
-.toolbar button{
-padding:8px 12px;
-border-radius:6px;
-border:1px solid #ccc;
-background:#f3f3f3;
-cursor:pointer;
+width:100%;padding:12px;margin-top:10px;
+border-radius:10px;border:1px solid #ccc;
 }
 
 button{
-padding:12px 25px;
-background:#1b5e20;
-color:white;
-border:none;
-border-radius:25px;
-margin-top:15px;
+padding:12px 25px;background:#1b5e20;
+color:white;border:none;border-radius:30px;margin-top:10px;
 cursor:pointer;
 }
 
-.preview{
-background:#444;
+button:hover{opacity:.9;}
+
+.logout{background:#b71c1c;float:right;}
+
+.editor{
+border:1px solid #ccc;padding:15px;
+min-height:220px;border-radius:10px;background:white;
+margin-top:10px;
 }
 
-.logout{
-background:#b71c1c;
-float:right;
-}
+.toolbar{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
+.toolbar button{padding:8px 12px;border-radius:6px;background:#eee;}
 
-.msg{
-margin-top:15px;
-font-weight:bold;
-}
-
-.previewBox{
-background:white;
-padding:20px;
-border-radius:10px;
-border:1px solid #ccc;
-margin-top:20px;
-display:none;
+.previewBox,.seoPreview{
+background:white;padding:15px;border-radius:10px;margin-top:15px;
 }
 
 .articleList{
-background:white;
-margin-top:25px;
-padding:20px;
-border-radius:10px;
+background:white;margin-top:20px;padding:15px;border-radius:10px;
 }
 
-.articleItem{
-border-bottom:1px solid #eee;
-padding:10px 0;
-}
+.articleItem{border-bottom:1px solid #eee;padding:10px 0;}
 
-.spinner{
-border:3px solid #eee;
-border-top:3px solid #1b5e20;
-border-radius:50%;
-width:18px;
-height:18px;
-display:inline-block;
-animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
-}
-
-.seoPreview{
-background:white;
-border:1px solid #ddd;
-padding:15px;
-margin-top:15px;
-}
+.msg{margin-top:10px;font-weight:600;}
 
 </style>
 
@@ -145,389 +56,253 @@ margin-top:15px;
 <body>
 
 <header>
-
-<h2>Chahat Organic Admin Dashboard</h2>
-
-<nav>
-
-<a href="https://chahatorganic.github.io/">Home</a>
-<a href="https://chahatorganic.github.io/articles.html">Articles</a>
-<a href="https://chahatorganic.github.io/about.html">About</a>
-<a href="https://chahatorganic.github.io/contact.html">Contact</a>
-<a href="https://instagram.com/chahatorganic" target="_blank">Instagram</a>
-
-</nav>
-
+<h2>Chahat Organic Admin Panel</h2>
 </header>
 
-
+<!-- LOGIN -->
 <div id="loginBox" class="container">
-
 <input id="emailInput" placeholder="Admin Email">
 <input id="passwordInput" type="password" placeholder="Password">
-
 <button onclick="login()">Login</button>
-
 <div class="msg" id="loginMsg"></div>
-
 </div>
 
-
-<div class="container" id="adminPanel" style="display:none">
+<!-- ADMIN -->
+<div id="adminPanel" class="container" style="display:none">
 
 <button class="logout" onclick="logout()">Logout</button>
 
 <input id="title" placeholder="Article Title">
+<p id="slugPreview"></p>
 
 <input id="metaTitleInput" placeholder="SEO Meta Title">
 <textarea id="metaDescInput" placeholder="SEO Meta Description"></textarea>
 
-<input id="tagsInput" placeholder="Tags (example: organic food, turmeric)">
+<input id="tagsInput" placeholder="Tags (comma separated)">
 <input id="imgAltInput" placeholder="Image ALT text">
 
 <div class="toolbar">
-
 <button onclick="format('bold')"><b>B</b></button>
 <button onclick="format('italic')"><i>I</i></button>
-<button onclick="format('insertUnorderedList')">• List</button>
+<button onclick="format('insertUnorderedList')">•</button>
 <button onclick="addImage()">🖼 Image</button>
-
 </div>
 
 <div id="editor" class="editor" contenteditable="true">
-<p><b>Start writing your article...</b></p>
+Start writing your article...
 </div>
 
+<p id="wordStats"></p>
+
 <button onclick="aiWriter()">AI Write Article</button>
-
-<button class="preview" onclick="preview()">Preview</button>
-
+<button onclick="preview()">Preview</button>
 <button onclick="saveDraft()">Save Draft</button>
-
-<button id="publishBtn" onclick="publish()">Publish Article</button>
+<button onclick="publish()">Publish</button>
 
 <div class="msg" id="statusMsg"></div>
 
 <div id="previewBox" class="previewBox"></div>
+<div id="seoPreview" class="seoPreview"></div>
 
-<div class="seoPreview" id="seoPreview"></div>
+<input id="searchInput" placeholder="Search articles">
 
 <div class="articleList">
-
 <h3>Published Articles</h3>
-
 <div id="articlesList"></div>
-
 </div>
 
 </div>
 
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-addDoc,
-getDocs,
-doc,
-deleteDoc,
-updateDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-import {
-getAuth,
-signInWithEmailAndPassword,
-signOut,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-import {
-getStorage,
-ref,
-uploadBytes,
-getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-
+<script>
 
 const firebaseConfig={
 apiKey:"AIzaSyDzdiSsRnH3NHbaqVT5PYEZHe7eqE6Gb0A",
 authDomain:"chahatorganic-ca1a1.firebaseapp.com",
 projectId:"chahatorganic-ca1a1",
-storageBucket:"chahatorganic-ca1a1.firebasestorage.app",
-messagingSenderId:"687378359578",
-appId:"1:687378359578:web:94b28c0dff9431a9e4f8a3"
+storageBucket:"chahatorganic-ca1a1.appspot.com"
 };
 
-const app=initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-const db=getFirestore(app);
-const auth=getAuth(app);
-const storage=getStorage(app);
+const auth=firebase.auth();
+const db=firebase.firestore();
+const storage=firebase.storage();
 
 let editingId=null;
 
-
 /* LOGIN */
-
-onAuthStateChanged(auth,(user)=>{
-
-if(user){
-
+function login(){
+auth.signInWithEmailAndPassword(emailInput.value,passwordInput.value)
+.then(()=>{
 loginBox.style.display="none";
 adminPanel.style.display="block";
-
 loadArticles();
-
-}
-
-});
-
-
-window.login=async function(){
-
-try{
-
-await signInWithEmailAndPassword(auth,emailInput.value,passwordInput.value);
-
-}catch(err){
-
+})
+.catch(err=>{
 loginMsg.innerText="❌ "+err.message;
-
+});
 }
 
-}
-
-
-window.logout=function(){
-
-signOut(auth);
+/* LOGOUT */
+function logout(){
+auth.signOut();
 location.reload();
-
 }
 
-
-/* EDITOR */
-
-window.format=function(cmd){
-
+/* FORMAT */
+function format(cmd){
 document.execCommand(cmd,false,null);
-
 }
 
+/* IMAGE */
+function addImage(){
 
-/* FAST IMAGE UPLOAD */
-
-window.addImage=function(){
+if(!imgAltInput.value){
+alert("Please enter ALT text");
+return;
+}
 
 let input=document.createElement("input");
 input.type="file";
-input.accept="image/*";
 
 input.onchange=async()=>{
-
 let file=input.files[0];
 
-statusMsg.innerHTML="Uploading image <span class='spinner'></span>";
+let ref=storage.ref("articles/"+Date.now()+"-"+file.name);
 
-let imageRef=ref(storage,"articles/"+Date.now()+"-"+file.name);
+await ref.put(file);
+let url=await ref.getDownloadURL();
 
-await uploadBytes(imageRef,file);
-
-let url=await getDownloadURL(imageRef);
-
-let alt=imgAltInput.value;
-
-document.execCommand(
-"insertHTML",
-false,
-`<img src="${url}" alt="${alt}" style="max-width:100%;border-radius:10px;margin:10px 0">`
-);
-
-statusMsg.innerText="Image uploaded";
-
-}
+document.execCommand("insertHTML",false,
+`<img src="${url}" alt="${imgAltInput.value}" style="max-width:100%;border-radius:10px">`);
+};
 
 input.click();
-
 }
 
-
 /* AI WRITER */
-
-window.aiWriter=function(){
-
-let topic=prompt("Enter article topic");
+function aiWriter(){
+let topic=prompt("Enter topic");
 
 editor.innerHTML=`
 <h2>${topic}</h2>
-<p>${topic} is an important part of organic lifestyle.</p>
+<p>${topic} is important for organic lifestyle.</p>
 <ul>
 <li>Improves health</li>
 <li>Boosts immunity</li>
 <li>Supports natural living</li>
-</ul>
-`;
-
+</ul>`;
 }
 
+/* SLUG */
+title.oninput=()=>{
+let slug=title.value.toLowerCase().replace(/\s+/g,"-");
+slugPreview.innerText="Slug: "+slug;
+};
+
+/* SEO PREVIEW */
+metaTitleInput.oninput=metaDescInput.oninput=()=>{
+seoPreview.innerHTML=
+`<h3>${metaTitleInput.value}</h3><p>${metaDescInput.value}</p>`;
+};
+
+/* WORD COUNT */
+editor.oninput=()=>{
+let words=editor.innerText.split(/\s+/).length;
+let time=Math.ceil(words/200);
+wordStats.innerText=`Words: ${words} | ${time} min read`;
+};
+
+/* AUTO SAVE */
+setInterval(()=>{
+if(editor.innerText.trim()){
+db.collection("drafts").add({
+content:editor.innerHTML,
+date:new Date()
+});
+}
+},30000);
 
 /* PREVIEW */
-
-window.preview=function(){
-
+function preview(){
 previewBox.innerHTML=`<h2>${title.value}</h2><hr>${editor.innerHTML}`;
-
-previewBox.style.display="block";
-
 }
-
 
 /* SAVE DRAFT */
-
-window.saveDraft=async function(){
-
-await addDoc(collection(db,"drafts"),{
-
+function saveDraft(){
+db.collection("drafts").add({
 title:title.value,
 content:editor.innerHTML,
-date:new Date().toISOString()
-
+date:new Date()
 });
-
 statusMsg.innerText="Draft saved";
-
 }
 
+/* PUBLISH */
+function publish(){
 
-/* PUBLISH / UPDATE */
+let content=editor.innerHTML + `
+<div style="text-align:center;margin-top:20px">
+<a href="index.html">Explore Organic Products</a>
+</div>`;
 
-window.publish=async function(){
-
-let t=title.value.trim();
-
-let slug=t.toLowerCase().replace(/[^\w ]+/g,"").replace(/ +/g,"-");
-
-if(editingId){
-
-await updateDoc(doc(db,"articles",editingId),{
-
-title:t,
-slug,
-content:editor.innerHTML,
-metaTitle:metaTitleInput.value,
-metaDesc:metaDescInput.value,
-tags:tagsInput.value.split(",")
-
-});
-
-statusMsg.innerText="Article Updated";
-
-editingId=null;
-
-}else{
-
-await addDoc(collection(db,"articles"),{
-
-title:t,
-slug,
-content:editor.innerHTML,
+db.collection("articles").add({
+title:title.value,
+slug:title.value.toLowerCase().replace(/\s+/g,"-"),
+content:content,
 metaTitle:metaTitleInput.value,
 metaDesc:metaDescInput.value,
 tags:tagsInput.value.split(","),
-date:new Date().toISOString(),
+date:new Date().toLocaleDateString("en-IN"),
 views:0,
 likes:0
-
-});
-
-statusMsg.innerText="Article Published";
-
-}
-
+})
+.then(()=>{
+statusMsg.innerText="✅ Published";
 loadArticles();
-
+});
 }
 
-
-/* LOAD ARTICLES */
-
-async function loadArticles(){
-
+/* LOAD */
+function loadArticles(){
 articlesList.innerHTML="Loading...";
 
-let snap=await getDocs(collection(db,"articles"));
-
+db.collection("articles").get().then(snap=>{
 articlesList.innerHTML="";
 
-snap.forEach(docSnap=>{
-
-let a=docSnap.data();
+snap.forEach(doc=>{
+let a=doc.data();
 
 articlesList.innerHTML+=`
-
 <div class="articleItem">
-
-<b>${a.title}</b>
-
-<br>
-
-<button onclick="editArticle('${docSnap.id}')">Edit</button>
-
-<button onclick="deleteArticle('${docSnap.id}')">Delete</button>
-
-</div>
-
-`;
-
+<b>${a.title}</b> (${a.views||0} views)<br>
+<button onclick="deleteArticle('${doc.id}')">Delete</button>
+</div>`;
 });
-
+});
 }
-
 
 /* DELETE */
+function deleteArticle(id){
+if(!confirm("Delete?")) return;
 
-window.deleteArticle=async function(id){
-
-if(!confirm("Delete article?")) return;
-
-await deleteDoc(doc(db,"articles",id));
-
-loadArticles();
-
+db.collection("articles").doc(id).delete().then(loadArticles);
 }
 
+/* SEARCH */
+searchInput.oninput=()=>{
+let q=searchInput.value.toLowerCase();
 
-/* FULL ARTICLE EDIT */
-
-window.editArticle=async function(id){
-
-editingId=id;
-
-let snap=await getDocs(collection(db,"articles"));
-
-snap.forEach(docSnap=>{
-
-if(docSnap.id===id){
-
-let a=docSnap.data();
-
-title.value=a.title;
-metaTitleInput.value=a.metaTitle;
-metaDescInput.value=a.metaDesc;
-tagsInput.value=(a.tags||[]).join(",");
-
-editor.innerHTML=a.content;
-
-window.scrollTo({top:0,behavior:"smooth"});
-
-}
-
+document.querySelectorAll(".articleItem").forEach(e=>{
+e.style.display=e.innerText.toLowerCase().includes(q)?"block":"none";
 });
-
-}
+};
 
 </script>
 
