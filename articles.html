@@ -5,18 +5,8 @@
 <meta charset="UTF-8">
 <title>Chahat Organic – Articles</title>
 
-<meta name="description" content="In-depth articles on organic food, spices and chemical-free living by Chahat Organic.">
-<meta name="keywords" content="organic food, organic spices, turmeric benefits, organic tea">
-<meta name="author" content="Shubham Mishra">
+<meta name="description" content="Organic food, spices & chemical-free living knowledge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="canonical" href="https://shubhammishra0043.github.io/chahatorganic/articles.html">
-
-<meta property="og:title" content="Chahat Organic Articles">
-<meta property="og:description" content="Pure Organic Knowledge">
-<meta property="og:image" content="Chahat Logo.png">
-
-<script type="application/ld+json" id="articleSchema"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -29,6 +19,7 @@ background:#f6f8f6;
 color:#222;
 }
 
+/* HEADER */
 header{
 background:#0f3d2e;
 color:white;
@@ -36,6 +27,13 @@ padding:25px;
 text-align:center;
 }
 
+header a{
+color:#fff;
+text-decoration:none;
+margin:0 8px;
+}
+
+/* HERO */
 .hero{
 padding:60px 10%;
 text-align:center;
@@ -43,6 +41,7 @@ background:url("25_firstpage.png") center/cover no-repeat;
 color:white;
 }
 
+/* SEARCH */
 .search-box{
 max-width:900px;
 margin:auto;
@@ -56,11 +55,12 @@ border-radius:50px;
 border:1px solid #ccc;
 }
 
+/* ARTICLE */
 .article{
 max-width:900px;
 margin:30px auto;
 background:white;
-padding:30px;
+padding:25px;
 border-radius:16px;
 box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
@@ -73,18 +73,45 @@ border-radius:12px;
 .meta{
 color:#777;
 font-size:14px;
-margin-bottom:20px;
+margin-bottom:15px;
 }
 
-.article-card{
+.actions{
+display:flex;
+gap:10px;
+margin-top:15px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:8px 14px;
+border-radius:30px;
+background:#1b5e20;
+color:white;
 cursor:pointer;
+font-size:14px;
+border:none;
+}
+
+.like{background:#e74c3c;}
+.share{background:#2980b9;}
+
+/* TOAST */
+.toast{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#333;
+color:#fff;
+padding:10px 20px;
+border-radius:30px;
+opacity:0;
 transition:.3s;
 }
+.toast.show{opacity:1;}
 
-.article-card:hover{
-transform:translateY(-5px);
-}
-
+/* FOOTER */
 footer{
 background:#0f2f17;
 color:white;
@@ -92,24 +119,12 @@ text-align:center;
 padding:40px;
 }
 
-.btn{
-display:inline-block;
-padding:10px 20px;
-background:#1b5e20;
-color:white;
-border-radius:50px;
-text-decoration:none;
-margin-top:10px;
-}
-
-.social{
-margin-top:15px;
-}
-
-.social a{
-margin:0 10px;
-text-decoration:none;
-font-weight:500;
+/* MOBILE */
+@media(max-width:600px){
+.hero{padding:40px 5%;}
+.article{margin:20px 10px;}
+.actions{flex-direction:column;}
+.btn{width:100%;}
 }
 
 </style>
@@ -119,112 +134,78 @@ font-weight:500;
 <body>
 
 <header>
-
 <h2>Chahat Organic – Articles</h2>
-
 <p>Pure • Honest • Farmer Sourced</p>
 
-<div class="social">
-
-<a href="https://instagram.com/chahatorganic" target="_blank">Instagram</a>
-
+<p>
+<a href="https://instagram.com/chahatorganic" target="_blank">Instagram</a> |
 <a href="mailto:chahatorganic@gmail.com">Email</a>
-
-</div>
-
+</p>
 </header>
 
 <div class="hero">
-
 <h1>Knowledge for Healthy Living</h1>
-
 <p>Research based articles about organic food</p>
-
 </div>
 
 <div class="search-box">
-
-<input id="search" placeholder="Search articles">
-
+<input id="search" placeholder="Search articles" aria-label="Search articles">
 </div>
 
-<div id="loading" style="text-align:center;margin:40px;">Loading articles...</div>
+<div id="articles" style="text-align:center;margin-top:40px;">
+⏳ Loading articles...
+</div>
 
-<div id="articles"></div>
+<div id="toast" class="toast"></div>
 
 <footer>
-
+<p>© 2026 Chahat Organic</p>
+<p>Founder – Shubham Mishra</p>
 <p>
-
-© 2026 Chahat Organic
-
+WhatsApp: <a href="https://wa.me/917053053863">7053053863</a><br>
+Email: <a href="mailto:chahatorganic@gmail.com">ChahatOrganic@gmail.com</a>
 </p>
-
-<p>
-
-Founder – Shubham Mishra
-
-</p>
-
-<p>
-
-<a href="https://instagram.com/chahatorganic" target="_blank">Instagram</a>
-
-|
-
-<a href="mailto:chahatorganic@gmail.com">Email</a>
-
-</p>
-
 </footer>
 
-<script type="module">
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+<script>
 
 const firebaseConfig={
 apiKey:"AIzaSyDzdiSsRnH3NHbaqVT5PYEZHe7eqE6Gb0A",
 authDomain:"chahatorganic-ca1a1.firebaseapp.com",
-projectId:"chahatorganic-ca1a1",
-storageBucket:"chahatorganic-ca1a1.firebasestorage.app",
-messagingSenderId:"687378359578",
-appId:"1:687378359578:web:94b28c0dff9431a9e4f8a3"
+projectId:"chahatorganic-ca1a1"
 };
 
-const app=initializeApp(firebaseConfig);
-const db=getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
 
 let ARTICLES=[];
 let currentArticle=null;
 
-const articlesContainer=document.getElementById("articles");
+const container=document.getElementById("articles");
 const searchInput=document.getElementById("search");
 
+/* TOAST */
+function showToast(msg){
+const t=document.getElementById("toast");
+t.innerText=msg;
+t.classList.add("show");
+setTimeout(()=>t.classList.remove("show"),2000);
+}
+
+/* SLUG */
 function getSlug(){
 return new URLSearchParams(location.search).get("post");
 }
 
-function readingTime(html){
-return Math.max(1,Math.ceil(html.replace(/<[^>]+>/g,"").split(/\s+/).length/200));
-}
+/* LOAD */
+db.collection("articles").get()
+.then(snapshot=>{
 
-function addArticleSchema(a){
-document.getElementById("articleSchema").textContent=JSON.stringify({
-"@context":"https://schema.org",
-"@type":"Article",
-"headline":a.title,
-"image":a.image,
-"author":{"@type":"Person","name":"Shubham Mishra"},
-"publisher":{"@type":"Organization","name":"Chahat Organic"},
-"datePublished":a.date,
-"description":a.excerpt
-});
-}
-
-async function loadArticles(){
-
-const snapshot=await getDocs(collection(db,"articles"));
+ARTICLES=[];
 
 snapshot.forEach(doc=>{
 let data=doc.data();
@@ -232,88 +213,136 @@ data.id=doc.id;
 ARTICLES.push(data);
 });
 
-document.getElementById("loading").style.display="none";
-
 const slug=getSlug();
-
 if(slug){
-currentArticle=ARTICLES.findIndex(a=>a.slug===slug);
+currentArticle=ARTICLES.find(a=>a.slug===slug);
 }
 
 render();
 
+})
+.catch(()=>{
+container.innerHTML="❌ Failed to load articles";
+});
+
+/* READING TIME */
+function readingTime(html){
+return Math.max(1,Math.ceil(html.replace(/<[^>]+>/g,"").split(/\s+/).length/200));
 }
 
-loadArticles();
-
-function render(){
-
-articlesContainer.innerHTML="";
-
-const q=(searchInput.value||"").toLowerCase();
-
-if(currentArticle!==null){
-
-const a=ARTICLES[currentArticle];
-
-addArticleSchema(a);
-
-articlesContainer.innerHTML=`
-
-<article class="article">
-
-<p><a href="articles.html">Articles</a> › ${a.title}</p>
-
-<img src="${a.image}" loading="lazy">
-
+/* CARD */
+function articleCard(a){
+return `
+<div class="article">
+<img src="${a.image || '19_article-thumbnail-generic.jpg'}" alt="${a.title}">
 <h2>${a.title}</h2>
 
 <div class="meta">
+${a.date || ""} • ${a.views || 0} views
+</div>
 
-${a.date} • ${readingTime(a.content)} min read
+<p>${a.excerpt || "Click to read full article..."}</p>
 
+<div class="actions">
+<button class="btn" onclick="openArticle('${a.slug}')">Read</button>
+<button class="btn like" onclick="like('${a.id}')">❤️ ${a.likes || 0}</button>
+<button class="btn share" onclick="share('${a.title}','${a.slug}')">Share</button>
+</div>
+</div>`;
+}
+
+/* SINGLE */
+function singleArticle(a){
+
+document.title = a.title + " | Chahat Organic";
+
+if(!localStorage.getItem("view_"+a.id)){
+db.collection("articles").doc(a.id).update({
+views:firebase.firestore.FieldValue.increment(1)
+});
+localStorage.setItem("view_"+a.id,true);
+}
+
+return `
+<div class="article">
+
+<a href="articles.html">← Back</a>
+
+<img src="${a.image || '19_article-thumbnail-generic.jpg'}" alt="${a.title}">
+
+<h1>${a.title}</h1>
+
+<div class="meta">
+${a.date || ""} • ${readingTime(a.content)} min read • ${a.views || 0} views
 </div>
 
 <div>${a.content}</div>
 
-<a class="btn" href="articles.html">Back</a>
+<div class="actions">
+<button class="btn like" onclick="like('${a.id}')">❤️ ${a.likes || 0}</button>
+<button class="btn share" onclick="share('${a.title}','${a.slug}')">Share</button>
+</div>
 
-</article>
+</div>`;
+}
 
-`;
+/* RENDER */
+function render(){
 
+let html="";
+const q=(searchInput.value||"").toLowerCase();
+
+if(currentArticle){
+container.innerHTML = singleArticle(currentArticle);
 return;
-
 }
 
 ARTICLES
-
-.filter(a=>!q||a.title.toLowerCase().includes(q))
-
+.filter(a=>!q || a.title.toLowerCase().includes(q))
 .forEach(a=>{
-
-articlesContainer.innerHTML+=`
-
-<article class="article article-card"
-
-onclick="location.href='articles.html?post=${a.slug}'">
-
-<img src="${a.image}" loading="lazy">
-
-<h2>${a.title}</h2>
-
-<div class="meta">${a.date}</div>
-
-<p>${a.excerpt}</p>
-
-</article>
-
-`;
-
+html += articleCard(a);
 });
+
+container.innerHTML = html || "No articles found";
 
 }
 
+/* OPEN */
+function openArticle(slug){
+location.href="articles.html?post="+slug;
+}
+
+/* LIKE */
+function like(id){
+
+if(localStorage.getItem("liked_"+id)){
+showToast("Already liked ❤️");
+return;
+}
+
+db.collection("articles").doc(id).update({
+likes:firebase.firestore.FieldValue.increment(1)
+});
+
+localStorage.setItem("liked_"+id,true);
+showToast("❤️ Liked");
+}
+
+/* SHARE */
+function share(title,slug){
+
+let url=location.origin + "/articles.html?post=" + slug;
+
+navigator.clipboard.writeText(url);
+
+let text=`${title}\n\nRead here: ${url}`;
+
+window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+
+showToast("Link copied + WhatsApp opened");
+}
+
+/* SEARCH */
 searchInput.oninput=render;
 
 </script>
