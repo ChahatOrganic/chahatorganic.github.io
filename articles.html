@@ -41,6 +41,14 @@ background:url("25_firstpage.png") center/cover no-repeat;
 color:white;
 }
 
+/* MOBILE FIX */
+@media(max-width:600px){
+.hero{padding:40px 5%;}
+.article{margin:20px 10px;}
+.actions{flex-direction:column;}
+.btn{width:100%;}
+}
+
 /* SEARCH */
 .search-box{
 max-width:900px;
@@ -63,6 +71,12 @@ background:white;
 padding:25px;
 border-radius:16px;
 box-shadow:0 8px 20px rgba(0,0,0,.08);
+transition:.3s;
+cursor:pointer;
+}
+
+.article:hover{
+transform:translateY(-5px);
 }
 
 .article img{
@@ -119,12 +133,9 @@ text-align:center;
 padding:40px;
 }
 
-/* MOBILE */
-@media(max-width:600px){
-.hero{padding:40px 5%;}
-.article{margin:20px 10px;}
-.actions{flex-direction:column;}
-.btn{width:100%;}
+footer a{
+color:white;
+text-decoration:none;
 }
 
 </style>
@@ -159,12 +170,19 @@ padding:40px;
 <div id="toast" class="toast"></div>
 
 <footer>
+
 <p>© 2026 Chahat Organic</p>
 <p>Founder – Shubham Mishra</p>
+
 <p>
 WhatsApp: <a href="https://wa.me/917053053863">7053053863</a><br>
 Email: <a href="mailto:chahatorganic@gmail.com">ChahatOrganic@gmail.com</a>
 </p>
+
+<p>
+<a href="https://instagram.com/chahatorganic" target="_blank">Instagram</a>
+</p>
+
 </footer>
 
 <!-- FIREBASE -->
@@ -196,7 +214,7 @@ t.classList.add("show");
 setTimeout(()=>t.classList.remove("show"),2000);
 }
 
-/* SLUG */
+/* GET SLUG */
 function getSlug(){
 return new URLSearchParams(location.search).get("post");
 }
@@ -230,11 +248,20 @@ function readingTime(html){
 return Math.max(1,Math.ceil(html.replace(/<[^>]+>/g,"").split(/\s+/).length/200));
 }
 
-/* CARD */
+/* CLEAN CONTENT (FIX SHARE ISSUE) */
+function cleanContent(html){
+return html
+.replace(/<script.*?>.*?<\/script>/gi,"")
+.replace(/style=".*?"/gi,"");
+}
+
+/* CARD (FULL CLICKABLE FIXED) */
 function articleCard(a){
 return `
-<div class="article">
+<div class="article" onclick="openArticle('${a.slug}')">
+
 <img src="${a.image || '19_article-thumbnail-generic.jpg'}" alt="${a.title}">
+
 <h2>${a.title}</h2>
 
 <div class="meta">
@@ -244,10 +271,19 @@ ${a.date || ""} • ${a.views || 0} views
 <p>${a.excerpt || "Click to read full article..."}</p>
 
 <div class="actions">
-<button class="btn" onclick="openArticle('${a.slug}')">Read</button>
-<button class="btn like" onclick="like('${a.id}')">❤️ ${a.likes || 0}</button>
-<button class="btn share" onclick="share('${a.title}','${a.slug}')">Share</button>
+
+<button class="btn" onclick="event.stopPropagation(); openArticle('${a.slug}')">Read</button>
+
+<button class="btn like" onclick="event.stopPropagation(); like('${a.id}')">
+❤️ ${a.likes || 0}
+</button>
+
+<button class="btn share" onclick="event.stopPropagation(); share('${a.title}','${a.slug}')">
+Share
+</button>
+
 </div>
+
 </div>`;
 }
 
@@ -276,7 +312,7 @@ return `
 ${a.date || ""} • ${readingTime(a.content)} min read • ${a.views || 0} views
 </div>
 
-<div>${a.content}</div>
+<div>${cleanContent(a.content)}</div>
 
 <div class="actions">
 <button class="btn like" onclick="like('${a.id}')">❤️ ${a.likes || 0}</button>
@@ -328,18 +364,35 @@ localStorage.setItem("liked_"+id,true);
 showToast("❤️ Liked");
 }
 
-/* SHARE */
+/* SHARE (MULTI PLATFORM) */
 function share(title,slug){
 
 let url=location.origin + "/articles.html?post=" + slug;
+let text=`${title}\n\nRead here: ${url}`;
 
 navigator.clipboard.writeText(url);
 
-let text=`${title}\n\nRead here: ${url}`;
+let options = `
+Choose platform:
+1. WhatsApp
+2. Facebook
+3. Twitter
+`;
 
+let choice = prompt(options);
+
+if(choice=="1"){
 window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+}
+else if(choice=="2"){
+window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+}
+else if(choice=="3"){
+window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`);
+}
 
-showToast("Link copied + WhatsApp opened");
+showToast("Link copied + Share opened");
+
 }
 
 /* SEARCH */
