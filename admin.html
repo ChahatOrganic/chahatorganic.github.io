@@ -1,223 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<title>Chahat Organic Admin Panel</title>
+<title>Chahat Organic Admin Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- QUILL -->
+<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<!-- XSS PROTECTION -->
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<!-- TOAST NOTIFY -->
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <style>
-
-body{
-font-family:Poppins,Arial;
-background:#f4f7f4;
-margin:0;
-color:#000;
-}
-
+body{font-family:Poppins;background:#f4f7f4;margin:0;}
 /* HEADER */
-header{
-background:#0f3d2e;
-color:#fff;
-padding:25px;
-text-align:center;
-}
-
-nav{
-margin-top:10px;
-}
-
-nav a{
-color:white;
-margin:0 10px;
-text-decoration:none;
-font-weight:500;
-}
-
+header{background:#0f3d2e;color:#fff;padding:20px;text-align:center;}
+nav a{color:white;margin:0 10px;text-decoration:none;font-weight:500;}
 /* CONTAINER */
-.container{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
-
+.container{max-width:1000px;margin:auto;padding:20px;}
 /* INPUT */
-input,textarea{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:10px;
-border:1px solid #ccc;
-background:#fff;
-color:#000;
-}
-
+input,textarea,select{width:100%;padding:12px;margin-top:10px;border-radius:10px;border:1px solid #ccc;box-sizing:border-box;}
 /* EDITOR */
-.editor{
-border:1px solid #ccc;
-padding:15px;
-min-height:400px;
-border-radius:10px;
-background:white;
-margin-top:10px;
-color:#000;
-}
-
+#editor{background:#fff;border-radius:10px;margin-top:10px;height:400px;}
+/* UPLOAD */
+#imagePreview img{max-width:200px;max-height:200px;margin:10px 0;border-radius:10px;}
 /* BUTTON */
-button{
-padding:12px 25px;
-background:#1b5e20;
-color:white;
-border:none;
-border-radius:30px;
-margin-top:10px;
-cursor:pointer;
-}
-
-button:hover{opacity:.9;}
-
-.logout{
-background:#b71c1c;
-float:right;
-}
-
-/* TOOLBAR */
-.toolbar{
-margin-top:10px;
-display:flex;
-gap:6px;
-flex-wrap:wrap;
-}
-
-.toolbar button{
-padding:8px 12px;
-background:#eee;
-color:#000;
-}
-
-/* BOX */
-.previewBox,.seoPreview{
-background:white;
-padding:15px;
-border-radius:10px;
-margin-top:15px;
-}
-
+button{padding:10px 20px;background:#1b5e20;color:white;border:none;border-radius:25px;margin-top:10px;cursor:pointer;font-family:Poppins;}
+button:hover{background:#2e7d32;}
+.logout{background:#b71c1c;float:right;}
+button:disabled{background:#666;cursor:not-allowed;}
 /* ARTICLES */
-.articleList{
-background:white;
-margin-top:20px;
-padding:15px;
-border-radius:10px;
-}
-
-.articleItem{
-border-bottom:1px solid #eee;
-padding:10px 0;
-}
-
+.articleItem{border-bottom:1px solid #eee;padding:15px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;}
+.articleItem button{margin-left:5px;}
+/* STATS */
+.stats{display:flex;gap:20px;margin:10px 0;color:#666;}
+/* TOAST - Using Toastify */
 /* FOOTER */
-.footer{
-background:#111;
-color:#eee;
-text-align:center;
-padding:30px;
-margin-top:40px;
-}
-
-.msg{
-margin-top:10px;
-font-weight:600;
-}
-
+.footer{background:#111;color:#eee;text-align:center;padding:25px;margin-top:40px;}
+@media (max-width:768px){.container{padding:10px;}.articleItem{flex-direction:column;align-items:flex-start;}}
 </style>
-
 </head>
-
 <body>
-
 <header>
-
-<h2>Chahat Organic Admin Dashboard</h2>
-
+<h2>🌿 Chahat Organic Admin Dashboard</h2>
 <nav>
 <a href="index.html">Home</a>
 <a href="articles.html">Articles</a>
-<a href="founder.html">Founder</a>
 <a href="contact.html">Contact</a>
 <a href="https://instagram.com/chahatorganic" target="_blank">Instagram</a>
 </nav>
-
 </header>
 
 <!-- LOGIN -->
 <div id="loginBox" class="container">
-
-<input id="emailInput" placeholder="Admin Email">
+<h3>🔐 Admin Login</h3>
+<input id="emailInput" placeholder="Admin Email" type="email">
 <input id="passwordInput" type="password" placeholder="Password">
-
 <button onclick="login()">Login</button>
-<div class="msg" id="loginMsg"></div>
-
+<p id="loginMsg" style="color:red;"></p>
 </div>
 
 <!-- ADMIN PANEL -->
 <div id="adminPanel" class="container" style="display:none">
-
-<button class="logout" onclick="logout()">Logout</button>
-
+<button class="logout" onclick="logout()">🚪 Logout</button>
+<h3>✍️ New Article</h3>
 <input id="title" placeholder="Article Title">
-<p id="slugPreview"></p>
-
-<input id="metaTitleInput" placeholder="SEO Meta Title">
-<textarea id="metaDescInput" placeholder="SEO Meta Description"></textarea>
-
-<input id="tagsInput" placeholder="Tags (comma separated)">
-<input id="imgAltInput" placeholder="Image ALT text">
-
-<div class="toolbar">
-<button onclick="format('bold')"><b>B</b></button>
-<button onclick="format('italic')"><i>I</i></button>
-<button onclick="format('insertUnorderedList')">• List</button>
-<button onclick="addImage()">🖼 Image</button>
+<input id="scheduleInput" type="datetime-local">
+<textarea id="metaDescInput" placeholder="SEO Meta Description (150 chars)" maxlength="160"></textarea>
+<input type="file" id="imageUpload" accept="image/*">
+<div id="imagePreview"></div>
+<!-- EDITOR -->
+<div id="editor"></div>
+<div class="stats">
+<span>Words: <span id="wordCount">0</span></span>
+<span>Status: <span id="status">Draft</span></span>
 </div>
-
-<div id="editor" class="editor" contenteditable="true">
-Start writing your article...
-</div>
-
-<p id="wordStats"></p>
-
-<button onclick="aiWriter()">AI Write Article</button>
-<button onclick="preview()">Preview</button>
-<button onclick="saveDraft()">Save Draft</button>
-<button onclick="publish()">Publish Article</button>
-
-<div class="msg" id="statusMsg"></div>
-
-<div id="previewBox" class="previewBox"></div>
-<div id="seoPreview" class="seoPreview"></div>
-
-<input id="searchInput" placeholder="Search articles">
-
-<div class="articleList">
-<h3>Published Articles</h3>
-<div id="articlesList"></div>
-</div>
-
-</div>
-
-<!-- FOOTER -->
-<div class="footer">
-
-<p><b>Founder:</b> Shubham Mishra</p>
-<p>Chahat Organic – Pure • Honest • Farmer Sourced</p>
-
-<p>Email: ChahatOrganic@gmail.com</p>
-<p>WhatsApp: 7053053863</p>
-
-<p>Instagram: @ChahatOrganic</p>
-
+<button onclick="preview()">👁️ Preview</button>
+<button onclick="publish()" id="publishBtn">🚀 Publish</button>
+<div id="previewBox" style="margin-top:20px;display:none;background:#f9f9f9;padding:20px;border-radius:10px;"></div>
+<h3>📄 Published Articles (<span id="articleCount">0</span>)</h3>
+<input id="searchInput" placeholder="🔍 Search articles...">
+<div id="articlesList">Loading...</div>
 </div>
 
 <!-- FIREBASE -->
@@ -227,194 +92,261 @@ Start writing your article...
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 
 <script>
-
-const firebaseConfig={
+const config={
 apiKey:"AIzaSyDzdiSsRnH3NHbaqVT5PYEZHe7eqE6Gb0A",
 authDomain:"chahatorganic-ca1a1.firebaseapp.com",
 projectId:"chahatorganic-ca1a1",
 storageBucket:"chahatorganic-ca1a1.appspot.com"
 };
-
-firebase.initializeApp(firebaseConfig);
-
+firebase.initializeApp(config);
 const auth=firebase.auth();
 const db=firebase.firestore();
 const storage=firebase.storage();
-
 let editingId=null;
+let imageUrl=null;
 
-/* AUTO LOGIN FIX */
-auth.onAuthStateChanged(user=>{
-if(user){
-loginBox.style.display="none";
-adminPanel.style.display="block";
-loadArticles();
+/* QUILL INIT */
+let quill = new Quill('#editor',{
+theme:'snow',
+placeholder:'Start writing your organic farming article... 🌱',
+modules: {
+toolbar: [
+['bold', 'italic', 'underline', 'strike'],
+['blockquote', 'code-block'],
+[{ 'header': 1 }, { 'header': 2 }],
+[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+[{ 'script': 'sub'}, { 'script': 'super' }],
+[{ 'indent': '-1'}, { 'indent': '+1' }],
+[{ 'direction': 'rtl' }],
+[{ 'size': ['small', false, 'large', 'huge'] }],
+[{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+[{ 'color': [] }, { 'background': [] }],
+[{ 'font': [] }],
+[{ 'align': [] }],
+['clean'],
+['link', 'image']
+]
 }
 });
-
-/* LOGIN */
-function login(){
-auth.signInWithEmailAndPassword(emailInput.value,passwordInput.value)
-.catch(err=>{
-loginMsg.innerText="❌ "+err.message;
-});
-}
-
-/* LOGOUT */
-function logout(){
-auth.signOut();
-}
-
-/* FORMAT */
-function format(cmd){
-document.execCommand(cmd,false,null);
-}
-
-/* IMAGE */
-function addImage(){
-
-if(!imgAltInput.value){
-alert("Please enter ALT text");
-return;
-}
-
-let input=document.createElement("input");
-input.type="file";
-
-input.onchange=async()=>{
-let file=input.files[0];
-
-let ref=storage.ref("articles/"+Date.now()+"-"+file.name);
-
-await ref.put(file);
-let url=await ref.getDownloadURL();
-
-document.execCommand("insertHTML",false,
-`<img src="${url}" alt="${imgAltInput.value}" style="max-width:100%;border-radius:10px">`);
-};
-
-input.click();
-}
-
-/* AI WRITER */
-function aiWriter(){
-let topic=prompt("Enter topic");
-
-editor.innerHTML=`
-<h2>${topic}</h2>
-<p>${topic} is important for organic lifestyle.</p>
-<ul>
-<li>Improves health</li>
-<li>Boosts immunity</li>
-<li>Supports natural living</li>
-</ul>`;
-}
-
-/* SLUG */
-title.oninput=()=>{
-let slug=title.value.toLowerCase().replace(/\s+/g,"-");
-slugPreview.innerText="Slug: "+slug;
-};
-
-/* SEO PREVIEW */
-metaTitleInput.oninput=metaDescInput.oninput=()=>{
-seoPreview.innerHTML=
-`<h3>${metaTitleInput.value}</h3><p>${metaDescInput.value}</p>`;
-};
 
 /* WORD COUNT */
-editor.oninput=()=>{
-let words=editor.innerText.split(/\s+/).length;
-let time=Math.ceil(words/200);
-wordStats.innerText=`Words: ${words} | ${time} min read`;
-};
-
-/* AUTO SAVE */
-setInterval(()=>{
-if(editor.innerText.trim()){
-db.collection("drafts").add({
-content:editor.innerHTML,
-date:new Date()
+quill.on('text-change',()=>{
+document.getElementById('wordCount').textContent=quill.getText().trim().split(/\s+/).length;
 });
+
+/* TOAST */
+function toast(msg,isError=false){
+Toastify({
+text: msg,
+duration: 3000,
+gravity: "bottom",
+position: "center",
+backgroundColor: isError ? "#b71c1c" : "#1b5e20",
+}).showToast();
 }
-},30000);
+
+/* IMAGE UPLOAD */
+document.getElementById('imageUpload').addEventListener('change',async(e)=>{
+let file=e.target.files[0];
+if(!file) return;
+let reader=new FileReader();
+reader.onload=(ev)=>{
+document.getElementById('imagePreview').innerHTML=`<img src="${ev.target.result}">`;
+};
+reader.readAsDataURL(file);
+try{
+let ref=storage.ref(`articles/${Date.now()}_${file.name}`);
+let snap=await ref.put(file);
+imageUrl=await snap.ref.getDownloadURL();
+toast('Image uploaded! 📸');
+}catch(e){
+toast('Upload failed: '+e.message,true);
+}});
+
+/* AUTH */
+auth.onAuthStateChanged(async(user)=>{
+if(user){
+document.getElementById('loginBox').style.display="none";
+document.getElementById('adminPanel').style.display="block";
+await loadArticles();
+}
+});
+
+/* ADMIN CHECK - Add custom claim check */
+async function isAdminUser(user){
+try{
+let token=await user.getIdTokenResult();
+return token.claims.admin === true;
+}catch(e){return false;}
+}
+
+function login(){
+let email=document.getElementById('emailInput').value;
+let password=document.getElementById('passwordInput').value;
+auth.signInWithEmailAndPassword(email,password)
+.then(async(userCred)=>{
+let user=userCred.user;
+if(!(await isAdminUser(user))){
+auth.signOut();
+document.getElementById('loginMsg').innerText='Access denied. Admin only.';
+return;
+}
+})
+.catch(e=>document.getElementById('loginMsg').innerText=e.message);
+}
+
+function logout(){
+auth.signOut();
+imageUrl=null;
+editingId=null;
+quill.setText('');
+}
+
+/* VALIDATION */
+function validate(title,content){
+if(!title.trim()){toast("Title required!");return false;}
+if(!content.trim()){toast("Content required!");return false;}
+if(title.length>200){toast("Title too long (max 200 chars)!");return false;}
+return true;
+}
 
 /* PREVIEW */
 function preview(){
-previewBox.innerHTML=`<h2>${title.value}</h2><hr>${editor.innerHTML}`;
-}
-
-/* SAVE DRAFT */
-function saveDraft(){
-db.collection("drafts").add({
-title:title.value,
-content:editor.innerHTML,
-date:new Date()
-});
-statusMsg.innerText="Draft saved";
+let previewBox=document.getElementById('previewBox');
+let cleanContent=DOMPurify.sanitize(quill.root.innerHTML);
+previewBox.innerHTML=(imageUrl?`<img src="${imageUrl}" style="max-width:100%;border-radius:10px;"><br>`:'')+
+`<h1>${document.getElementById('title').value}</h1>`+
+cleanContent;
+previewBox.style.display='block';
+previewBox.scrollIntoView({behavior:'smooth'});
 }
 
 /* PUBLISH */
-function publish(){
-
-let content=editor.innerHTML + `
-<div style="text-align:center;margin-top:20px">
-<a href="index.html">Explore Organic Products</a>
-</div>`;
-
-db.collection("articles").add({
-title:title.value,
-slug:title.value.toLowerCase().replace(/\s+/g,"-"),
-content:content,
-metaTitle:metaTitleInput.value,
-metaDesc:metaDescInput.value,
-tags:tagsInput.value.split(","),
-date:new Date().toLocaleDateString("en-IN"),
-views:0,
-likes:0
-})
-.then(()=>{
-statusMsg.innerText="✅ Published";
+async function publish(){
+let publishBtn=document.getElementById('publishBtn');
+publishBtn.disabled=true;
+publishBtn.textContent='Publishing...';
+try{
+let cleanContent=DOMPurify.sanitize(quill.root.innerHTML);
+if(!validate(document.getElementById('title').value,cleanContent)) return;
+let data={
+title:document.getElementById('title').value,
+content:cleanContent,
+slug:document.getElementById('title').value.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),
+metaDesc:document.getElementById('metaDescInput').value,
+imageUrl:imageUrl||'',
+publishAt: document.getElementById('scheduleInput').value ? new Date(document.getElementById('scheduleInput').value) : new Date(),
+updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+};
+if(editingId){
+await db.collection("articles").doc(editingId).update(data);
+toast("Article updated! ✅");
+editingId=null;
+}else{
+data.views=0;
+data.likes=0;
+data.createdAt=firebase.firestore.FieldValue.serverTimestamp();
+await db.collection("articles").add(data);
+toast("Article published! 🚀");
+}
 loadArticles();
-});
+resetForm();
+}catch(e){
+toast("Error: "+e.message,true);
+}finally{
+publishBtn.disabled=false;
+publishBtn.textContent='🚀 Publish';
+}
 }
 
-/* LOAD */
-function loadArticles(){
-articlesList.innerHTML="Loading...";
+function resetForm(){
+document.getElementById('title').value='';
+document.getElementById('metaDescInput').value='';
+document.getElementById('scheduleInput').value='';
+document.getElementById('imageUpload').value='';
+document.getElementById('imagePreview').innerHTML='';
+quill.setText('');
+imageUrl=null;
+editingId=null;
+}
 
-db.collection("articles").get().then(snap=>{
-articlesList.innerHTML="";
-
+/* LOAD ARTICLES */
+async function loadArticles(){
+let articlesList=document.getElementById('articlesList');
+articlesList.innerHTML='<div style="text-align:center;padding:20px;">Loading articles...</div>';
+try{
+let snap=await db.collection("articles").orderBy('publishAt','desc').get();
+articlesList.innerHTML='';
+let count=0;
 snap.forEach(doc=>{
 let a=doc.data();
-
+count++;
 articlesList.innerHTML+=`
 <div class="articleItem">
-<b>${a.title}</b> (${a.views||0} views)<br>
-<button onclick="deleteArticle('${doc.id}')">Delete</button>
+<div>
+<b>${a.title}</b><br>
+<small>Published: ${a.publishAt?.toDate ? a.publishAt.toDate().toLocaleDateString() : 'Now'} | Views: ${a.views||0} | Likes: ${a.likes||0}</small>
+${a.imageUrl ? `<br><img src="${a.imageUrl}" style="width:60px;height:60px;object-fit:cover;border-radius:5px;">` : ''}
+</div>
+<div>
+<button onclick="editArticle('${doc.id}')">✏️ Edit</button>
+<button onclick="deleteArticle('${doc.id}')">🗑️ Delete</button>
+<a href="/article/${a.slug}" target="_blank" style="background:#0f3d2e;padding:10px 15px;color:white;text-decoration:none;border-radius:20px;">👁️ View</a>
+</div>
 </div>`;
 });
-});
+document.getElementById('articleCount').textContent=count;
+}catch(e){
+articlesList.innerHTML='<div style="color:red;">Error loading articles.</div>';
+}
+}
+
+/* EDIT */
+async function editArticle(id){
+let docSnap=await db.collection("articles").doc(id).get();
+if(!docSnap.exists) return toast('Article not found',true);
+let a=docSnap.data();
+editingId=id;
+document.getElementById('title').value=a.title;
+quill.root.innerHTML=a.content;
+document.getElementById('metaDescInput').value=a.metaDesc || '';
+document.getElementById('scheduleInput').value=a.publishAt?.toDate ? a.publishAt.toDate().toISOString().slice(0,16) : '';
+imageUrl=a.imageUrl;
+if(imageUrl){
+document.getElementById('imagePreview').innerHTML=`<img src="${imageUrl}">`;
+}
+document.getElementById('publishBtn').textContent='💾 Update';
+window.scrollTo({top:0,behavior:"smooth"});
+toast(`Editing: ${a.title}`);
 }
 
 /* DELETE */
-function deleteArticle(id){
-if(!confirm("Delete?")) return;
-
-db.collection("articles").doc(id).delete().then(loadArticles);
+async function deleteArticle(id){
+if(!confirm('Delete this article?')) return;
+try{
+await db.collection("articles").doc(id).delete();
+toast('Article deleted');
+loadArticles();
+}catch(e){
+toast('Delete failed: '+e.message,true);
+}
 }
 
 /* SEARCH */
-searchInput.oninput=()=>{
-let q=searchInput.value.toLowerCase();
-
+document.getElementById('searchInput').oninput=()=>{
+let q=document.getElementById('searchInput').value.toLowerCase();
 document.querySelectorAll(".articleItem").forEach(e=>{
-e.style.display=e.innerText.toLowerCase().includes(q)?"block":"none";
+e.style.display=e.textContent.toLowerCase().includes(q) ? "flex" : "none";
 });
 };
-
 </script>
 
+<div class="footer">
+<p><b>Founder:</b> Shubham Mishra</p>
+<p>Chahat Organic – Pure • Honest • Farmer Sourced</p>
+<p>Email: ChahatOrganic@gmail.com | WhatsApp: 7053053863</p>
+<p>Instagram: @ChahatOrganic</p>
+<p><small>🔒 Secure Admin v2.0 - Set Firestore rules: allow read: if true; allow write: if request.auth != null && request.auth.token.admin == true;</small></p>
+</div>
 </body>
 </html>
