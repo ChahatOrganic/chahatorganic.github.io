@@ -41,14 +41,6 @@ background:url("25_firstpage.png") center/cover no-repeat;
 color:white;
 }
 
-/* MOBILE FIX */
-@media(max-width:600px){
-.hero{padding:40px 5%;}
-.article{margin:20px 10px;}
-.actions{flex-direction:column;}
-.btn{width:100%;}
-}
-
 /* SEARCH */
 .search-box{
 max-width:900px;
@@ -63,7 +55,7 @@ border-radius:50px;
 border:1px solid #ccc;
 }
 
-/* ARTICLE */
+/* ARTICLE CARD */
 .article{
 max-width:900px;
 margin:30px auto;
@@ -71,8 +63,8 @@ background:white;
 padding:25px;
 border-radius:16px;
 box-shadow:0 8px 20px rgba(0,0,0,.08);
-transition:.3s;
 cursor:pointer;
+transition:.3s;
 }
 
 .article:hover{
@@ -84,16 +76,40 @@ width:100%;
 border-radius:12px;
 }
 
+/* SINGLE ARTICLE FIX */
+.article-container{
+max-width:750px;
+margin:40px auto;
+padding:30px;
+background:#fff;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* TYPOGRAPHY */
+.article-container h1{font-size:30px;}
+.article-container h2{font-size:22px;margin-top:25px;}
+.article-container p{line-height:1.8;margin-top:12px;color:#333;}
+.article-container ul{padding-left:20px;margin-top:10px;}
+
+.article-container img{
+max-width:100%;
+border-radius:10px;
+margin:20px 0;
+}
+
+/* META */
 .meta{
 color:#777;
 font-size:14px;
 margin-bottom:15px;
 }
 
+/* BUTTONS */
 .actions{
 display:flex;
 gap:10px;
-margin-top:15px;
+margin-top:20px;
 flex-wrap:wrap;
 }
 
@@ -102,9 +118,8 @@ padding:8px 14px;
 border-radius:30px;
 background:#1b5e20;
 color:white;
-cursor:pointer;
-font-size:14px;
 border:none;
+cursor:pointer;
 }
 
 .like{background:#e74c3c;}
@@ -133,9 +148,10 @@ text-align:center;
 padding:40px;
 }
 
-footer a{
-color:white;
-text-decoration:none;
+/* MOBILE */
+@media(max-width:600px){
+.hero{padding:40px 5%;}
+.article-container{margin:20px 10px;padding:20px;}
 }
 
 </style>
@@ -156,33 +172,24 @@ text-decoration:none;
 
 <div class="hero">
 <h1>Knowledge for Healthy Living</h1>
-<p>Research based articles about organic food</p>
+<p>Research based organic articles</p>
 </div>
 
 <div class="search-box">
-<input id="search" placeholder="Search articles" aria-label="Search articles">
+<input id="search" placeholder="Search articles">
 </div>
 
-<div id="articles" style="text-align:center;margin-top:40px;">
-⏳ Loading articles...
-</div>
+<div id="articles">⏳ Loading articles...</div>
 
 <div id="toast" class="toast"></div>
 
 <footer>
-
 <p>© 2026 Chahat Organic</p>
 <p>Founder – Shubham Mishra</p>
-
 <p>
 WhatsApp: <a href="https://wa.me/917053053863">7053053863</a><br>
 Email: <a href="mailto:chahatorganic@gmail.com">ChahatOrganic@gmail.com</a>
 </p>
-
-<p>
-<a href="https://instagram.com/chahatorganic" target="_blank">Instagram</a>
-</p>
-
 </footer>
 
 <!-- FIREBASE -->
@@ -219,27 +226,23 @@ function getSlug(){
 return new URLSearchParams(location.search).get("post");
 }
 
-/* LOAD */
-db.collection("articles").get()
-.then(snapshot=>{
-
-ARTICLES=[];
+/* LOAD ARTICLES */
+db.collection("articles").get().then(snapshot=>{
 
 snapshot.forEach(doc=>{
-let data=doc.data();
-data.id=doc.id;
-ARTICLES.push(data);
+let d=doc.data();
+d.id=doc.id;
+ARTICLES.push(d);
 });
 
-const slug=getSlug();
+let slug=getSlug();
 if(slug){
 currentArticle=ARTICLES.find(a=>a.slug===slug);
 }
 
 render();
 
-})
-.catch(()=>{
+}).catch(()=>{
 container.innerHTML="❌ Failed to load articles";
 });
 
@@ -248,19 +251,19 @@ function readingTime(html){
 return Math.max(1,Math.ceil(html.replace(/<[^>]+>/g,"").split(/\s+/).length/200));
 }
 
-/* CLEAN CONTENT (FIX SHARE ISSUE) */
+/* CLEAN CONTENT */
 function cleanContent(html){
 return html
 .replace(/<script.*?>.*?<\/script>/gi,"")
 .replace(/style=".*?"/gi,"");
 }
 
-/* CARD (FULL CLICKABLE FIXED) */
+/* CARD */
 function articleCard(a){
 return `
 <div class="article" onclick="openArticle('${a.slug}')">
 
-<img src="${a.image || '19_article-thumbnail-generic.jpg'}" alt="${a.title}">
+<img src="${a.imageUrl || a.image || '19_article-thumbnail-generic.jpg'}">
 
 <h2>${a.title}</h2>
 
@@ -271,27 +274,26 @@ ${a.date || ""} • ${a.views || 0} views
 <p>${a.excerpt || "Click to read full article..."}</p>
 
 <div class="actions">
-
 <button class="btn" onclick="event.stopPropagation(); openArticle('${a.slug}')">Read</button>
 
 <button class="btn like" onclick="event.stopPropagation(); like('${a.id}')">
 ❤️ ${a.likes || 0}
 </button>
 
-<button class="btn share" onclick="event.stopPropagation(); share('${a.title}','${a.slug}')">
-Share
+<button class="btn share" onclick="event.stopPropagation(); shareArticle('${a.title}','${a.slug}')">
+🔗 Share
 </button>
-
 </div>
 
 </div>`;
 }
 
-/* SINGLE */
+/* SINGLE ARTICLE */
 function singleArticle(a){
 
 document.title = a.title + " | Chahat Organic";
 
+/* VIEW COUNT */
 if(!localStorage.getItem("view_"+a.id)){
 db.collection("articles").doc(a.id).update({
 views:firebase.firestore.FieldValue.increment(1)
@@ -300,11 +302,11 @@ localStorage.setItem("view_"+a.id,true);
 }
 
 return `
-<div class="article">
+<div class="article-container">
 
 <a href="articles.html">← Back</a>
 
-<img src="${a.image || '19_article-thumbnail-generic.jpg'}" alt="${a.title}">
+<img src="${a.imageUrl || a.image || '19_article-thumbnail-generic.jpg'}">
 
 <h1>${a.title}</h1>
 
@@ -315,8 +317,15 @@ ${a.date || ""} • ${readingTime(a.content)} min read • ${a.views || 0} views
 <div>${cleanContent(a.content)}</div>
 
 <div class="actions">
-<button class="btn like" onclick="like('${a.id}')">❤️ ${a.likes || 0}</button>
-<button class="btn share" onclick="share('${a.title}','${a.slug}')">Share</button>
+
+<button class="btn like" onclick="like('${a.id}')">
+❤️ ${a.likes || 0}
+</button>
+
+<button class="btn share" onclick="shareArticle('${a.title}','${a.slug}')">
+🔗 Share
+</button>
+
 </div>
 
 </div>`;
@@ -325,22 +334,17 @@ ${a.date || ""} • ${readingTime(a.content)} min read • ${a.views || 0} views
 /* RENDER */
 function render(){
 
-let html="";
-const q=(searchInput.value||"").toLowerCase();
-
 if(currentArticle){
-container.innerHTML = singleArticle(currentArticle);
+container.innerHTML=singleArticle(currentArticle);
 return;
 }
 
+let html="";
 ARTICLES
-.filter(a=>!q || a.title.toLowerCase().includes(q))
-.forEach(a=>{
-html += articleCard(a);
-});
+.filter(a=>!searchInput.value || a.title.toLowerCase().includes(searchInput.value.toLowerCase()))
+.forEach(a=> html+=articleCard(a));
 
-container.innerHTML = html || "No articles found";
-
+container.innerHTML=html || "No articles found";
 }
 
 /* OPEN */
@@ -362,36 +366,24 @@ likes:firebase.firestore.FieldValue.increment(1)
 
 localStorage.setItem("liked_"+id,true);
 showToast("❤️ Liked");
+
+setTimeout(render,500);
 }
 
-/* SHARE (MULTI PLATFORM) */
-function share(title,slug){
+/* MODERN SHARE */
+function shareArticle(title,slug){
 
 let url=location.origin + "/articles.html?post=" + slug;
-let text=`${title}\n\nRead here: ${url}`;
 
+if(navigator.share){
+navigator.share({
+title:title,
+url:url
+});
+}else{
 navigator.clipboard.writeText(url);
-
-let options = `
-Choose platform:
-1. WhatsApp
-2. Facebook
-3. Twitter
-`;
-
-let choice = prompt(options);
-
-if(choice=="1"){
-window.open(`https://wa.me/?text=${encodeURIComponent(text)}`);
+showToast("Link copied!");
 }
-else if(choice=="2"){
-window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
-}
-else if(choice=="3"){
-window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`);
-}
-
-showToast("Link copied + Share opened");
 
 }
 
