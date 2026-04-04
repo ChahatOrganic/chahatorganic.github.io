@@ -8,46 +8,127 @@
 
 <style>
 
-body{font-family:Poppins,Arial;background:#f4f7f4;margin:0;}
-header{background:#0f3d2e;color:#fff;padding:25px;text-align:center;}
-
-.container{max-width:900px;margin:auto;padding:20px;}
-
-input,textarea{
-width:100%;padding:12px;margin-top:10px;
-border-radius:10px;border:1px solid #ccc;
+body{
+font-family:Poppins,Arial;
+background:#f4f7f4;
+margin:0;
+color:#000;
 }
 
+/* HEADER */
+header{
+background:#0f3d2e;
+color:#fff;
+padding:25px;
+text-align:center;
+}
+
+nav{
+margin-top:10px;
+}
+
+nav a{
+color:white;
+margin:0 10px;
+text-decoration:none;
+font-weight:500;
+}
+
+/* CONTAINER */
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+/* INPUT */
+input,textarea{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #ccc;
+background:#fff;
+color:#000;
+}
+
+/* EDITOR */
+.editor{
+border:1px solid #ccc;
+padding:15px;
+min-height:400px;
+border-radius:10px;
+background:white;
+margin-top:10px;
+color:#000;
+}
+
+/* BUTTON */
 button{
-padding:12px 25px;background:#1b5e20;
-color:white;border:none;border-radius:30px;margin-top:10px;
+padding:12px 25px;
+background:#1b5e20;
+color:white;
+border:none;
+border-radius:30px;
+margin-top:10px;
 cursor:pointer;
 }
 
 button:hover{opacity:.9;}
 
-.logout{background:#b71c1c;float:right;}
+.logout{
+background:#b71c1c;
+float:right;
+}
 
-.editor{
-border:1px solid #ccc;padding:15px;
-min-height:220px;border-radius:10px;background:white;
+/* TOOLBAR */
+.toolbar{
 margin-top:10px;
+display:flex;
+gap:6px;
+flex-wrap:wrap;
 }
 
-.toolbar{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;}
-.toolbar button{padding:8px 12px;border-radius:6px;background:#eee;}
+.toolbar button{
+padding:8px 12px;
+background:#eee;
+color:#000;
+}
 
+/* BOX */
 .previewBox,.seoPreview{
-background:white;padding:15px;border-radius:10px;margin-top:15px;
+background:white;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
 }
 
+/* ARTICLES */
 .articleList{
-background:white;margin-top:20px;padding:15px;border-radius:10px;
+background:white;
+margin-top:20px;
+padding:15px;
+border-radius:10px;
 }
 
-.articleItem{border-bottom:1px solid #eee;padding:10px 0;}
+.articleItem{
+border-bottom:1px solid #eee;
+padding:10px 0;
+}
 
-.msg{margin-top:10px;font-weight:600;}
+/* FOOTER */
+.footer{
+background:#111;
+color:#eee;
+text-align:center;
+padding:30px;
+margin-top:40px;
+}
+
+.msg{
+margin-top:10px;
+font-weight:600;
+}
 
 </style>
 
@@ -56,18 +137,31 @@ background:white;margin-top:20px;padding:15px;border-radius:10px;
 <body>
 
 <header>
-<h2>Chahat Organic Admin Panel</h2>
+
+<h2>Chahat Organic Admin Dashboard</h2>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="articles.html">Articles</a>
+<a href="founder.html">Founder</a>
+<a href="contact.html">Contact</a>
+<a href="https://instagram.com/chahatorganic" target="_blank">Instagram</a>
+</nav>
+
 </header>
 
 <!-- LOGIN -->
 <div id="loginBox" class="container">
+
 <input id="emailInput" placeholder="Admin Email">
 <input id="passwordInput" type="password" placeholder="Password">
+
 <button onclick="login()">Login</button>
 <div class="msg" id="loginMsg"></div>
+
 </div>
 
-<!-- ADMIN -->
+<!-- ADMIN PANEL -->
 <div id="adminPanel" class="container" style="display:none">
 
 <button class="logout" onclick="logout()">Logout</button>
@@ -84,7 +178,7 @@ background:white;margin-top:20px;padding:15px;border-radius:10px;
 <div class="toolbar">
 <button onclick="format('bold')"><b>B</b></button>
 <button onclick="format('italic')"><i>I</i></button>
-<button onclick="format('insertUnorderedList')">•</button>
+<button onclick="format('insertUnorderedList')">• List</button>
 <button onclick="addImage()">🖼 Image</button>
 </div>
 
@@ -97,7 +191,7 @@ Start writing your article...
 <button onclick="aiWriter()">AI Write Article</button>
 <button onclick="preview()">Preview</button>
 <button onclick="saveDraft()">Save Draft</button>
-<button onclick="publish()">Publish</button>
+<button onclick="publish()">Publish Article</button>
 
 <div class="msg" id="statusMsg"></div>
 
@@ -110,6 +204,19 @@ Start writing your article...
 <h3>Published Articles</h3>
 <div id="articlesList"></div>
 </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+
+<p><b>Founder:</b> Shubham Mishra</p>
+<p>Chahat Organic – Pure • Honest • Farmer Sourced</p>
+
+<p>Email: ChahatOrganic@gmail.com</p>
+<p>WhatsApp: 7053053863</p>
+
+<p>Instagram: @ChahatOrganic</p>
 
 </div>
 
@@ -136,14 +243,18 @@ const storage=firebase.storage();
 
 let editingId=null;
 
-/* LOGIN */
-function login(){
-auth.signInWithEmailAndPassword(emailInput.value,passwordInput.value)
-.then(()=>{
+/* AUTO LOGIN FIX */
+auth.onAuthStateChanged(user=>{
+if(user){
 loginBox.style.display="none";
 adminPanel.style.display="block";
 loadArticles();
-})
+}
+});
+
+/* LOGIN */
+function login(){
+auth.signInWithEmailAndPassword(emailInput.value,passwordInput.value)
 .catch(err=>{
 loginMsg.innerText="❌ "+err.message;
 });
@@ -152,7 +263,6 @@ loginMsg.innerText="❌ "+err.message;
 /* LOGOUT */
 function logout(){
 auth.signOut();
-location.reload();
 }
 
 /* FORMAT */
