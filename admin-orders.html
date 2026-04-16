@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chahat Organic | Admin Orders</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{font-family:Arial;margin:0;background:#f4f7f4;text-align:center;}
+header{background:#1b5e20;color:white;padding:20px;}
+nav{background:#2e7d32;padding:10px;}
+nav a{color:white;margin:10px;text-decoration:none;font-weight:bold;}
+
+#loginBox{margin-top:100px;}
+input{padding:10px;margin:10px;width:250px;}
+
+button{
+padding:10px 20px;
+background:#1b5e20;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+#dashboard{display:none;}
+
+.summary{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.card{
+background:white;
+margin:10px;
+padding:15px;
+border-radius:10px;
+width:150px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* TABLE WRAP (mobile fix) */
+.table-wrap{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+}
+
+th, td{
+padding:10px;
+border:1px solid #ddd;
+font-size:13px;
+white-space:nowrap;
+}
+
+th{background:#1b5e20;color:white;}
+
+.paid{color:green;font-weight:bold;}
+.pending{color:red;font-weight:bold;}
+
+#search{
+padding:10px;
+width:80%;
+margin:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>📊 Chahat Organic Admin</h1>
+</header>
+
+<!-- LOGIN -->
+<div id="loginBox">
+<h2>🔐 Admin Login</h2>
+<input type="password" id="password" placeholder="Enter Password">
+<br>
+<button onclick="login()">Login</button>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+
+<nav>
+<a href="index.html">Home</a>
+<a href="shop.html">Shop</a>
+<a href="#" onclick="logout()">Logout</a>
+</nav>
+
+<h2>📊 Orders Dashboard</h2>
+
+<div class="summary">
+<div class="card">Total<br><b id="total"></b></div>
+<div class="card">Paid<br><b id="paid"></b></div>
+<div class="card">Pending<br><b id="pending"></b></div>
+<div class="card">Revenue<br><b id="revenue"></b></div>
+</div>
+
+<input type="text" id="search" placeholder="Search..." onkeyup="filterOrders()">
+
+<button onclick="loadOrders()">🔄 Refresh</button>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Date</th>
+<th>Product</th>
+<th>Price</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="ordersTable">
+<tr><td colspan="7">Loading...</td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+<script>
+
+/* CONFIG */
+const API = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+/* ESCAPE HTML (XSS FIX) */
+function escapeHTML(str){
+return String(str).replace(/[&<>"']/g, m => ({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#39;'
+}[m]));
+}
+
+let allOrders=[];
+
+/* LOGIN (TOKEN BASED) */
+function login(){
+let pass=document.getElementById("password").value;
+
+fetch(API,{
+method:"POST",
+body:JSON.stringify({type:"login",password:pass})
+})
+.then(res=>res.json())
+.then(data=>{
+if(data.token){
+localStorage.setItem("token",data.token);
+startDashboard();
+}else{
+alert("Wrong password");
+}
+});
+}
+
+/* START */
+function startDashboard(){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("dashboard").style.display="block";
+loadOrders();
+}
+
+/* AUTO LOGIN */
+if(localStorage.getItem("token")){
+startDashboard();
+}
+
+/* LOGOUT */
+function logout(){
+localStorage.removeItem("token");
+location.reload();
+}
+
+/* LOAD */
+function loadOrders(){
+
+document.getElementById("ordersTable").innerHTML =
+"<tr><td colspan='7'>Loading...</td></tr>";
+
+fetch(API,{
+method:"POST",
+body:JSON.stringify({
+type:"getOrders",
+token:localStorage.getItem("token")
+})
+})
+.then(res=>res.json())
+.then(data=>{
+if(!Array.isArray(data)) throw "Auth error";
+
+allOrders=data.reverse();
+displayOrders(allOrders);
+summary(allOrders);
+})
+.catch(()=>{
+alert("Access denied / error");
+});
+}
+
+/* DISPLAY */
+function displayOrders(data){
+
+let html="";
+
+data.forEach(o=>{
+html+=`
+<tr>
+<td>${escapeHTML(o.orderId)}</td>
+<td>${escapeHTML(o.dateTime)}</td>
+<td>${escapeHTML(o.product)}</td>
+<td>₹${escapeHTML(o.price)}</td>
+<td>${escapeHTML(o.name)}</td>
+<td>${escapeHTML(o.phone)}</td>
+<td class="${o.payment==="Paid"?"paid":"pending"}">${escapeHTML(o.payment)}</td>
+</tr>
+`;
+});
+
+document.getElementById("ordersTable").innerHTML=html;
+
+}
+
+/* SUMMARY */
+function summary(data){
+
+let total=data.length;
+let paid=data.filter(o=>o.payment==="Paid").length;
+let pending=total-paid;
+
+let revenue=data
+.filter(o=>o.payment==="Paid")
+.reduce((s,o)=>s+Number(o.price),0);
+
+document.getElementById("total").innerText=total;
+document.getElementById("paid").innerText=paid;
+document.getElementById("pending").innerText=pending;
+document.getElementById("revenue").innerText="₹"+revenue;
+
+}
+
+/* SEARCH */
+function filterOrders(){
+
+let q=document.getElementById("search").value.toLowerCase();
+
+let filtered=allOrders.filter(o=>
+o.name.toLowerCase().includes(q) ||
+o.product.toLowerCase().includes(q) ||
+o.phone.includes(q)
+);
+
+displayOrders(filtered);
+}
+
+/* AUTO REFRESH */
+setInterval(()=>{
+if(localStorage.getItem("token")){
+loadOrders();
+}
+},15000);
+
+</script>
+
+</body>
+</html>
