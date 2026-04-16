@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chahat Organic | Order</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{font-family:Arial;margin:0;background:#f4f7f4;text-align:center;}
+header{background:#1b5e20;color:white;padding:20px;}
+nav{background:#2e7d32;padding:10px;}
+nav a{color:white;margin:10px;text-decoration:none;font-weight:bold;}
+
+form{
+background:white;
+padding:20px;
+margin:30px auto;
+width:300px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+input, textarea, select{
+width:90%;
+padding:10px;
+margin:8px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+label{
+display:block;
+text-align:left;
+margin-left:5%;
+font-weight:bold;
+}
+
+button{
+background:#1b5e20;
+color:white;
+padding:10px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:disabled{
+background:gray;
+cursor:not-allowed;
+}
+
+#status{
+margin-top:10px;
+font-size:14px;
+color:#333;
+}
+
+footer{
+background:#1b5e20;
+color:white;
+padding:15px;
+margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🌿 Chahat Organic</h1>
+</header>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="articles.html">Articles</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a href="shop.html">Shop</a>
+<a href="payment.html">Support</a>
+</nav>
+
+<h2>🧾 Order Details</h2>
+
+<h3 id="product"></h3>
+<h3 id="price"></h3>
+
+<form onsubmit="sendOrder(event)">
+
+<label>Full Name</label>
+<input type="text" id="name" required>
+
+<label>Mobile Number</label>
+<input type="tel" id="phone" pattern="[6-9][0-9]{9}" maxlength="10" required>
+
+<label>Full Address</label>
+<textarea id="address" minlength="10" maxlength="200" required></textarea>
+
+<label>Payment Status</label>
+<select id="payment">
+<option value="Pending">Payment Pending</option>
+<option value="Paid">Payment Done</option>
+</select>
+
+<button type="submit" id="submitBtn">Place Order</button>
+
+<div id="status" aria-live="polite"></div>
+
+</form>
+
+<script>
+
+/* CONFIG */
+const WHATSAPP_NUMBER = "917053053863";
+const SHEET_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+/* FETCH */
+let product = localStorage.getItem("product");
+let price = localStorage.getItem("price");
+
+/* PRICE VALIDATION */
+let priceNum = parseFloat(price);
+if(isNaN(priceNum)){
+alert("Invalid price. Please restart order.");
+}
+
+/* DISPLAY */
+document.getElementById("product").innerText = product ? "Product: "+product : "⚠️ No product";
+document.getElementById("price").innerText = price ? "Price: ₹"+price : "";
+
+function sendOrder(e){
+e.preventDefault();
+
+let btn = document.getElementById("submitBtn");
+let statusBox = document.getElementById("status");
+
+/* VALIDATION */
+if(!product || !price){
+alert("Select product first");
+return;
+}
+
+/* LOCK */
+btn.disabled = true;
+btn.innerText = "Processing...";
+statusBox.innerText = "Submitting order...";
+
+/* DATA */
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let address = document.getElementById("address").value;
+let payment = document.getElementById("payment").value;
+
+let orderId = "ORD"+Date.now();
+let dateTime = new Date().toLocaleString();
+
+/* MESSAGE */
+let message = encodeURIComponent(`
+🌿 New Order - Chahat Organic
+Order ID: ${orderId}
+Date: ${dateTime}
+Product: ${product}
+Price: ₹${price}
+Name: ${name}
+Phone: ${phone}
+Address: ${address}
+Payment Status: ${payment}
+`);
+
+/* GOOGLE SHEET */
+fetch(SHEET_URL,{
+method:"POST",
+body:JSON.stringify({
+orderId,dateTime,product,price,name,phone,address,payment
+})
+})
+.then(res=>res.json())
+.then(data=>{
+console.log("Sheet:",data);
+statusBox.innerText = "Order logged successfully!";
+})
+.catch(err=>{
+console.error(err);
+statusBox.innerText = "Order saved but server sync failed.";
+});
+
+/* WHATSAPP */
+let wa = window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`);
+
+if(!wa){
+statusBox.innerText = "WhatsApp blocked. Please send manually.";
+}
+
+/* REDIRECT */
+setTimeout(()=>{
+if(payment==="Paid"){
+window.location.href="thankyou.html";
+}else{
+window.location.href="payment.html";
+}
+},2000);
+
+}
+
+</script>
+
+<footer>
+<p>© 2026 Chahat Organic 🌿</p>
+</footer>
+
+</body>
+</html>
